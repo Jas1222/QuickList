@@ -1,5 +1,6 @@
 package com.example.jaspalhayer.quicklist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -37,6 +38,16 @@ public class MainActivity extends AppCompatActivity
         });
 
         btnViewButton = (Button) findViewById(R.id.btnViewButton);
+        btnViewButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                // Launching All products Activity
+                Intent i = new Intent(getApplicationContext(), AllListingsActivity.class);
+                startActivity(i);
+
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

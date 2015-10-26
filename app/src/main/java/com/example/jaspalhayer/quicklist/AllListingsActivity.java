@@ -1,8 +1,10 @@
 package com.example.jaspalhayer.quicklist;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.JsonReader;
 import android.util.Log;
 import android.widget.ListAdapter;
@@ -32,7 +34,7 @@ import java.util.List;
 /**
  * Created by jaspalhayer on 26/10/2015.
  */
-public class AllListingsActivity {
+public class AllListingsActivity extends Activity {
 
     //JSON Nodes
     private static final String TAG_SUCCESS = "success";
@@ -43,8 +45,18 @@ public class AllListingsActivity {
     JSONArray books = null;
     public String URL = "http://localhost:8888/quicklist/get_all_listings.php";
 
-    ArrayList<HashMap<String, String>> booksList;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
 
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Hashmap for ListView
+
+        // Loading products in Background Thread
+        new LoadAllProducts().execute();
+
+    }
 
     class LoadAllProducts extends AsyncTask<String, String, String> {
 
@@ -68,7 +80,7 @@ public class AllListingsActivity {
             StringBuilder result = new StringBuilder();
 
             try {
-                URL url = new URL("http://localhost:8888/quicklist/get_all_listings.php");
+                URL url = new URL("http://10.0.2.2:8888/quicklist/get_all_listings.php");
 
                 try {
                     urlConnection = (HttpURLConnection) url.openConnection();
@@ -88,7 +100,7 @@ public class AllListingsActivity {
                 }
 
             } catch (MalformedURLException nameOfTheException) {
-                //put exceptioncode here
+
             }
             return result.toString();
         }
