@@ -15,9 +15,8 @@
         android:layout_width="100dip"
         android:layout_height="50dip"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:text="View Button"
-        android:layout_marginTop="25dip"/>
+        android:layout_alignParentBottom="true"/>
 
     <ImageView
         android:src="@drawable/list"
@@ -41,6 +40,14 @@
         android:layout_height="100dip"
         android:layout_marginLeft="30dip"
         android:layout_marginTop = "120dip"
+        />
+
+    <ImageView
+        android:src="@drawable/email"
+        android:layout_width="100dip"
+        android:layout_height="100dip"
+        android:layout_marginLeft="30dip"
+        android:layout_marginTop = "350dip"
         />
 
 </RelativeLayout>
