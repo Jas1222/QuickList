@@ -19,6 +19,7 @@
         android:layout_alignParentBottom="true"/>
 
     <ImageView
+        android:id="@+id/listIcon"
         android:src="@drawable/list"
         android:layout_width="100dip"
         android:layout_height="100dip"
@@ -27,6 +28,7 @@
         />
 
     <ImageView
+        android:id="@+id/barcodeIcon"
         android:src="@drawable/barcode"
         android:layout_width="100dip"
         android:layout_height="100dip"
@@ -35,18 +37,20 @@
         />
 
     <ImageView
+        android:id="@+id/bookIcon"
         android:src="@drawable/book"
         android:layout_width="100dip"
         android:layout_height="100dip"
-        android:layout_marginLeft="30dip"
+        android:layout_marginLeft="40dip"
         android:layout_marginTop = "120dip"
         />
 
     <ImageView
+        android:id="@+id/mailIcon"
         android:src="@drawable/email"
         android:layout_width="100dip"
         android:layout_height="100dip"
-        android:layout_marginLeft="30dip"
+        android:layout_marginLeft="40dip"
         android:layout_marginTop = "350dip"
         />
 
