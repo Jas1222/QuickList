@@ -80,21 +80,29 @@ public class AllListingsActivity extends Activity {
             StringBuilder result = new StringBuilder();
 
             try {
-                URL url = new URL("http://10.0.2.2:8888/quicklist/get_all_listings.php");
+
+                URL url = new URL("http://qt003605.webs.sse.reading.ac.uk/android_connect/get_all_listings.php");
 
                 try {
                     urlConnection = (HttpURLConnection) url.openConnection();
-                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                    System.out.println(urlConnection.getResponseCode());
+                    if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        Log.d("OK_TAG", "Connected Okay");
+                        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            result.append(line);
+                        }
 
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        result.append(line);
+                    } else {
+                        // TODO Handle Exception
                     }
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
+                    // TODO Handle Exception
                 } finally {
                     urlConnection.disconnect();
                 }
