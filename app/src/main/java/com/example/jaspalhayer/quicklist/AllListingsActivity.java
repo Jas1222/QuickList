@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.JsonReader;
 import android.util.Log;
 import android.widget.ListAdapter;
@@ -34,7 +35,7 @@ import java.util.List;
 /**
  * Created by jaspalhayer on 26/10/2015.
  */
-public class AllListingsActivity extends Activity {
+public class AllListingsActivity extends AppCompatActivity {
 
     //JSON Nodes
     private static final String TAG_SUCCESS = "success";
@@ -51,7 +52,7 @@ public class AllListingsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Hashmap for ListView
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Loading products in Background Thread
         new LoadAllProducts().execute();
@@ -66,7 +67,6 @@ public class AllListingsActivity extends Activity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-
         }
 
         HttpURLConnection urlConnection;
@@ -74,6 +74,7 @@ public class AllListingsActivity extends Activity {
         /**
          * getting All products from url
          */
+
         protected String doInBackground(String... args) {
             // Building Parameters
             // getting JSON string from URL
@@ -85,7 +86,7 @@ public class AllListingsActivity extends Activity {
 
                 try {
                     urlConnection = (HttpURLConnection) url.openConnection();
-                    System.out.println(urlConnection.getResponseCode());
+
                     if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                         Log.d("OK_TAG", "Connected Okay");
                         InputStream in = new BufferedInputStream(urlConnection.getInputStream());

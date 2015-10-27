@@ -7,12 +7,44 @@
 
     <include layout="@layout/app_bar_main" android:layout_width="match_parent"
         android:layout_height="match_parent" />
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <Button android:id="@+id/btnViewButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dip"
+        android:layout_height="50dip"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:text="View Button"
-        android:layout_marginTop="400dip"/>
+        android:layout_marginTop="25dip"/>
+
+    <ImageView
+        android:src="@drawable/list"
+        android:layout_width="100dip"
+        android:layout_height="100dip"
+        android:layout_marginLeft="260dip"
+        android:layout_marginTop = "350dip"
+        />
+
+    <ImageView
+        android:src="@drawable/barcode"
+        android:layout_width="100dip"
+        android:layout_height="100dip"
+        android:layout_marginLeft="260dip"
+        android:layout_marginTop = "120dip"
+        />
+
+    <ImageView
+        android:src="@drawable/book"
+        android:layout_width="100dip"
+        android:layout_height="100dip"
+        android:layout_marginLeft="30dip"
+        android:layout_marginTop = "120dip"
+        />
+
+</RelativeLayout>
+
 
 
     <android.support.design.widget.NavigationView android:id="@+id/nav_view"
