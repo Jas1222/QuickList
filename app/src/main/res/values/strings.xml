@@ -3,6 +3,10 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="bookLabel">Browse by University Course</string>
+    <string name="barcodeLabel">Scan a Barcode</string>
+    <string name="messageLabel">My Messages</string>
+    <string name="listLabel">My Listings</string>
 
     <string name="action_settings">Settings</string>
 </resources>

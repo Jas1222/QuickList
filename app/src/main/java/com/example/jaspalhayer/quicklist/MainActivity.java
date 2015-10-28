@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity
 
     Button btnViewButton;
     ImageView bookIcon;
+    ImageView barcodeIcon;
+    ImageView messageIcon;
+    ImageView listIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +46,41 @@ public class MainActivity extends AppCompatActivity
         bookIcon = (ImageView) findViewById(R.id.bookIcon);
         bookIcon.setOnClickListener(new View.OnClickListener() {
             @Override
-        public void onClick(View v) {
-                Snackbar.make(v, "Replace with your own action", Snackbar.LENGTH_LONG)
+            public void onClick(View v) {
+                Snackbar.make(v, "Will open 'Browse' Intent", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
 
+        barcodeIcon = (ImageView) findViewById(R.id.barcodeIcon);
+        barcodeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "Will open 'Barcode' Intent", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        messageIcon = (ImageView) findViewById(R.id.messageIcon);
+        messageIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "Will open 'My Messages' Intent", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        listIcon = (ImageView) findViewById(R.id.listIcon);
+        listIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "Will open 'My Listings' Intent", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+
+        // Open new activity Intent
         btnViewButton = (Button) findViewById(R.id.btnViewButton);
         btnViewButton.setOnClickListener(new View.OnClickListener() {
 
