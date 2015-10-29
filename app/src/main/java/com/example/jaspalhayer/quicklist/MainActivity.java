@@ -20,7 +20,6 @@ import android.widget.ImageView;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    Button btnViewButton;
     ImageView bookIcon;
     ImageView barcodeIcon;
     ImageView messageIcon;
@@ -37,8 +36,9 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                // Launching All products Activity
+                Intent i = new Intent(getApplicationContext(), AllListingsActivity.class);
+                startActivity(i);
             }
         });
 
@@ -76,20 +76,6 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 Snackbar.make(v, "Will open 'My Listings' Intent", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-            }
-        });
-
-
-        // Open new activity Intent
-        btnViewButton = (Button) findViewById(R.id.btnViewButton);
-        btnViewButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                // Launching All products Activity
-                Intent i = new Intent(getApplicationContext(), AllListingsActivity.class);
-                startActivity(i);
-
             }
         });
 

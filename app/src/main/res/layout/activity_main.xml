@@ -11,13 +11,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <Button android:id="@+id/btnViewButton"
-        android:layout_width="100dip"
-        android:layout_height="50dip"
-        android:layout_centerHorizontal="true"
-        android:text="View Button"
-        android:layout_alignParentBottom="true"/>
-
     <!-- Book icon and text -->
     <ImageView
         android:id="@+id/bookIcon"
@@ -103,8 +96,6 @@
         android:layout_marginLeft="273dip"/>
 
 </RelativeLayout>
-
-
 
     <android.support.design.widget.NavigationView android:id="@+id/nav_view"
         android:layout_width="wrap_content" android:layout_height="match_parent"
