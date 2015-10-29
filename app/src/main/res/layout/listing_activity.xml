@@ -20,7 +20,6 @@
             android:layout_toStartOf="@+id/titleText"
             android:layout_marginEnd="9dp"
             android:layout_marginTop="15dp" />
-
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,7 +29,8 @@
             android:maxWidth="320dip"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="78dp" />
+            android:layout_marginTop="78dp"
+            android:maxLength="120"/>
 
         <!-- Author Icon -->
         <ImageView
@@ -43,26 +43,16 @@
             android:layout_alignStart="@+id/titleIcon"/>
 
         <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/authorText"
-        android:hint="Who are the book authors?"
-        android:minWidth="320dip"
-        android:maxWidth="320dip"
-            android:layout_marginTop="15dp"
-            android:layout_below="@+id/titleText"
-            android:layout_alignStart="@+id/titleText" />
-
-        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/yearText"
-            android:hint="What year was the book published?"
+            android:id="@+id/authorText"
+            android:hint="Who are the book authors?"
             android:minWidth="320dip"
             android:maxWidth="320dip"
             android:layout_marginTop="15dp"
-            android:layout_below="@+id/authorText"
-            android:layout_alignStart="@+id/authorText" />
+            android:layout_below="@+id/titleText"
+            android:layout_alignStart="@+id/titleText"
+            android:maxLength="120"/>
 
         <!-- Year Icon -->
         <ImageView
@@ -75,26 +65,52 @@
             android:layout_alignBottom="@+id/yearText"
             android:layout_marginTop="30dip"
             />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/yearText"
+            android:hint="What year was the book published?"
+            android:minWidth="320dip"
+            android:maxWidth="320dip"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/authorText"
+            android:layout_alignStart="@+id/authorText"
+            android:maxLength="4"
+            android:inputType="number"/>
 
+        <!-- Description Icon -->
+        <ImageView
+            android:layout_width="18dip"
+            android:layout_height="18dip"
+            android:id="@+id/descIcon"
+            android:src="@drawable/desc_icon"
+            android:layout_below="@+id/year_icon"
+            android:layout_alignRight="@+id/year_icon"
+            android:layout_alignBottom="@+id/descText"
+            android:layout_marginTop="25dip"
+            />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/descText"
-            android:hint="Tap to enter a description"
+            android:hint="Tap to enter a short description"
             android:minWidth="320dip"
             android:maxWidth="320dip"
             android:layout_below="@+id/yearText"
             android:layout_alignStart="@+id/yearText"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="15dp"
+            android:maxLength="250"/>
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="200dip"
             android:layout_height="wrap_content"
             android:text="Make Listing"
             android:id="@+id/makeListingBtn"
             android:layout_alignParentBottom="true"
             android:layout_alignEnd="@+id/descText"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorPrimary"
+            android:shadowColor="@color/colorPrimaryDark"/>
 
 
     </RelativeLayout>
