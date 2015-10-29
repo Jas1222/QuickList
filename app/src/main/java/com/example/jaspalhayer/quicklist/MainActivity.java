@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        // Listener event for icons
+        // Listener event for icons - refactor?
         bookIcon = (ImageView) findViewById(R.id.bookIcon);
         bookIcon.setOnClickListener(new View.OnClickListener() {
             @Override
