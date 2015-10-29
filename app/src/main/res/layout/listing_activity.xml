@@ -102,7 +102,7 @@
             android:maxLength="250"/>
 
         <Button
-            android:layout_width="200dip"
+            android:layout_width="150dip"
             android:layout_height="wrap_content"
             android:text="Make Listing"
             android:id="@+id/makeListingBtn"
@@ -110,8 +110,7 @@
             android:layout_alignEnd="@+id/descText"
             android:layout_marginBottom="10dp"
             android:background="@color/colorPrimary"
+            android:textColor="@color/white"
             android:shadowColor="@color/colorPrimaryDark"/>
-
-
     </RelativeLayout>
 </LinearLayout>
