@@ -17,6 +17,7 @@ public class ConnectionHandler {
     HttpURLConnection urlConnection;
     StringBuilder result = new StringBuilder();
 
+    // Reads listings
     public String openHttpConnection() {
         try {
 

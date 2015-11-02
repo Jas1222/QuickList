@@ -29,7 +29,8 @@
             android:maxWidth="320dip"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="78dp"
+            android:layout_marginTop="300dp"
+
             android:maxLength="120"/>
 
         <!-- Author Icon -->
