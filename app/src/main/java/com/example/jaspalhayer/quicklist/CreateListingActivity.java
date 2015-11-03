@@ -43,25 +43,14 @@ public class CreateListingActivity extends AppCompatActivity {
         priceText = (EditText)findViewById(R.id.priceText);
 
         mListing = (Button)findViewById(R.id.makeListingBtn);
+
         mListing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Launching All products Activity
-                bookInfoField = titleText.getText().toString();
-                authorInfoField = authorText.getText().toString();
-                yearInfoField = yearText.getText().toString();
-                descInfoField = descText.getText().toString();
-                priceInfoField = priceText.getText().toString();
-
+                saveTextListing();
                 new CreateBookListing().execute();
-
             }
         });
-
-
-
-
-
     }
 
     @Override
@@ -69,6 +58,14 @@ public class CreateListingActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.create_listing_toolbar, menu);
         return true;
+    }
+
+    private void saveTextListing(){
+        bookInfoField = titleText.getText().toString();
+        authorInfoField = authorText.getText().toString();
+        yearInfoField = yearText.getText().toString();
+        descInfoField = descText.getText().toString();
+        priceInfoField = priceText.getText().toString();
     }
 
     // ** Opens connection to database to load listings, IS NOT NEEDED ATM **
