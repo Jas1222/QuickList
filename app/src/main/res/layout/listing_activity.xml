@@ -49,7 +49,7 @@
             android:hint="Who are the book authors?"
             android:minWidth="320dip"
             android:maxWidth="320dip"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:layout_below="@+id/titleText"
             android:layout_alignStart="@+id/titleText"
             android:maxLength="120"/>
@@ -60,11 +60,9 @@
             android:layout_height="20dip"
             android:id="@+id/year_icon"
             android:src="@drawable/year_icon"
-            android:layout_below="@+id/author_icon"
-            android:layout_alignRight="@+id/author_icon"
+            android:layout_marginBottom="8dip"
             android:layout_alignBottom="@+id/yearText"
-            android:layout_marginTop="30dip"
-            />
+            android:layout_alignStart="@+id/author_icon" />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,8 +70,9 @@
             android:hint="What year was the book published?"
             android:minWidth="320dip"
             android:maxWidth="320dip"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dip"
             android:layout_below="@+id/authorText"
+            android:layout_alignTop="@id/yearText"
             android:layout_alignStart="@+id/authorText"
             android:maxLength="4"
             android:inputType="number"/>
@@ -84,11 +83,9 @@
             android:layout_height="18dip"
             android:id="@+id/descIcon"
             android:src="@drawable/desc_icon"
-            android:layout_below="@+id/year_icon"
-            android:layout_alignRight="@+id/year_icon"
             android:layout_alignBottom="@+id/descText"
-            android:layout_marginTop="25dip"
-            />
+            android:layout_alignEnd="@+id/year_icon"
+            android:layout_marginBottom="8dip"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,11 +95,11 @@
             android:maxWidth="320dip"
             android:layout_below="@+id/yearText"
             android:layout_alignStart="@+id/yearText"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dip"
             android:maxLength="250"/>
 
 
-        <!-- Rectangle background -->
+        <!-- Rectangle footer -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:background="@drawable/grey_rectangle"
@@ -114,8 +111,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/priceText"
+                android:textColor="@color/colorPrimary"
+                android:maxLength="6"
+                android:layout_marginLeft="48dip"
+                android:textSize="25dip"
+                android:hint="Price"
+                android:inputType="numberDecimal"
                 android:layout_centerVertical="true"
                 android:layout_alignParentStart="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="£"
+                android:textSize="30dip"
+                android:textColor="@color/colorPrimary"
+                android:id="@+id/poundSymbol"
+                android:layout_marginStart="28dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true" />
         </RelativeLayout>
 
         <Button
