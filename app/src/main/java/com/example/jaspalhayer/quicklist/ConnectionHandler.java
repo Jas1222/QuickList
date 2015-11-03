@@ -116,6 +116,7 @@ public class ConnectionHandler {
                 params.put("book_year",CreateListingActivity.yearInfoField);
                 params.put("book_desc",CreateListingActivity.descInfoField);
                 params.put("book_price", CreateListingActivity.priceInfoField);
+
                 return params;
             }
 
