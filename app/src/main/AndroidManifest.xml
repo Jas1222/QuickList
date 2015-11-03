@@ -24,7 +24,13 @@
         <activity
             android:name=".AllListingsActivity"
             android:parentActivityName=".MainActivity"
-            android:label="Create a Listing" >
+            android:label="All Listings" >
+        </activity>
+
+        <!-- Create a Listing Activity (child of main activity -->
+        <activity android:name=".CreateListingActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="Create a Listing">
         </activity>
     </application>
     <!--  Internet Permissions -->

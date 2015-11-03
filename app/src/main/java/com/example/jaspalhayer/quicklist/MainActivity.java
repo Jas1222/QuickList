@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 // Launching All products Activity
-                Intent i = new Intent(getApplicationContext(), AllListingsActivity.class);
+                Intent i = new Intent(getApplicationContext(), CreateListingActivity.class);
                 startActivity(i);
             }
         });
