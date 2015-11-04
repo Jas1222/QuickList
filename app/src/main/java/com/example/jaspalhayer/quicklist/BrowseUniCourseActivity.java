@@ -6,11 +6,44 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class BrowseUniCourseActivity extends AppCompatActivity {
-    protected String courseType[];
     protected Spinner spinner;
+    protected ListView lstView;
+    protected String underGradCourses[];
+    protected String courses[] = {
+            "Computer Science",
+            "Geography",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+            "Computer Science",
+
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,10 +51,25 @@ public class BrowseUniCourseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_browse_uni_course);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        lstView = (ListView)findViewById(R.id.courseList);
         spinner = (Spinner)findViewById(R.id.courseSpinner);
-       // courseType = getResources().getStringArray(R.array.course_type);
 
-        ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter.createFromResource(this, R.array.course_type, android.R.layout.simple_spinner_item);
+        underGradCourses = getResources().getStringArray(R.array.undergrad_courses);
+
+//        ArrayAdapter<String> lstAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, courses);
+//        lstView.setAdapter(lstAdapter);
+//        lstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+//                int itemPosition = position;
+//
+//                String itemValue = (String)lstView.getItemAtPosition(position);
+//                Toast.makeText(getApplicationContext(),itemPosition+itemValue, Toast.LENGTH_LONG).show();
+//
+//            }
+//        });
+
+        ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter.createFromResource(this, R.array.course_type, R.layout.course_spinner_layout);
 
         staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(staticAdapter);
@@ -29,6 +77,25 @@ public class BrowseUniCourseActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                if(i == 1) {
+                    ArrayAdapter<String> lstAdapter = new ArrayAdapter<String>(BrowseUniCourseActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, underGradCourses);
+                    lstView.setAdapter(lstAdapter);
+                    lstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                            int itemPosition = position;
+
+                            // Gets the course string
+                            String itemValue = (String) lstView.getItemAtPosition(position);
+                            Toast.makeText(getApplicationContext(), itemPosition + itemValue, Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+                } else if (i == 2) {
+                    //Post grad shit
+                }
+
 
             }
 

@@ -12,7 +12,182 @@
     <string name="title_activity_browse_uni_course">BrowseUniCourseActivity</string>
 
     <string-array name="course_type">
+        <item>Select your degree type</item>
         <item>Undergraduate</item>
         <item>Postgraduate</item>
     </string-array>
+
+    <string-array name="undergrad_courses">
+        <item>Accounting and Business</item>
+        <item>Accounting and Finance</item>
+        <item>Accounting and Management</item>
+        <item>Agricultural Business Management</item>
+        <item>Agriculture</item>
+        <item>Ancient History</item>
+        <item>Ancient History and Archaeology</item>
+        <item>Ancient History and History</item>
+        <item>Animal Science</item>
+        <item>Archaeology</item>
+        <item>Archaeology and Classical Studies</item>
+        <item>Archaeology and History</item>
+        <item>Art</item>
+        <item>Art and English Literature</item>
+        <item>Art and Film</item>
+        <item>Art and Theatre</item>
+        <item>Art and Film &amp; Theatre</item>
+        <item>Art and History of Art</item>
+        <item>Art and Philosophy</item>
+        <item>Art and Psychology</item>
+        <item>Artificial Intelligence</item>
+        <item>Biochemistry</item>
+        <item>Biological Sciences</item>
+        <item>Biomedical Sciences</item>
+        <item>Building Surveying</item>
+        <item>Business and Management</item>
+        <item>Business Economics</item>
+        <item>Chemistry</item>
+        <item>Chemistry with Education</item>
+        <item>Chemistry with Forensic Analysis</item>
+        <item>Childrens Development and Learning</item>
+        <item>Classical and Medieval Studies</item>
+        <item>Classical Studies</item>
+        <item>Classical Studies and English Literature</item>
+        <item>Classics</item>
+        <item>Computational Mathematics</item>
+        <item>Computer Science</item>
+        <item>Construction Management</item>
+        <item>Construction Management and Surveying</item>
+        <item>Consumer Behaviour and Marketing</item>
+        <item>Cybernetics</item>
+        <item>Ecology and Wildlife Conservation</item>
+        <item>Economics (BA)</item>
+        <item>Economics (BSc)</item>
+        <item>Economics and Econometrics</item>
+        <item>Economics and Finance</item>
+        <item>Electronic Engineering (BEng)</item>
+        <item>Electronic Engineering (MEng)</item>
+        <item>English Language</item>
+        <item>English Language and Literature</item>
+        <item>English Language Studies</item>
+        <item>English Literature</item>
+        <item>English Literature and Film &amp; Theatre</item>
+        <item>English Literature and Film</item>
+        <item>English Literature and German</item>
+        <item>English Literature and Theatre</item>
+        <item>English Literature and International Relations</item>
+        <item>English Literature and Italian</item>
+        <item>English Literature and Politics</item>
+        <item>English Literature with French</item>
+        <item>Entrepreneurship</item>
+        <item>Entrepreneurship and Management</item>
+        <item>Environmental Management</item>
+        <item>Environmental Physics</item>
+        <item>Environmental Science</item>
+        <item>Environmental Science (MEnvSci)</item>
+        <item>Ethics, Value and Philosophy</item>
+        <item>European Studies</item>
+        <item>Film</item>
+        <item>Film &amp; Theatre</item>
+        <item>Finance and Business Management</item>
+        <item>Finance and Investment Banking</item>
+        <item>Finance and Psychology</item>
+        <item>Fine Art</item>
+        <item>Food Marketing and Business Economics</item>
+        <item>Food Science</item>
+        <item>Food Science with Business</item>
+        <item>French</item>
+        <item>French and Economics</item>
+        <item>French and English Literature</item>
+        <item>French and German</item>
+        <item>French and History</item>
+        <item>French and International Relations</item>
+        <item>French and Italian</item>
+        <item>French and Management Studies</item>
+        <item>French and Spanish</item>
+        <item>French Studies &amp; English Language</item>
+        <item>Geography (Human and Physical)</item>
+        <item>Geography (Human)</item>
+        <item>Geography (Physical)</item>
+        <item>Geography and Economics</item>
+        <item>German</item>
+        <item>German and Economics</item>
+        <item>German and History</item>
+        <item>German and International Relations</item>
+        <item>German and Italian</item>
+        <item>German and Management Studies</item>
+        <item>German and Spanish</item>
+        <item>German Studies &amp; English Language</item>
+        <item>Graphic Communication</item>
+        <item>History</item>
+        <item>History and Economics</item>
+        <item>History and English Literature</item>
+        <item>History and International Relations</item>
+        <item>History and Philosophy</item>
+        <item>History and Politics</item>
+        <item>Information Technology</item>
+        <item>International Business and Finance</item>
+        <item>International Business and Management</item>
+        <item>International Development</item>
+        <item>International Foundation Programme</item>
+        <item>International Relations and Economics</item>
+        <item>International Management &amp; Business Administration with French</item>
+        <item>International Management &amp; Business Administration with German</item>
+        <item>International Management &amp; Business Administration with Italian</item>
+        <item>International Management &amp; Business Administration with Spanish</item>
+        <item>Investment &amp; Finance in Property</item>
+        <item>Italian</item>
+        <item>Italian and Classical Studies</item>
+        <item>Italian and Economics</item>
+        <item>Italian and History</item>
+        <item>Italian and International Relations</item>
+        <item>Italian and Management Studies</item>
+        <item>Italian and Spanish</item>
+        <item>Italian Studies &amp; English Language</item>
+        <item>Language Sciences and Psychology</item>
+        <item>LLB Law</item>
+        <item>Management with Information Technology</item>
+        <item>Mathematics (BSc)</item>
+        <item>Mathematics (MMath)</item>
+        <item>Mathematics and Economics</item>
+        <item>Mathematics and Meteorology (BSc)</item>
+        <item>Mathematics and Meteorology (MMath)</item>
+        <item>Mathematics and Psychology</item>
+        <item>Mathematics and Statistics</item>
+        <item>Mathematics with Finance and Investment Banking</item>
+        <item>Meteorology and Climate</item>
+        <item>Microbiology</item>
+        <item>Museum and Classical Studies</item>
+        <item>Museum Studies and Archaeology</item>
+        <item>Nutrition and Food Science</item>
+        <item>Nutrition with Food Consumer Sciences</item>
+        <item>Pharmacy</item>
+        <item>Philosophy</item>
+        <item>Philosophy and Classical Studies</item>
+        <item>Philosophy and English Literature</item>
+        <item>Philosophy and International Relations</item>
+        <item>Philosophy and Politics</item>
+        <item>Philosophy, Politics and Economics</item>
+        <item>Politics and Economics</item>
+        <item>Politics and International Relations</item>
+        <item>Psychological Theory and Practice</item>
+        <item>Psychology</item>
+        <item>Psychology and Philosophy</item>
+        <item>Psychology Childhood and Ageing</item>
+        <item>Psychology with Neuroscience</item>
+        <item>Quantity Surveying</item>
+        <item>Real Estate (fuck max)</item>
+        <item>Robotics (BSc)</item>
+        <item>Robotics (MEng)</item>
+        <item>Rural Property and Management</item>
+        <item>Spanish Studies and English Language</item>
+        <item>Spanish and English Literature</item>
+        <item>Spanish and History</item>
+        <item>Spanish and Management Studies</item>
+        <item>Speech and Language Therapy</item>
+        <item>Theatre</item>
+        <item>Theatre Arts, Education and Deaf Studies</item>
+        <item>War Peace and International Relations</item>
+        <item>Zoology</item>
+    </string-array>
+
 </resources>
