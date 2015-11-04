@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.jaspalhayer.quicklist" >
+    <!-- Internet Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -8,6 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
+
         <!-- Main/Home Activity -->
         <activity
             android:name=".MainActivity"
@@ -23,16 +26,24 @@
         <!-- All Product Activity (child of main activity) -->
         <activity
             android:name=".AllListingsActivity"
-            android:parentActivityName=".MainActivity"
-            android:label="All Listings" >
+            android:label="All Listings"
+            android:parentActivityName=".MainActivity" >
         </activity>
 
         <!-- Create a Listing Activity (child of main activity -->
-        <activity android:name=".CreateListingActivity"
-            android:parentActivityName=".MainActivity"
-            android:label="Create a Listing">
+        <activity
+            android:name=".CreateListingActivity"
+            android:label="Create a Listing"
+            android:parentActivityName=".MainActivity" >
+        </activity>
+        <activity
+            android:name=".BrowseUniCourseActivity"
+            android:label="Browse by university course"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.jaspalhayer.quicklist.MainActivity" />
         </activity>
     </application>
-    <!--  Internet Permissions -->
-    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>

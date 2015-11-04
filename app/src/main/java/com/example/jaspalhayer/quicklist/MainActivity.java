@@ -47,8 +47,9 @@ public class MainActivity extends AppCompatActivity
         bookIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Will open 'Browse' Intent", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                // Launching All products Activity
+                Intent i = new Intent(getApplicationContext(), BrowseUniCourseActivity.class);
+                startActivity(i);
             }
         });
 
