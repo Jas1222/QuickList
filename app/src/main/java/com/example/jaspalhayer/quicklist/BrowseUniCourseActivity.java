@@ -14,36 +14,7 @@ public class BrowseUniCourseActivity extends AppCompatActivity {
     protected Spinner spinner;
     protected ListView lstView;
     protected String underGradCourses[];
-    protected String courses[] = {
-            "Computer Science",
-            "Geography",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-            "Computer Science",
-
-    };
+    protected String postGradCourses[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +26,7 @@ public class BrowseUniCourseActivity extends AppCompatActivity {
         spinner = (Spinner)findViewById(R.id.courseSpinner);
 
         underGradCourses = getResources().getStringArray(R.array.undergrad_courses);
+        postGradCourses = getResources().getStringArray(R.array.postgrad_courses);
 
 //        ArrayAdapter<String> lstAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, courses);
 //        lstView.setAdapter(lstAdapter);
@@ -79,8 +51,8 @@ public class BrowseUniCourseActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 if(i == 1) {
-                    ArrayAdapter<String> lstAdapter = new ArrayAdapter<String>(BrowseUniCourseActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, underGradCourses);
-                    lstView.setAdapter(lstAdapter);
+                    ArrayAdapter<String> ugLstAdapter = new ArrayAdapter<String>(BrowseUniCourseActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, underGradCourses);
+                    lstView.setAdapter(ugLstAdapter);
                     lstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -92,8 +64,22 @@ public class BrowseUniCourseActivity extends AppCompatActivity {
 
                         }
                     });
-                } else if (i == 2) {
-                    //Post grad shit
+                }
+
+                if (i == 2) {
+                    ArrayAdapter<String> pgLstAdapter = new ArrayAdapter<String>(BrowseUniCourseActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, postGradCourses);
+                    lstView.setAdapter(pgLstAdapter);
+                    lstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                            int itemPosition = position;
+
+                            // Gets the course string
+                            String itemValue = (String) lstView.getItemAtPosition(position);
+                            Toast.makeText(getApplicationContext(), itemPosition + itemValue, Toast.LENGTH_LONG).show();
+
+                        }
+                    });
                 }
 
 
