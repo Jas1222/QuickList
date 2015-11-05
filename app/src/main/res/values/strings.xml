@@ -17,7 +17,10 @@
         <item>Postgraduate</item>
     </string-array>
 
+    <string-array name="initial_course">Select your degree type first</string-array>
+
     <string-array name="undergrad_courses">
+        <item>Select your course</item>
         <item>Accounting and Business</item>
         <item>Accounting and Finance</item>
         <item>Accounting and Management</item>
@@ -192,6 +195,7 @@
     </string-array>
 
     <string-array name="postgrad_courses">
+        <item>Select your course</item>
         <item>Accounting and Financial Management</item>
         <item>Accounting and International Management</item>
         <item>Advanced Computer Science</item>
@@ -362,6 +366,7 @@
     </string-array>
 
     <string-array name="course_year_array">
+        <item>Select your year</item>
         <item>Year 1</item>
         <item>Year 2</item>
         <item>Year 3</item>

@@ -15,15 +15,23 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
+
 /**
  * Created by jaspalhayer on 05/11/2015.
  */
 public class BrowseCourseListFragment extends Fragment {
 
-    protected Spinner spinner;
+    protected Spinner degreeTypeSpinner;
+    protected Spinner courseSpinner;
+    protected Spinner yearSpinner;
     protected ListView lstView;
     protected String underGradCourses[];
     protected String postGradCourses[];
+    protected String courseYear[];
+
+    protected boolean underGradCourse;
+    protected boolean postGradCourse;
 
 
     @Override
@@ -32,23 +40,37 @@ public class BrowseCourseListFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.browse_uni_course, container, false);
         lstView = (ListView)rootView.findViewById(R.id.courseList);
-        spinner = (Spinner)rootView.findViewById(R.id.courseSpinner);
+        degreeTypeSpinner = (Spinner)rootView.findViewById(R.id.degreeTypeSpinner);
+        courseSpinner = (Spinner)rootView.findViewById(R.id.courseSpinner);
+        yearSpinner = (Spinner)rootView.findViewById(R.id.yearSpinner);
 
-        underGradCourses = getResources().getStringArray(R.array.undergrad_courses);
-        postGradCourses = getResources().getStringArray(R.array.postgrad_courses);
+        final ArrayAdapter<CharSequence> degreeTypeAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.course_type, R.layout.course_spinner_layout);
+        final ArrayAdapter<CharSequence> ugCourseAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.undergrad_courses, R.layout.course_spinner_layout);
+        final ArrayAdapter<CharSequence> pgCourseAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.postgrad_courses, R.layout.course_spinner_layout);
+        final ArrayAdapter<CharSequence> yearAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.course_year_array, R.layout.course_spinner_layout);
+        final ArrayAdapter<CharSequence> initialCourseAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.initial_course, R.layout.course_spinner_layout);
 
-        ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.course_type, R.layout.course_spinner_layout);
+        ugCourseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        pgCourseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        degreeTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        initialCourseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(staticAdapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        yearSpinner.setAdapter(yearAdapter);
+        courseSpinner.setAdapter(initialCourseAdapter);
+        degreeTypeSpinner.setAdapter(degreeTypeAdapter);
+        degreeTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 1) {
-                    drawUndergradList(getActivity(), i);
-
+//                    drawUndergradList(getActivity(), i);
+                    underGradCourse = true;
+                    courseSpinner.setAdapter(ugCourseAdapter);
                 } else if (i == 2) {
-                    drawPostGradList(getActivity(), i);
+//                    drawPostGradList(getActivity(), i);
+                    postGradCourse = true;
+                    courseSpinner.setAdapter(pgCourseAdapter);
+
                 } else {
                     // DO nothing
                 }
@@ -59,6 +81,9 @@ public class BrowseCourseListFragment extends Fragment {
                 // AUTO-generated stub
             }
         });
+
+
+
 
         TextView textView = new TextView(getActivity());
         textView.setText(R.string.hello_blank_fragment);

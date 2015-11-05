@@ -6,11 +6,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 public class BrowseUniCourseActivity extends AppCompatActivity {
-    protected static Spinner spinner;
-    protected static ListView lstView;
-    protected static String underGradCourses[];
-    protected static String postGradCourses[];
-    protected static String yearList[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
