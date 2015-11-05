@@ -1,15 +1,15 @@
 package com.example.jaspalhayer.quicklist;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,12 +26,15 @@ public class BrowseCourseListFragment extends Fragment {
     protected Spinner courseSpinner;
     protected Spinner yearSpinner;
     protected ListView lstView;
-    protected String underGradCourses[];
-    protected String postGradCourses[];
-    protected String courseYear[];
+    protected Button mLookup;
+
+    protected boolean degreeTypeSet = false;
+    protected boolean yearSet = false;
+    protected boolean courseSet = false;
 
     protected boolean underGradCourse;
     protected boolean postGradCourse;
+
 
 
     @Override
@@ -43,6 +46,7 @@ public class BrowseCourseListFragment extends Fragment {
         degreeTypeSpinner = (Spinner)rootView.findViewById(R.id.degreeTypeSpinner);
         courseSpinner = (Spinner)rootView.findViewById(R.id.courseSpinner);
         yearSpinner = (Spinner)rootView.findViewById(R.id.yearSpinner);
+        mLookup = (Button)rootView.findViewById(R.id.makeListingBtn);
 
         final ArrayAdapter<CharSequence> degreeTypeAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.course_type, R.layout.course_spinner_layout);
         final ArrayAdapter<CharSequence> ugCourseAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.undergrad_courses, R.layout.course_spinner_layout);
@@ -59,20 +63,12 @@ public class BrowseCourseListFragment extends Fragment {
         yearSpinner.setAdapter(yearAdapter);
         courseSpinner.setAdapter(initialCourseAdapter);
         degreeTypeSpinner.setAdapter(degreeTypeAdapter);
-        degreeTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i == 1) {
-//                    drawUndergradList(getActivity(), i);
-                    underGradCourse = true;
-                    courseSpinner.setAdapter(ugCourseAdapter);
-                } else if (i == 2) {
-//                    drawPostGradList(getActivity(), i);
-                    postGradCourse = true;
-                    courseSpinner.setAdapter(pgCourseAdapter);
-
-                } else {
-                    // DO nothing
+                if (i != 0) {
+                    yearSet = true;
                 }
             }
 
@@ -82,57 +78,62 @@ public class BrowseCourseListFragment extends Fragment {
             }
         });
 
+        courseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i != 0) {
+                    courseSet = true;
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // AUTO-generated stub
+            }
+        });
 
+        degreeTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 1) {
+                    degreeTypeSet = true;
+                    underGradCourse = true;
 
-        TextView textView = new TextView(getActivity());
-        textView.setText(R.string.hello_blank_fragment);
+                    courseSpinner.setAdapter(ugCourseAdapter);
+                } else if (i == 2) {
+                    degreeTypeSet = true;
+                    postGradCourse = true;
+
+                    courseSpinner.setAdapter(pgCourseAdapter);
+
+                } else {
+                    // DO nothing
+                }
+            }
+
+            
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // AUTO-generated stub
+            }
+        });
+
+        mLookup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (degreeTypeSet == true && courseSet == true && yearSet == true) {
+                    Intent i = new Intent(getActivity(), BrowseResultActivity.class);
+                    startActivity(i);
+                } else {
+                    Snackbar.make(getView(), "Ensure you have selected all fields", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            }
+        });
+
         return rootView;
     }
 
-    protected void drawPostGradList(final Context context, int i){
-        if (i == 2) {
-            ArrayAdapter<String> pgLstAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, android.R.id.text1, postGradCourses);
-            lstView.setAdapter(pgLstAdapter);
-            lstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                    int itemPosition = position;
 
-                    // Gets the course string
-                    String selectedCourse = (String) lstView.getItemAtPosition(position);
-                    Toast.makeText(context, selectedCourse, Toast.LENGTH_LONG).show();
-                }
-            });
-        }
-    }
-
-    protected void drawUndergradList(final Context context, int i){
-        if(i == 1) {
-            ArrayAdapter<String> ugLstAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, android.R.id.text1, underGradCourses);
-            lstView.setAdapter(ugLstAdapter);
-            lstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                    int itemPosition = position;
-
-                    // Gets the course string
-                    String selectedCourse = (String) lstView.getItemAtPosition(position);
-                    Toast.makeText(context, selectedCourse, Toast.LENGTH_LONG).show();
-
-                    Fragment fragment = new BrowseYearListFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("bSelectedText", selectedCourse);
-                    fragment.setArguments(bundle);
-
-                    FragmentManager fragmentManager = getActivity().getFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.container, fragment);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-
-                }
-            });
-        }
-    }
 }

@@ -47,9 +47,28 @@
             android:layout_height="wrap_content"
             android:id="@+id/courseSpinner"
             android:layout_centerVertical="true"
+            android:layout_marginBottom="60dip"
             android:layout_alignEnd="@+id/yearSpinner"
             android:layout_span="5" />
     </TableRow>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lookup"
+            android:id="@+id/makeListingBtn"
+            android:layout_alignParentBottom="true"
+            android:layout_alignEnd="@+id/descText"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:layout_column="1"
+            android:layout_gravity="center_horizontal|bottom" />
+    </FrameLayout>
 
 </TableLayout>
 </RelativeLayout>
