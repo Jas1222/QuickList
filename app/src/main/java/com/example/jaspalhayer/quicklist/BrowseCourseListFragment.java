@@ -111,7 +111,7 @@ public class BrowseCourseListFragment extends Fragment {
                 }
             }
 
-            
+
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
