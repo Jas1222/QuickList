@@ -1,6 +1,8 @@
 package com.example.jaspalhayer.quicklist;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,18 +12,19 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
  * Created by jaspalhayer on 05/11/2015.
  */
-public class BrowseCourseList extends Fragment {
+public class BrowseCourseListFragment extends Fragment {
 
-    protected static Spinner spinner;
-    protected static ListView lstView;
-    protected static String underGradCourses[];
-    protected static String postGradCourses[];
-    protected static String yearList[];
+    protected Spinner spinner;
+    protected ListView lstView;
+    protected String underGradCourses[];
+    protected String postGradCourses[];
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,6 +36,7 @@ public class BrowseCourseList extends Fragment {
 
         underGradCourses = getResources().getStringArray(R.array.undergrad_courses);
         postGradCourses = getResources().getStringArray(R.array.postgrad_courses);
+
         ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.course_type, R.layout.course_spinner_layout);
 
         staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -42,6 +46,7 @@ public class BrowseCourseList extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 1) {
                     drawUndergradList(getActivity(), i);
+
                 } else if (i == 2) {
                     drawPostGradList(getActivity(), i);
                 } else {
@@ -55,10 +60,12 @@ public class BrowseCourseList extends Fragment {
             }
         });
 
+        TextView textView = new TextView(getActivity());
+        textView.setText(R.string.hello_blank_fragment);
         return rootView;
     }
 
-    protected void drawPostGradList(Context context, int i){
+    protected void drawPostGradList(final Context context, int i){
         if (i == 2) {
             ArrayAdapter<String> pgLstAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, android.R.id.text1, postGradCourses);
             lstView.setAdapter(pgLstAdapter);
@@ -69,13 +76,13 @@ public class BrowseCourseList extends Fragment {
 
                     // Gets the course string
                     String selectedCourse = (String) lstView.getItemAtPosition(position);
-
+                    Toast.makeText(context, selectedCourse, Toast.LENGTH_LONG).show();
                 }
             });
         }
     }
 
-    protected void drawUndergradList(Context context, int i){
+    protected void drawUndergradList(final Context context, int i){
         if(i == 1) {
             ArrayAdapter<String> ugLstAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, android.R.id.text1, underGradCourses);
             lstView.setAdapter(ugLstAdapter);
@@ -86,6 +93,19 @@ public class BrowseCourseList extends Fragment {
 
                     // Gets the course string
                     String selectedCourse = (String) lstView.getItemAtPosition(position);
+                    Toast.makeText(context, selectedCourse, Toast.LENGTH_LONG).show();
+
+                    Fragment fragment = new BrowseYearListFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("bSelectedText", selectedCourse);
+                    fragment.setArguments(bundle);
+
+                    FragmentManager fragmentManager = getActivity().getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.container, fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+
                 }
             });
         }

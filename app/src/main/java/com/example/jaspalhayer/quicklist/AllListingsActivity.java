@@ -33,25 +33,4 @@ public class AllListingsActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.create_listing_toolbar, menu);
         return true;
     }
-
-    // ** Opens connection to database to load listings, IS NOT NEEDED ATM **
-//    class LoadAllListings extends AsyncTask<String, String, String> {
-//
-//        /**
-//         * Before starting background thread Show Progress Dialog
-//         */
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//        }
-//
-//        /**
-//         * getting All products from url
-//         */
-//
-//        protected String doInBackground(String... args) {
-//            ConnectionHandler handler = new ConnectionHandler();
-//            return handler.openHttpConnection();
-//        }
-//    }
 }

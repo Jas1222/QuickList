@@ -38,7 +38,7 @@
         </activity>
         <activity
             android:name=".BrowseUniCourseActivity"
-            android:label="Browse by university course"
+            android:label="Browse by Course"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
