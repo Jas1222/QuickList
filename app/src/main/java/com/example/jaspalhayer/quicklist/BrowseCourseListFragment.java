@@ -15,6 +15,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.ParseError;
+
 import java.lang.reflect.Array;
 
 /**
@@ -69,6 +71,8 @@ public class BrowseCourseListFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i != 0) {
                     yearSet = true;
+                } else {
+                    yearSet = false;
                 }
             }
 
@@ -83,6 +87,8 @@ public class BrowseCourseListFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i != 0) {
                     courseSet = true;
+                } else {
+                    courseSet = false;
                 }
             }
 
@@ -107,10 +113,9 @@ public class BrowseCourseListFragment extends Fragment {
                     courseSpinner.setAdapter(pgCourseAdapter);
 
                 } else {
-                    // DO nothing
+                    degreeTypeSet = false;
                 }
             }
-
 
 
             @Override
