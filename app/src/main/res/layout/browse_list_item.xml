@@ -14,13 +14,17 @@
 
     <TextView
         android:id="@+id/book_title"
+        android:maxLines="4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/book_pic"
         android:paddingBottom="10dp"
         android:text="txt"
-        android:textSize="20sp" />
+        android:maxWidth="200dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorAlt"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/author_text"
@@ -29,27 +33,29 @@
         android:layout_alignLeft="@+id/book_title"
         android:layout_below="@+id/book_title"
         android:text="txt"
-        android:textSize="16sp" />
+        android:textColor="@color/colorAlt2"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/price_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="txt"
-        android:textSize="16sp"
-        android:layout_marginEnd="67dp"
+        android:text="£"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginEnd="25dp"
+        android:paddingBottom="10dp"
         android:layout_alignTop="@+id/book_title"
-        android:layout_alignParentEnd="true"
-        android:paddingBottom="10dp" />
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/date_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="txt"
-        android:textSize="16sp"
-        android:layout_alignBottom="@+id/book_pic"
-        android:layout_toStartOf="@+id/price_text"
-        android:layout_marginEnd="29dp" />
+        android:textSize="11sp"
+        android:layout_alignTop="@+id/author_text"
+        android:layout_alignStart="@+id/price_text" />
 
 </RelativeLayout>

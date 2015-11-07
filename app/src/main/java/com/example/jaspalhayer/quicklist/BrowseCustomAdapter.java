@@ -67,7 +67,7 @@ public class BrowseCustomAdapter extends BaseAdapter {
 
             holder.book_title.setText(row_pos.bookTitle);
             holder.author_text.setText(row_pos.bookAuthor);
-          //  holder.price_text.setText(row_pos.bookPrice);
+            holder.price_text.setText(""+row_pos.bookPrice);
             holder.date_text.setText(row_pos.dateListed);
 
             convertView.setTag(holder);
