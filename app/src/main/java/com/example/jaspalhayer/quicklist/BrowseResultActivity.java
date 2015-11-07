@@ -19,6 +19,8 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
     protected int book_prices[] = {
             12,
             12,
+            24,
+            54
     };
 
     List<BrowseRowItem> rowItems;

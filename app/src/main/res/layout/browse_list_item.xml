@@ -21,7 +21,7 @@
         android:layout_toRightOf="@+id/book_pic"
         android:paddingBottom="10dp"
         android:text="txt"
-        android:maxWidth="200dp"
+        android:maxWidth="190dp"
         android:textStyle="bold"
         android:textColor="@color/colorAlt"
         android:textSize="14sp" />
@@ -34,7 +34,7 @@
         android:layout_below="@+id/book_title"
         android:text="txt"
         android:textColor="@color/colorAlt2"
-        android:textSize="15sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/price_text"
@@ -56,6 +56,18 @@
         android:text="txt"
         android:textSize="11sp"
         android:layout_alignTop="@+id/author_text"
-        android:layout_alignStart="@+id/price_text" />
+        android:layout_alignStart="@+id/poundsign" />
+
+    <TextView
+        android:id="@+id/poundsign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="£"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:paddingBottom="10dp"
+        android:layout_alignTop="@+id/price_text"
+        android:layout_toStartOf="@+id/price_text" />
 
 </RelativeLayout>
