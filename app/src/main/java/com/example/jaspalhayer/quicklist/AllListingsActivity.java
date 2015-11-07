@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 /**
  * Created by jaspalhayer on 26/10/2015.
  */
+
 public class AllListingsActivity extends AppCompatActivity {
 
     @Override
@@ -21,10 +22,8 @@ public class AllListingsActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         // ** OPENS CONNECTION TO DATABASE TO RETRIEVE ALL LISTINGS - TODO MOVE
         //new LoadAllListings().execute();
-
     }
 
     @Override
