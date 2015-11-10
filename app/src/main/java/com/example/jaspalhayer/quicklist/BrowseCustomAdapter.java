@@ -58,7 +58,7 @@ public class BrowseCustomAdapter extends BaseAdapter {
             holder = new ViewHolder();
 
             holder.book_title = (TextView) convertView.findViewById(R.id.book_title);
-            holder.book_pic = (ImageView) convertView.findViewById(R.id.book_pic);
+           // holder.book_pic = (ImageView) convertView.findViewById(R.id.book_pic);
             holder.author_text = (TextView) convertView.findViewById(R.id.author_text);
             holder.date_text = (TextView) convertView.findViewById(R.id.date_text);
             holder.price_text = (TextView) convertView.findViewById(R.id.price_text);
@@ -67,8 +67,8 @@ public class BrowseCustomAdapter extends BaseAdapter {
 
             holder.book_title.setText(row_pos.bookTitle);
             holder.author_text.setText(row_pos.bookAuthor);
-            holder.price_text.setText(""+row_pos.bookPrice);
-            holder.date_text.setText(row_pos.dateListed);
+            holder.price_text.setText("£"+row_pos.bookPrice);
+            holder.date_text.setText("("+row_pos.dateListed+")");
 
             convertView.setTag(holder);
         } else {

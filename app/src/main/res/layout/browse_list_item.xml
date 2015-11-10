@@ -4,24 +4,15 @@
     android:layout_height="fill_parent"
     android:padding="2dp" >
 
-    <ImageView
-        android:id="@+id/book_pic"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:contentDescription="desc"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
-
     <TextView
         android:id="@+id/book_title"
         android:maxLines="4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/book_pic"
         android:paddingBottom="10dp"
         android:text="txt"
-        android:maxWidth="190dp"
+        android:maxWidth="250dp"
         android:textStyle="bold"
         android:textColor="@color/colorAlt"
         android:textSize="14sp" />
@@ -54,20 +45,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="txt"
-        android:textSize="11sp"
+        android:textSize="12sp"
         android:layout_alignTop="@+id/author_text"
-        android:layout_alignStart="@+id/poundsign" />
-
-    <TextView
-        android:id="@+id/poundsign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="£"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        android:paddingBottom="10dp"
-        android:layout_alignTop="@+id/price_text"
-        android:layout_toStartOf="@+id/price_text" />
+        android:layout_alignStart="@+id/price_text" />
 
 </RelativeLayout>
