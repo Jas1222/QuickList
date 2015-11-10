@@ -68,7 +68,6 @@ public class CreateListingActivity extends AppCompatActivity {
         priceInfoField = priceText.getText().toString();
     }
 
-    // ** Opens connection to database to load listings, IS NOT NEEDED ATM **
     class CreateBookListing extends AsyncTask<String, String, String> {
 
         /**

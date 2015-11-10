@@ -1,5 +1,6 @@
 package com.example.jaspalhayer.quicklist;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,8 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
 
     protected String[] book_titles;
     protected String courseTitle;
+    protected String selectedCourseYear;
+    protected String selectedCourseTitle;
     protected String[] book_authors;
     protected String[] dates_listed;
     protected int book_prices[] = {
@@ -32,11 +35,13 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse_result);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         courseTitle = getIntent().getStringExtra("keyTitle");
+        selectedCourseTitle = getIntent().getStringExtra("keyTitle");
+        selectedCourseYear = getIntent().getStringExtra("keyUniYear");
+
         rowItems = new ArrayList<>();
         getSupportActionBar().setTitle(courseTitle);
-
-
 
         book_titles = getResources().getStringArray(R.array.testBookTitles);
         book_authors = getResources().getStringArray(R.array.testBookAuthor);
@@ -51,7 +56,10 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
         BrowseCustomAdapter adapter = new BrowseCustomAdapter(this, rowItems);
         myListView.setAdapter(adapter);
         myListView.setOnItemClickListener(this);
+        new LoadCourseListings().execute();
+
     }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
@@ -59,6 +67,27 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
         String member_name = rowItems.get(position).bookTitle;
         Toast.makeText(getApplicationContext(), "" + member_name,
                 Toast.LENGTH_SHORT).show();
+    }
+
+    class LoadCourseListings extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        protected String doInBackground(String... args) {
+            ConnectionHandler handler = new ConnectionHandler();
+            try {
+                handler.getCourseListing(getApplicationContext(), selectedCourseTitle, selectedCourseYear);
+            } catch (Exception e) {
+                System.out.println("Unable to get course listings");
+            }
+            return null;
+        }
     }
 
 }
