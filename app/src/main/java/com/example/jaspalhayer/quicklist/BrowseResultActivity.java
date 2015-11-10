@@ -14,6 +14,7 @@ import java.util.List;
 public class BrowseResultActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
     protected String[] book_titles;
+    protected String courseTitle;
     protected String[] book_authors;
     protected String[] dates_listed;
     protected int book_prices[] = {
@@ -31,8 +32,11 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse_result);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        courseTitle = getIntent().getStringExtra("keyTitle");
+        rowItems = new ArrayList<>();
+        getSupportActionBar().setTitle(courseTitle);
 
-        rowItems = new ArrayList<BrowseRowItem>();
+
 
         book_titles = getResources().getStringArray(R.array.testBookTitles);
         book_authors = getResources().getStringArray(R.array.testBookAuthor);

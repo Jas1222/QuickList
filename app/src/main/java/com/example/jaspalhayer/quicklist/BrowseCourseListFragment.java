@@ -29,6 +29,7 @@ public class BrowseCourseListFragment extends Fragment {
     protected Spinner yearSpinner;
     protected ListView lstView;
     protected Button mLookup;
+    protected String selectedCourse;
 
     protected boolean degreeTypeSet = false;
     protected boolean yearSet = false;
@@ -87,6 +88,7 @@ public class BrowseCourseListFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i != 0) {
                     courseSet = true;
+                    selectedCourse = courseSpinner.getItemAtPosition(i).toString();
                 } else {
                     courseSet = false;
                 }
@@ -128,6 +130,7 @@ public class BrowseCourseListFragment extends Fragment {
             public void onClick(View view) {
                 if (degreeTypeSet == true && courseSet == true && yearSet == true) {
                     Intent i = new Intent(getActivity(), BrowseResultActivity.class);
+                    i.putExtra("keyTitle", selectedCourse);
                     startActivity(i);
                 } else {
                     Snackbar.make(getView(), "Ensure you have selected all fields", Snackbar.LENGTH_LONG)
