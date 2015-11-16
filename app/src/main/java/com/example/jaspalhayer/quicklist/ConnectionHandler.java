@@ -1,9 +1,6 @@
 package com.example.jaspalhayer.quicklist;
 
-import android.app.ProgressDialog;
-import android.content.ContentValues;
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -13,20 +10,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.android.volley.*;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.net.ssl.HttpsURLConnection;
 
 /**
  * Created by jaspalhayer on 29/10/2015.
@@ -36,6 +27,14 @@ public class ConnectionHandler {
     StringBuilder result = new StringBuilder();
     String postUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/create_book_listingTest.php";
     String getCourseListUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/get_book_listingTest.php";
+
+    public static final String UNI_YEAR ="uni_year";
+    public static final String UNI_COURSE="uni_course";
+    public static final String BOOK_TITLE="book_title";
+    public static final String BOOK_AUTHOR="book_author";
+    public static final String BOOK_PRICE="book_price";
+    public static final String BOOK_YEAR="book_year";
+    public static final String ISBN ="isbn";
 
     public void createListingPost(Context context) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, postUrl,
@@ -69,7 +68,7 @@ public class ConnectionHandler {
         requestQueue.add(stringRequest);
     }
 
-    public void getCourseListingTest(final Context context, final String uniCourse, final String uniYear) {
+    public Books getCourseListingTest(final Context context, final String uniCourse, final String uniYear) {
         String getTestUrl = getCourseListUrl+"?uni_year="+uniYear+"&uni_course="+uniCourse;
         getTestUrl = getTestUrl.replaceAll(" ", "%20");
 
@@ -87,9 +86,27 @@ public class ConnectionHandler {
 
                     if (success == 1) {
                         Toast.makeText(context,
-                                "Updated Successfully",
+                                "Retrieved Successfully",
                                 Toast.LENGTH_SHORT).show();
-                        // redirect to readdata
+
+                        JSONArray ja = response.getJSONArray("listing");
+
+                        Books jsonBook = new Books();
+
+                        for(int i = 0; i < ja.length(); i++){
+                            JSONObject jobj = ja.getJSONObject(i);
+                            HashMap<String, String> item = new HashMap<>();
+
+                            jsonBook.jsonBookTitle.add(jobj.getString("book_title"));
+                            jsonBook.jsonBookAuthor.add(jobj.getString("book_author"));
+                            jsonBook.jsonUniCourse.add(jobj.getString("uni_course"));
+                            jsonBook.jsonBookPrice.add(jobj.getString("book_price"));
+                            jsonBook.jsonUniYear.add(jobj.getString("uni_year"));
+                            jsonBook.jsonBookIsbn.add(jobj.getString("isbn"));
+                            jsonBook.jsonBookYear.add(jobj.getString("book_year"));
+
+                            System.out.println(item);
+                        }
 
 
                     } else {
@@ -142,6 +159,7 @@ public class ConnectionHandler {
 //
 //        RequestQueue requestQueue = Volley.newRequestQueue(context);
 //        requestQueue.add(stringRequest);
+
     }
 }
 

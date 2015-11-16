@@ -2,7 +2,6 @@ package com.example.jaspalhayer.quicklist;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -43,6 +42,12 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
         rowItems = new ArrayList<>();
         getSupportActionBar().setTitle(courseTitle);
 
+        myListView = (ListView)findViewById(R.id.listView);
+        BrowseCustomAdapter adapter = new BrowseCustomAdapter(this, rowItems);
+        myListView.setAdapter(adapter);
+        myListView.setOnItemClickListener(this);
+        new LoadCourseListings().execute();
+
         book_titles = getResources().getStringArray(R.array.testBookTitles);
         book_authors = getResources().getStringArray(R.array.testBookAuthor);
         dates_listed = getResources().getStringArray(R.array.testDateListed);
@@ -51,12 +56,6 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
             BrowseRowItem item = new BrowseRowItem(book_titles[i], book_authors[i], book_prices[i], dates_listed[i]);
             rowItems.add(item);
         }
-
-        myListView = (ListView)findViewById(R.id.listView);
-        BrowseCustomAdapter adapter = new BrowseCustomAdapter(this, rowItems);
-        myListView.setAdapter(adapter);
-        myListView.setOnItemClickListener(this);
-        new LoadCourseListings().execute();
 
     }
 
@@ -84,6 +83,7 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
             try {
                // handler.getCourseListing(getApplicationContext(), selectedCourseTitle, selectedCourseYear);
                 handler.getCourseListingTest(getApplicationContext(), selectedCourseTitle, selectedCourseYear);
+
             } catch (Exception e) {
                 System.out.println("Unable to get course listings");
             }
