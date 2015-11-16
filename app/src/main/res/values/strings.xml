@@ -374,7 +374,7 @@
     </string-array>
 
     <string-array name="testBookTitles">
-        <item>Macroeconomics - An indepth analysis into fuck knows</item>
+        <item>Macroeconomics: An in-depth analysis into the economy</item>
         <item>Title 2</item>
         <item>Computer Networking: A top down approach (sixth edition)</item>
     </string-array>
@@ -393,7 +393,7 @@
         <item>2014</item>
     </string-array>
 
-<!-- TODO: Remove or change this placeholder text -->
+<!-- TODO: Add title string names here -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_browse_result">BrowseResultActivity</string>
 </resources>

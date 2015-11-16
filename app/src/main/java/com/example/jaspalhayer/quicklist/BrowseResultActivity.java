@@ -82,7 +82,8 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
         protected String doInBackground(String... args) {
             ConnectionHandler handler = new ConnectionHandler();
             try {
-                handler.getCourseListing(getApplicationContext(), selectedCourseTitle, selectedCourseYear);
+               // handler.getCourseListing(getApplicationContext(), selectedCourseTitle, selectedCourseYear);
+                handler.getCourseListingTest(getApplicationContext(), selectedCourseTitle, selectedCourseYear);
             } catch (Exception e) {
                 System.out.println("Unable to get course listings");
             }
