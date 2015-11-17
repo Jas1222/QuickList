@@ -68,11 +68,9 @@ public class ConnectionHandler {
         requestQueue.add(stringRequest);
     }
 
-    public Books getCourseListingTest(final Context context, final String uniCourse, final String uniYear) {
+    public void getCourseListingTest(final Context context, final String uniCourse, final String uniYear) {
         String getTestUrl = getCourseListUrl+"?uni_year="+uniYear+"&uni_course="+uniCourse;
         getTestUrl = getTestUrl.replaceAll(" ", "%20");
-
-        System.out.println(getTestUrl);
 
         JsonObjectRequest update_request = new JsonObjectRequest(getTestUrl,
                 null, new Response.Listener<JSONObject>() {
@@ -95,7 +93,6 @@ public class ConnectionHandler {
 
                         for(int i = 0; i < ja.length(); i++){
                             JSONObject jobj = ja.getJSONObject(i);
-                            HashMap<String, String> item = new HashMap<>();
 
                             jsonBook.jsonBookTitle.add(jobj.getString("book_title"));
                             jsonBook.jsonBookAuthor.add(jobj.getString("book_author"));
@@ -105,7 +102,6 @@ public class ConnectionHandler {
                             jsonBook.jsonBookIsbn.add(jobj.getString("isbn"));
                             jsonBook.jsonBookYear.add(jobj.getString("book_year"));
 
-                            System.out.println(item);
                         }
 
 
@@ -130,35 +126,6 @@ public class ConnectionHandler {
         });
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(update_request);
-
-        // Adding request to request queue
-
-//
-//        StringRequest stringRequest = new StringRequest(Request.Method.GET, getCourseListUrl,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        System.out.println(response);
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        System.out.println(error);
-//                    }
-//                }) {
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("uni_course", uniCourse);
-//                params.put("uni_year", uniYear);
-//                return params;
-//            }
-//
-//        };
-//
-//        RequestQueue requestQueue = Volley.newRequestQueue(context);
-//        requestQueue.add(stringRequest);
 
     }
 }
