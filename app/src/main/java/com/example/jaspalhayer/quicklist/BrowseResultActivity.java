@@ -8,6 +8,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +18,12 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
 
     protected String[] book_titles;
     protected String courseTitle;
+    protected JSONArray jsArray = new JSONArray();
+    protected JSONObject jsOb = new JSONObject();
     protected String selectedCourseYear;
     protected String selectedCourseTitle;
     protected String[] book_authors;
+    protected ConnectionHandler handler = new ConnectionHandler();
     protected String[] dates_listed;
     protected int book_prices[] = {
             12,
@@ -46,7 +52,14 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
         BrowseCustomAdapter adapter = new BrowseCustomAdapter(this, rowItems);
         myListView.setAdapter(adapter);
         myListView.setOnItemClickListener(this);
-        new LoadCourseListings().execute();
+        handler.getCourseListingTest(getApplicationContext(), selectedCourseTitle, selectedCourseYear, new ConnectionHandler.VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject result) {
+                jsOb = result;
+            }
+        });
+
+        
 
         book_titles = getResources().getStringArray(R.array.testBookTitles);
         book_authors = getResources().getStringArray(R.array.testBookAuthor);
@@ -82,7 +95,7 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
             ConnectionHandler handler = new ConnectionHandler();
             try {
                // handler.getCourseListing(getApplicationContext(), selectedCourseTitle, selectedCourseYear);
-                handler.getCourseListingTest(getApplicationContext(), selectedCourseTitle, selectedCourseYear);
+             //   handler.getCourseListingTest(getApplicationContext(), selectedCourseTitle, selectedCourseYear);
 
             } catch (Exception e) {
                 System.out.println("Unable to get course listings");

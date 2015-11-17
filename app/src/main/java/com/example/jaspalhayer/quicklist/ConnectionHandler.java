@@ -24,9 +24,9 @@ import java.util.Map;
  */
 public class ConnectionHandler {
     HttpURLConnection urlConnection;
-    StringBuilder result = new StringBuilder();
     String postUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/create_book_listingTest.php";
     String getCourseListUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/get_book_listingTest.php";
+    JSONObject result = new JSONObject();
 
     public static final String UNI_YEAR ="uni_year";
     public static final String UNI_COURSE="uni_course";
@@ -68,7 +68,7 @@ public class ConnectionHandler {
         requestQueue.add(stringRequest);
     }
 
-    public void getCourseListingTest(final Context context, final String uniCourse, final String uniYear) {
+    public void getCourseListingTest(final Context context, final String uniCourse, final String uniYear, final VolleyCallback callback) {
         String getTestUrl = getCourseListUrl+"?uni_year="+uniYear+"&uni_course="+uniCourse;
         getTestUrl = getTestUrl.replaceAll(" ", "%20");
 
@@ -86,23 +86,25 @@ public class ConnectionHandler {
                         Toast.makeText(context,
                                 "Retrieved Successfully",
                                 Toast.LENGTH_SHORT).show();
+                        result=response;
+                        callback.onSuccess(result);
+//                        JSONArray ja = response.getJSONArray("listing");
 
-                        JSONArray ja = response.getJSONArray("listing");
 
-                        Books jsonBook = new Books();
-
-                        for(int i = 0; i < ja.length(); i++){
-                            JSONObject jobj = ja.getJSONObject(i);
-
-                            jsonBook.jsonBookTitle.add(jobj.getString("book_title"));
-                            jsonBook.jsonBookAuthor.add(jobj.getString("book_author"));
-                            jsonBook.jsonUniCourse.add(jobj.getString("uni_course"));
-                            jsonBook.jsonBookPrice.add(jobj.getString("book_price"));
-                            jsonBook.jsonUniYear.add(jobj.getString("uni_year"));
-                            jsonBook.jsonBookIsbn.add(jobj.getString("isbn"));
-                            jsonBook.jsonBookYear.add(jobj.getString("book_year"));
-
-                        }
+//                        Books jsonBook = new Books();
+//
+//                        for(int i = 0; i < ja.length(); i++){
+//                            JSONObject jobj = ja.getJSONObject(i);
+//
+//                            jsonBook.jsonBookTitle.add(jobj.getString("book_title"));
+//                            jsonBook.jsonBookAuthor.add(jobj.getString("book_author"));
+//                            jsonBook.jsonUniCourse.add(jobj.getString("uni_course"));
+//                            jsonBook.jsonBookPrice.add(jobj.getString("book_price"));
+//                            jsonBook.jsonUniYear.add(jobj.getString("uni_year"));
+//                            jsonBook.jsonBookIsbn.add(jobj.getString("isbn"));
+//                            jsonBook.jsonBookYear.add(jobj.getString("book_year"));
+//
+//                        }
 
 
                     } else {
@@ -126,7 +128,10 @@ public class ConnectionHandler {
         });
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(update_request);
+    }
 
+    public interface VolleyCallback{
+        void onSuccess(JSONObject result);
     }
 }
 
