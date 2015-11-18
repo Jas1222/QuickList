@@ -24,13 +24,10 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
     protected String selectedCourseTitle;
     protected String[] book_authors;
     protected ConnectionHandler handler = new ConnectionHandler();
-    protected String[] dates_listed;
-    protected int book_prices[] = {
-            12,
-            12,
-            24,
-            54
+    protected String dates_listed[] = {
+            "10/10/10"
     };
+
 
     List<BrowseRowItem> rowItems;
     ListView myListView;
@@ -39,15 +36,17 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         Books mBook = new Books();
 
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_browse_result);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         try {
             jsonObject = new JSONObject(getIntent().getStringExtra("jsonObject"));
         } catch (Exception e) {
             System.out.println("Fucked up retrieving jsonObject from Intent");
         }
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_browse_result);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         courseTitle = getIntent().getStringExtra("keyTitle");
         selectedCourseTitle = getIntent().getStringExtra("keyTitle");
@@ -64,6 +63,11 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
 
         try {
             jsArray = jsonObject.getJSONArray("listing");
+        } catch (Exception e) {
+            System.out.println("Parsing the JSON object to array fucked up");
+        }
+
+        try {
             for (int i = 0; i < jsArray.length(); i++) {
                 JSONObject jobj = jsArray.getJSONObject(i);
 
@@ -74,18 +78,10 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
                 mBook.jsonUniYear.add(jobj.getString("uni_year"));
                 mBook.jsonBookIsbn.add(jobj.getString("isbn"));
                 mBook.jsonBookYear.add(jobj.getString("book_year"));
-
             }
         } catch (Exception e) {
-            System.out.println("Parsing the JSON format fucked up");
+            System.out.println("Parsing JSON object to Book object fucked up");
         }
-
-
-
-
-        book_titles = getResources().getStringArray(R.array.testBookTitles);
-        book_authors = getResources().getStringArray(R.array.testBookAuthor);
-        dates_listed = getResources().getStringArray(R.array.testDateListed);
 
         for (int i = 0; i < mBook.jsonBookTitle.size(); i++) {
             BrowseRowItem item = new BrowseRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), mBook.jsonBookPrice.get(i), dates_listed[i]);
@@ -101,29 +97,6 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
         String member_name = rowItems.get(position).bookTitle;
         Toast.makeText(getApplicationContext(), "" + member_name,
                 Toast.LENGTH_SHORT).show();
-    }
-
-    class LoadCourseListings extends AsyncTask<String, String, String> {
-
-        /**
-         * Before starting background thread Show Progress Dialog
-         */
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        protected String doInBackground(String... args) {
-            ConnectionHandler handler = new ConnectionHandler();
-            try {
-                // handler.getCourseListing(getApplicationContext(), selectedCourseTitle, selectedCourseYear);
-                //   handler.getCourseListingTest(getApplicationContext(), selectedCourseTitle, selectedCourseYear);
-
-            } catch (Exception e) {
-                System.out.println("Unable to get course listings");
-            }
-            return null;
-        }
     }
 
 }

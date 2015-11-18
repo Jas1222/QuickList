@@ -142,16 +142,11 @@ public class BrowseCourseListFragment extends Fragment {
                         public void onSuccess(JSONObject result) {
                             jsOb = result;
                             Intent i = new Intent(getActivity(), BrowseResultActivity.class);
-
+                            i.putExtra("keyTitle", selectedCourse);
                             i.putExtra("jsonObject", jsOb.toString());
                             startActivity(i);
-
                         }
                     });
-                    Intent i = new Intent(getActivity(), BrowseResultActivity.class);
-                    i.putExtra("keyTitle", selectedCourse);
-                  //  i.putExtra("keyUniYear", selectedYear);
-                    startActivity(i);
                 } else {
                     Snackbar.make(getView(), "Ensure you have selected all fields", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
