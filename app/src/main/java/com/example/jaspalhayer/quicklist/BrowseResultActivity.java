@@ -14,12 +14,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BrowseResultActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class BrowseResultActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     protected String[] book_titles;
     protected String courseTitle;
     protected JSONArray jsArray = new JSONArray();
-    protected JSONObject jsOb = new JSONObject();
+    protected JSONObject jsonObject;
     protected String selectedCourseYear;
     protected String selectedCourseTitle;
     protected String[] book_authors;
@@ -37,6 +37,14 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Books mBook = new Books();
+
+        try {
+            jsonObject = new JSONObject(getIntent().getStringExtra("jsonObject"));
+        } catch (Exception e) {
+            System.out.println("Fucked up retrieving jsonObject from Intent");
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse_result);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -48,25 +56,39 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
         rowItems = new ArrayList<>();
         getSupportActionBar().setTitle(courseTitle);
 
-        myListView = (ListView)findViewById(R.id.listView);
+        myListView = (ListView) findViewById(R.id.listView);
         BrowseCustomAdapter adapter = new BrowseCustomAdapter(this, rowItems);
         myListView.setAdapter(adapter);
         myListView.setOnItemClickListener(this);
-        handler.getCourseListingTest(getApplicationContext(), selectedCourseTitle, selectedCourseYear, new ConnectionHandler.VolleyCallback() {
-            @Override
-            public void onSuccess(JSONObject result) {
-                jsOb = result;
-            }
-        });
 
-        
+
+        try {
+            jsArray = jsonObject.getJSONArray("listing");
+            for (int i = 0; i < jsArray.length(); i++) {
+                JSONObject jobj = jsArray.getJSONObject(i);
+
+                mBook.jsonBookTitle.add(jobj.getString("book_title"));
+                mBook.jsonBookAuthor.add(jobj.getString("book_author"));
+                mBook.jsonUniCourse.add(jobj.getString("uni_course"));
+                mBook.jsonBookPrice.add(jobj.getString("book_price"));
+                mBook.jsonUniYear.add(jobj.getString("uni_year"));
+                mBook.jsonBookIsbn.add(jobj.getString("isbn"));
+                mBook.jsonBookYear.add(jobj.getString("book_year"));
+
+            }
+        } catch (Exception e) {
+            System.out.println("Parsing the JSON format fucked up");
+        }
+
+
+
 
         book_titles = getResources().getStringArray(R.array.testBookTitles);
         book_authors = getResources().getStringArray(R.array.testBookAuthor);
         dates_listed = getResources().getStringArray(R.array.testDateListed);
 
-        for (int i = 0; i < book_titles.length; i++){
-            BrowseRowItem item = new BrowseRowItem(book_titles[i], book_authors[i], book_prices[i], dates_listed[i]);
+        for (int i = 0; i < mBook.jsonBookTitle.size(); i++) {
+            BrowseRowItem item = new BrowseRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), book_prices[i], dates_listed[i]);
             rowItems.add(item);
         }
 
@@ -94,8 +116,8 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
         protected String doInBackground(String... args) {
             ConnectionHandler handler = new ConnectionHandler();
             try {
-               // handler.getCourseListing(getApplicationContext(), selectedCourseTitle, selectedCourseYear);
-             //   handler.getCourseListingTest(getApplicationContext(), selectedCourseTitle, selectedCourseYear);
+                // handler.getCourseListing(getApplicationContext(), selectedCourseTitle, selectedCourseYear);
+                //   handler.getCourseListingTest(getApplicationContext(), selectedCourseTitle, selectedCourseYear);
 
             } catch (Exception e) {
                 System.out.println("Unable to get course listings");

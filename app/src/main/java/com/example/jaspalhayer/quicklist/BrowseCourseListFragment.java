@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.android.volley.ParseError;
 
+import org.json.JSONObject;
+
 import java.lang.reflect.Array;
 
 /**
@@ -27,10 +29,14 @@ public class BrowseCourseListFragment extends Fragment {
     protected Spinner degreeTypeSpinner;
     protected Spinner courseSpinner;
     protected Spinner yearSpinner;
+    protected JSONObject jsOb = new JSONObject();
+
     protected ListView lstView;
     protected Button mLookup;
     protected String selectedCourse;
     protected String selectedYear;
+
+    protected ConnectionHandler handler = new ConnectionHandler();
 
     protected boolean degreeTypeSet = false;
     protected boolean yearSet = false;
@@ -131,9 +137,20 @@ public class BrowseCourseListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (degreeTypeSet == true && courseSet == true && yearSet == true) {
+                    handler.getCourseListingTest(getActivity().getApplicationContext(), selectedCourse, selectedYear, new ConnectionHandler.VolleyCallback() {
+                        @Override
+                        public void onSuccess(JSONObject result) {
+                            jsOb = result;
+                            Intent i = new Intent(getActivity(), BrowseResultActivity.class);
+
+                            i.putExtra("jsonObject", jsOb.toString());
+                            startActivity(i);
+
+                        }
+                    });
                     Intent i = new Intent(getActivity(), BrowseResultActivity.class);
-                    i.putExtra("keyTitle", selectedCourse);
-                    i.putExtra("keyUniYear", selectedYear);
+                  //  i.putExtra("keyTitle", selectedCourse);
+                  //  i.putExtra("keyUniYear", selectedYear);
                     startActivity(i);
                 } else {
                     Snackbar.make(getView(), "Ensure you have selected all fields", Snackbar.LENGTH_LONG)
