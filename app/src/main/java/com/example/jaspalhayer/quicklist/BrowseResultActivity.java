@@ -1,6 +1,5 @@
 package com.example.jaspalhayer.quicklist;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -16,16 +15,15 @@ import java.util.List;
 
 public class BrowseResultActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    protected String[] book_titles;
     protected String courseTitle;
     protected JSONArray jsArray = new JSONArray();
     protected JSONObject jsonObject;
     protected String selectedCourseYear;
     protected String selectedCourseTitle;
-    protected String[] book_authors;
     protected ConnectionHandler handler = new ConnectionHandler();
-    protected String dates_listed[] = {
-            "10/10/10"
+    protected String year_published[] = {
+            "2012",
+            "1985"
     };
 
 
@@ -62,7 +60,7 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
 
 
         try {
-            jsArray = jsonObject.getJSONArray("listing");
+            jsArray = jsonObject.getJSONArray("books");
         } catch (Exception e) {
             System.out.println("Parsing the JSON object to array fucked up");
         }
@@ -78,16 +76,13 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
                 mBook.jsonUniYear.add(jobj.getString("uni_year"));
                 mBook.jsonBookIsbn.add(jobj.getString("isbn"));
                 mBook.jsonBookYear.add(jobj.getString("book_year"));
+
+                BrowseRowItem item = new BrowseRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), mBook.jsonBookPrice.get(i), year_published[i]);
+                rowItems.add(item);
             }
         } catch (Exception e) {
             System.out.println("Parsing JSON object to Book object fucked up");
         }
-
-        for (int i = 0; i < mBook.jsonBookTitle.size(); i++) {
-            BrowseRowItem item = new BrowseRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), mBook.jsonBookPrice.get(i), dates_listed[i]);
-            rowItems.add(item);
-        }
-
     }
 
     @Override
