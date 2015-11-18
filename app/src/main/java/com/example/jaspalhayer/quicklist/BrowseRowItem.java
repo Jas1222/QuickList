@@ -6,10 +6,10 @@ package com.example.jaspalhayer.quicklist;
 public class BrowseRowItem {
     protected String bookTitle;
     protected String bookAuthor;
-    protected int bookPrice;
+    protected String bookPrice;
     protected String dateListed;
 
-    public BrowseRowItem(String bookTitle, String bookAuthor, int bookPrice, String dateListed){
+    public BrowseRowItem(String bookTitle, String bookAuthor, String bookPrice, String dateListed){
         this.bookTitle = bookTitle;
         this.bookAuthor = bookAuthor;
         this.bookPrice = bookPrice;

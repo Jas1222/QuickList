@@ -149,7 +149,7 @@ public class BrowseCourseListFragment extends Fragment {
                         }
                     });
                     Intent i = new Intent(getActivity(), BrowseResultActivity.class);
-                  //  i.putExtra("keyTitle", selectedCourse);
+                    i.putExtra("keyTitle", selectedCourse);
                   //  i.putExtra("keyUniYear", selectedYear);
                     startActivity(i);
                 } else {

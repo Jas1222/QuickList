@@ -88,7 +88,7 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
         dates_listed = getResources().getStringArray(R.array.testDateListed);
 
         for (int i = 0; i < mBook.jsonBookTitle.size(); i++) {
-            BrowseRowItem item = new BrowseRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), book_prices[i], dates_listed[i]);
+            BrowseRowItem item = new BrowseRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), mBook.jsonBookPrice.get(i), dates_listed[i]);
             rowItems.add(item);
         }
 

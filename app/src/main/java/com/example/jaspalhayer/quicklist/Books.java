@@ -11,7 +11,7 @@ public class Books {
     protected String bookTitle;
     protected String bookAuthors;
     protected String bookDateListed;
-    protected int bookPrice;
+    protected String bookPrice;
     protected String bookUserListed;
 
 //    protected String jsonBookTitle[];
