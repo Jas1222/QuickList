@@ -12,14 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.ParseError;
 
 import org.json.JSONObject;
-
-import java.lang.reflect.Array;
 
 /**
  * Created by jaspalhayer on 05/11/2015.
@@ -57,11 +51,7 @@ public class BrowseCourseListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.browse_uni_course, container, false);
-        lstView = (ListView)rootView.findViewById(R.id.courseList);
-        degreeTypeSpinner = (Spinner)rootView.findViewById(R.id.degreeTypeSpinner);
-        courseSpinner = (Spinner)rootView.findViewById(R.id.courseSpinner);
-        yearSpinner = (Spinner)rootView.findViewById(R.id.yearSpinner);
-        mLookup = (Button)rootView.findViewById(R.id.makeListingBtn);
+        setVariablesUiElements(rootView);
 
         createArrayAdapters();
         setSpinnerToAdapter();
@@ -70,12 +60,7 @@ public class BrowseCourseListFragment extends Fragment {
         yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i != 0) {
-                    yearSet = true;
-                    selectedYear = yearSpinner.getItemAtPosition(i).toString();
-                } else {
-                    yearSet = false;
-                }
+                setValidYearField(i);
             }
 
             @Override
@@ -87,12 +72,7 @@ public class BrowseCourseListFragment extends Fragment {
         courseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i != 0) {
-                    courseSet = true;
-                    selectedCourse = courseSpinner.getItemAtPosition(i).toString();
-                } else {
-                    courseSet = false;
-                }
+                setValidCourseField(i);
             }
 
             @Override
@@ -104,7 +84,7 @@ public class BrowseCourseListFragment extends Fragment {
         degreeTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                validateFields(i);
+                setValidCourseTypeField(i);
             }
 
             @Override
@@ -159,7 +139,7 @@ public class BrowseCourseListFragment extends Fragment {
         degreeTypeSpinner.setAdapter(degreeTypeAdapter);
     }
 
-    protected void validateFields(int i){
+    protected void setValidCourseTypeField(int i){
         if (i == 1) {
             degreeTypeSet = true;
             underGradCourse = true;
@@ -175,4 +155,31 @@ public class BrowseCourseListFragment extends Fragment {
             degreeTypeSet = false;
         }
     }
+
+    protected void setValidYearField(int i){
+        if (i != 0) {
+            yearSet = true;
+            selectedYear = yearSpinner.getItemAtPosition(i).toString();
+        } else {
+            yearSet = false;
+        }
+    }
+
+    protected void setValidCourseField(int i){
+        if (i != 0) {
+            courseSet = true;
+            selectedCourse = courseSpinner.getItemAtPosition(i).toString();
+        } else {
+            courseSet = false;
+        }
+    }
+
+    protected void setVariablesUiElements(View rootView){
+        lstView = (ListView)rootView.findViewById(R.id.courseList);
+        degreeTypeSpinner = (Spinner)rootView.findViewById(R.id.degreeTypeSpinner);
+        courseSpinner = (Spinner)rootView.findViewById(R.id.courseSpinner);
+        yearSpinner = (Spinner)rootView.findViewById(R.id.yearSpinner);
+        mLookup = (Button)rootView.findViewById(R.id.makeListingBtn);
+    }
+
 }
