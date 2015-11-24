@@ -65,10 +65,7 @@ public class BrowseCourseListFragment extends Fragment {
 
         createArrayAdapters();
         setSpinnerToAdapter();
-
-        yearSpinner.setAdapter(yearAdapter);
-        courseSpinner.setAdapter(initialCourseAdapter);
-        degreeTypeSpinner.setAdapter(degreeTypeAdapter);
+        setAdapter();
 
         yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -107,20 +104,7 @@ public class BrowseCourseListFragment extends Fragment {
         degreeTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i == 1) {
-                    degreeTypeSet = true;
-                    underGradCourse = true;
-
-                    courseSpinner.setAdapter(ugCourseAdapter);
-                } else if (i == 2) {
-                    degreeTypeSet = true;
-                    postGradCourse = true;
-
-                    courseSpinner.setAdapter(pgCourseAdapter);
-
-                } else {
-                    degreeTypeSet = false;
-                }
+                validateFields(i);
             }
 
             @Override
@@ -167,5 +151,28 @@ public class BrowseCourseListFragment extends Fragment {
         yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         degreeTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         initialCourseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    }
+
+    protected void setAdapter(){
+        yearSpinner.setAdapter(yearAdapter);
+        courseSpinner.setAdapter(initialCourseAdapter);
+        degreeTypeSpinner.setAdapter(degreeTypeAdapter);
+    }
+
+    protected void validateFields(int i){
+        if (i == 1) {
+            degreeTypeSet = true;
+            underGradCourse = true;
+
+            courseSpinner.setAdapter(ugCourseAdapter);
+        } else if (i == 2) {
+            degreeTypeSet = true;
+            postGradCourse = true;
+
+            courseSpinner.setAdapter(pgCourseAdapter);
+
+        } else {
+            degreeTypeSet = false;
+        }
     }
 }
