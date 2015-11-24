@@ -45,6 +45,11 @@ public class BrowseCourseListFragment extends Fragment {
     protected boolean underGradCourse;
     protected boolean postGradCourse;
 
+    ArrayAdapter<CharSequence> degreeTypeAdapter;
+    ArrayAdapter<CharSequence> ugCourseAdapter;
+    ArrayAdapter<CharSequence> pgCourseAdapter;
+    ArrayAdapter<CharSequence> yearAdapter;
+    ArrayAdapter<CharSequence> initialCourseAdapter;
 
 
     @Override
@@ -58,12 +63,7 @@ public class BrowseCourseListFragment extends Fragment {
         yearSpinner = (Spinner)rootView.findViewById(R.id.yearSpinner);
         mLookup = (Button)rootView.findViewById(R.id.makeListingBtn);
 
-        final ArrayAdapter<CharSequence> degreeTypeAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.course_type, R.layout.course_spinner_layout);
-        final ArrayAdapter<CharSequence> ugCourseAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.undergrad_courses, R.layout.course_spinner_layout);
-        final ArrayAdapter<CharSequence> pgCourseAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.postgrad_courses, R.layout.course_spinner_layout);
-        final ArrayAdapter<CharSequence> yearAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.course_year_array, R.layout.course_spinner_layout);
-        final ArrayAdapter<CharSequence> initialCourseAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.initial_course, R.layout.course_spinner_layout);
-
+        createArrayAdapters();
         ugCourseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         pgCourseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -157,5 +157,12 @@ public class BrowseCourseListFragment extends Fragment {
         return rootView;
     }
 
+    protected void createArrayAdapters(){
+        degreeTypeAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.course_type, R.layout.course_spinner_layout);
+        ugCourseAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.undergrad_courses, R.layout.course_spinner_layout);
+        pgCourseAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.postgrad_courses, R.layout.course_spinner_layout);
+        yearAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.course_year_array, R.layout.course_spinner_layout);
+        initialCourseAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.initial_course, R.layout.course_spinner_layout);
+    }
 
 }
