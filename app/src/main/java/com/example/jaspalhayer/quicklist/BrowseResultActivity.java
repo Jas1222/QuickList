@@ -33,27 +33,22 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Books mBook = new Books();
-
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_browse_result);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-        getJsonObject();
-
         getInputtedStrings();
 
-        rowItems = new ArrayList<>();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(courseTitle);
+        Books mBook = new Books();
+        rowItems = new ArrayList<>();
 
-        myListView = (ListView) findViewById(R.id.listView);
         BrowseCustomAdapter adapter = new BrowseCustomAdapter(this, rowItems);
+        myListView = (ListView) findViewById(R.id.listView);
         myListView.setAdapter(adapter);
         myListView.setOnItemClickListener(this);
 
+        getInputtedStrings();
+        getJsonObject();
 
         try {
             jsArray = jsonObject.getJSONArray("books");
