@@ -64,11 +64,7 @@ public class BrowseCourseListFragment extends Fragment {
         mLookup = (Button)rootView.findViewById(R.id.makeListingBtn);
 
         createArrayAdapters();
-        ugCourseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        pgCourseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        degreeTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        initialCourseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        setSpinnerToAdapter();
 
         yearSpinner.setAdapter(yearAdapter);
         courseSpinner.setAdapter(initialCourseAdapter);
@@ -165,4 +161,11 @@ public class BrowseCourseListFragment extends Fragment {
         initialCourseAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.initial_course, R.layout.course_spinner_layout);
     }
 
+    protected void setSpinnerToAdapter(){
+        ugCourseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        pgCourseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        degreeTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        initialCourseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    }
 }
