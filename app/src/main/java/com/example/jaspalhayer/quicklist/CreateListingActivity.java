@@ -36,13 +36,7 @@ public class CreateListingActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        titleText = (EditText)findViewById(R.id.titleText);
-        authorText = (EditText)findViewById(R.id.authorText);
-        yearText = (EditText)findViewById(R.id.yearText);
-        descText = (EditText)findViewById(R.id.descText);
-        priceText = (EditText)findViewById(R.id.priceText);
-
-        mListing = (Button)findViewById(R.id.makeListingBtn);
+        setVariablesToUiElements();
 
         mListing.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +60,16 @@ public class CreateListingActivity extends AppCompatActivity {
         yearInfoField = yearText.getText().toString();
         descInfoField = descText.getText().toString();
         priceInfoField = priceText.getText().toString();
+    }
+
+    private void setVariablesToUiElements(){
+        titleText = (EditText)findViewById(R.id.titleText);
+        authorText = (EditText)findViewById(R.id.authorText);
+        yearText = (EditText)findViewById(R.id.yearText);
+        descText = (EditText)findViewById(R.id.descText);
+        priceText = (EditText)findViewById(R.id.priceText);
+
+        mListing = (Button)findViewById(R.id.makeListingBtn);
     }
 
     class CreateBookListing extends AsyncTask<String, String, String> {

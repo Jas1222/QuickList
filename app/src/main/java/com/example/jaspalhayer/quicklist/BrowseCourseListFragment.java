@@ -51,7 +51,7 @@ public class BrowseCourseListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.browse_uni_course, container, false);
-        setVariablesUiElements(rootView);
+        setVariablesToUiElements(rootView);
 
         createArrayAdapters();
         setSpinnerToAdapter();
@@ -174,7 +174,7 @@ public class BrowseCourseListFragment extends Fragment {
         }
     }
 
-    protected void setVariablesUiElements(View rootView){
+    protected void setVariablesToUiElements(View rootView){
         lstView = (ListView)rootView.findViewById(R.id.courseList);
         degreeTypeSpinner = (Spinner)rootView.findViewById(R.id.degreeTypeSpinner);
         courseSpinner = (Spinner)rootView.findViewById(R.id.courseSpinner);
