@@ -22,8 +22,6 @@ public class AllListingsActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // ** OPENS CONNECTION TO DATABASE TO RETRIEVE ALL LISTINGS - TODO MOVE
-        //new LoadAllListings().execute();
     }
 
     @Override

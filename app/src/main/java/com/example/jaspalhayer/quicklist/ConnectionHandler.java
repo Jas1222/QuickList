@@ -23,18 +23,9 @@ import java.util.Map;
  * Created by jaspalhayer on 29/10/2015.
  */
 public class ConnectionHandler {
-    HttpURLConnection urlConnection;
     String postUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/create_book_listingTest.php";
     String getCourseListUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/get_book_listingTest.php";
     JSONObject result = new JSONObject();
-
-    public static final String UNI_YEAR ="uni_year";
-    public static final String UNI_COURSE="uni_course";
-    public static final String BOOK_TITLE="book_title";
-    public static final String BOOK_AUTHOR="book_author";
-    public static final String BOOK_PRICE="book_price";
-    public static final String BOOK_YEAR="book_year";
-    public static final String ISBN ="isbn";
 
     public void createListingPost(Context context) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, postUrl,
@@ -88,24 +79,6 @@ public class ConnectionHandler {
                                 Toast.LENGTH_SHORT).show();
                         result=response;
                         callback.onSuccess(result);
-//                        JSONArray ja = response.getJSONArray("listing");
-
-
-//                        Books jsonBook = new Books();
-//
-//                        for(int i = 0; i < ja.length(); i++){
-//                            JSONObject jobj = ja.getJSONObject(i);
-//
-//                            jsonBook.jsonBookTitle.add(jobj.getString("book_title"));
-//                            jsonBook.jsonBookAuthor.add(jobj.getString("book_author"));
-//                            jsonBook.jsonUniCourse.add(jobj.getString("uni_course"));
-//                            jsonBook.jsonBookPrice.add(jobj.getString("book_price"));
-//                            jsonBook.jsonUniYear.add(jobj.getString("uni_year"));
-//                            jsonBook.jsonBookIsbn.add(jobj.getString("isbn"));
-//                            jsonBook.jsonBookYear.add(jobj.getString("book_year"));
-//
-//                        }
-
 
                     } else {
                         Toast.makeText(context,
@@ -126,6 +99,7 @@ public class ConnectionHandler {
 
             }
         });
+
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(update_request);
     }
