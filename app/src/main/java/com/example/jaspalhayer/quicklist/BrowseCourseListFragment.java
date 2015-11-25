@@ -39,11 +39,11 @@ public class BrowseCourseListFragment extends Fragment {
     protected boolean underGradCourse;
     protected boolean postGradCourse;
 
-    ArrayAdapter<CharSequence> degreeTypeAdapter;
-    ArrayAdapter<CharSequence> ugCourseAdapter;
-    ArrayAdapter<CharSequence> pgCourseAdapter;
-    ArrayAdapter<CharSequence> yearAdapter;
-    ArrayAdapter<CharSequence> initialCourseAdapter;
+    protected ArrayAdapter<CharSequence> degreeTypeAdapter;
+    protected ArrayAdapter<CharSequence> ugCourseAdapter;
+    protected ArrayAdapter<CharSequence> pgCourseAdapter;
+    protected ArrayAdapter<CharSequence> yearAdapter;
+    protected ArrayAdapter<CharSequence> initialCourseAdapter;
 
 
     @Override

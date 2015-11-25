@@ -15,7 +15,4 @@ public class BrowseRowItem {
         this.bookPrice = bookPrice;
         this.dateListed = dateListed;
     }
-
-
-
 }
