@@ -17,6 +17,8 @@
         <item>Postgraduate</item>
     </string-array>
 
+    <string name="search">Search</string>
+
     <string-array name="initial_course">Select your degree type first</string-array>
 
     <string-array name="undergrad_courses">

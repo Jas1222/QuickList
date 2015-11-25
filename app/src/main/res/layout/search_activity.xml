@@ -6,36 +6,24 @@
         android:layout_height="match_parent"
         android:weightSum="3">
 
-        <!-- Title Icon -->
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TableRow
                 android:layout_width="match_parent"
+                android:gravity="center_horizontal"
                 android:layout_height="match_parent">
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/titleText"
-                    android:hint="What is the book title?"
-                    android:minWidth="320dip"
-                    android:maxWidth="320dip"
-                    android:maxLength="120"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true" />
+                    android:hint="Search by ISBN number"
+                    android:inputType="number"
+                    android:maxLength="13" />
             </TableRow>
         </TableLayout>
-
-        <!-- Author Icon -->
-
-        <!-- Year Icon -->
-
-        <!-- Description Icon -->
-
-
-        <!-- Rectangle footer -->
 
         <Button
             android:layout_width="150dip"
