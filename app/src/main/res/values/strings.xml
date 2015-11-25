@@ -396,4 +396,5 @@
 <!-- TODO: Add title string names here -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_browse_result">BrowseResultActivity</string>
+    <string name="title_activity_search">SearchActivity</string>
 </resources>

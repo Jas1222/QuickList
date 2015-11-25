@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+
+
         // Listener event for icons - refactor?
         bookIcon = (ImageView) findViewById(R.id.bookIcon);
         bookIcon.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +119,10 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.search_mag_icon){
+            // Open intent here
+            Intent i = new Intent(getApplicationContext(), SearchActivity.class);
+            startActivity(i);
         }
 
         return super.onOptionsItemSelected(item);
