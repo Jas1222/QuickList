@@ -1,6 +1,5 @@
 package com.example.jaspalhayer.quicklist;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -63,7 +62,7 @@ public class CreateListingActivity extends AppCompatActivity {
     }
 
     private void setVariablesToUiElements(){
-        titleText = (EditText)findViewById(R.id.titleText);
+        titleText = (EditText)findViewById(R.id.sIsbn);
         authorText = (EditText)findViewById(R.id.authorText);
         yearText = (EditText)findViewById(R.id.yearText);
         descText = (EditText)findViewById(R.id.descText);

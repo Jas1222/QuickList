@@ -6,34 +6,70 @@
         android:layout_height="match_parent"
         android:weightSum="3">
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:gravity="center_horizontal"
-                android:layout_height="match_parent">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/titleText"
-                    android:hint="Search by ISBN number"
-                    android:inputType="number"
-                    android:maxLength="13" />
-            </TableRow>
-        </TableLayout>
-
-        <Button
+    <Button
             android:layout_width="150dip"
             android:layout_height="wrap_content"
-            android:text="Make Listing"
+            android:text="Search"
             android:id="@+id/makeListingBtn"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
+        android:layout_marginBottom="29dp"
             android:background="@color/colorPrimary"
             android:textColor="@color/white"
-            android:shadowColor="@color/colorPrimaryDark"/>
+            android:shadowColor="@color/colorPrimaryDark"
+        android:layout_gravity="center_vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
-    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="For best results, search by ISBN"
+        android:gravity="center_vertical"
+        android:id="@+id/textView3"
+        android:textStyle="bold"
+        android:textColor="@color/colorAlt"
+        android:layout_marginTop="101dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sIsbn"
+        android:hint="Search by ISBN number"
+        android:inputType="number"
+        android:layout_above="@+id/sTitle"
+        android:maxLength="13"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sTitle"
+        android:hint="Search by book title"
+        android:maxWidth="320dip"
+        android:maxLength="120"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sAuthor"
+        android:hint="Search by author"
+        android:maxWidth="320dip"
+        android:maxLength="120"
+        android:layout_marginTop="20dp"
+        android:layout_column="16"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/sTitle"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
