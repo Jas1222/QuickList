@@ -7,16 +7,18 @@
         android:weightSum="3">
 
     <Button
-            android:layout_width="150dip"
-            android:layout_height="wrap_content"
-            android:text="Search"
-            android:id="@+id/makeListingBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:id="@+id/makeListingBtn"
         android:layout_marginBottom="29dp"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/white"
-            android:shadowColor="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:shadowColor="@color/colorPrimaryDark"
         android:layout_gravity="center_vertical"
         android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_centerHorizontal="true" />
 
 
@@ -26,11 +28,12 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="For best results, search by ISBN"
         android:gravity="center_vertical"
-        android:id="@+id/textView3"
+        android:id="@+id/headerText"
+        android:textSize="20dp"
         android:textStyle="bold"
         android:textColor="@color/colorAlt"
-        android:layout_marginTop="101dp"
-        android:layout_alignParentTop="true"
+        android:layout_marginBottom="100dp"
+        android:layout_above="@+id/sIsbn"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -69,6 +72,7 @@
         android:layout_column="16"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+
         android:layout_below="@+id/sTitle"
         android:layout_centerHorizontal="true" />
 
