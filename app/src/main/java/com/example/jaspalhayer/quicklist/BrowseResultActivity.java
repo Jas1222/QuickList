@@ -27,7 +27,6 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
             "1985"
     };
 
-
     List<BrowseRowItem> rowItems;
     ListView myListView;
 

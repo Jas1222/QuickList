@@ -40,7 +40,7 @@ public class CreateListingActivity extends AppCompatActivity {
         mListing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                saveTextListing();
+                saveUserInputText();
                 new CreateBookListing().execute();
             }
         });
@@ -53,7 +53,7 @@ public class CreateListingActivity extends AppCompatActivity {
         return true;
     }
 
-    private void saveTextListing(){
+    private void saveUserInputText(){
         bookInfoField = titleText.getText().toString();
         authorInfoField = authorText.getText().toString();
         yearInfoField = yearText.getText().toString();

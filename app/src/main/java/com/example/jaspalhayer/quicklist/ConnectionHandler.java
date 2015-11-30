@@ -25,6 +25,8 @@ import java.util.Map;
 public class ConnectionHandler {
     String postUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/create_book_listingTest.php";
     String getCourseListUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/get_book_listingTest.php";
+    String localSearchUrl="http://localhost:8888/quicklist/search_book_listings.php";
+    String localPostUrl="http://localhost:8888/quicklist/create_book_listingTest.php";
     JSONObject result = new JSONObject();
 
     public void createListingPost(Context context) {
@@ -43,7 +45,7 @@ public class ConnectionHandler {
                 }) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("book_title", CreateListingActivity.bookInfoField);
                 params.put("book_author", CreateListingActivity.authorInfoField);
                 params.put("book_year", CreateListingActivity.yearInfoField);
@@ -83,6 +85,51 @@ public class ConnectionHandler {
                     } else {
                         Toast.makeText(context,
                                 "failed to update", Toast.LENGTH_SHORT)
+                                .show();
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error);
+
+            }
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(update_request);
+    }
+
+    public void searchListings(final Context context, final int isbn, final String book_title, final String book_author, final VolleyCallback callback){
+        String getTestUrl = localSearchUrl+"?isbn="+isbn+"&book_title="+book_title+"&book_author="+book_author;
+        getTestUrl = getTestUrl.replaceAll(" ", "%20");
+
+        JsonObjectRequest update_request = new JsonObjectRequest(getTestUrl,
+                null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                System.out.println(response);
+
+                try {
+                    int success = response.getInt("success");
+
+                    if (success == 1) {
+                        Toast.makeText(context,
+                                "Retrieved Successfully",
+                                Toast.LENGTH_SHORT).show();
+                        result=response;
+                        callback.onSuccess(result);
+
+                    } else {
+                        Toast.makeText(context,
+                                "failed to retrieve search listings", Toast.LENGTH_SHORT)
                                 .show();
                     }
 
