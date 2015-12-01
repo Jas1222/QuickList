@@ -11,9 +11,6 @@ import android.widget.EditText;
 import org.json.JSONObject;
 
 public class SearchActivity extends AppCompatActivity {
-    protected int mIsbn;
-    protected String mBookTitle;
-    protected String mAuthor;
     protected Button sButton;
     protected EditText field_isbn;
     protected EditText field_title;
@@ -36,7 +33,6 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View view) {
                 saveUserInputText();
                 if(validInputFields()) {
-                    // ** When server is back up, launch the GET request below and start activity, delete code above
                     handler.searchListings(getApplicationContext(), input_isbn, input_title, input_author, new ConnectionHandler.VolleyCallback() {
                         @Override
                         public void onSuccess(JSONObject result) {

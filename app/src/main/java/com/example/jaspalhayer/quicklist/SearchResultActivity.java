@@ -21,26 +21,6 @@ public class SearchResultActivity extends AppCompatActivity implements AdapterVi
     protected JSONArray jsArray = new JSONArray();
 
     Books mBook = new Books();
-    protected String titles[]={
-            "Book 1",
-            "Book 2",
-            "Book 3",
-            "Book 4"
-    };
-
-    protected String authors[] ={
-            "Author 1",
-            "Author 2",
-            "Author 3",
-            "Author 4"
-    };
-
-    protected String prices[]={
-            "12",
-            "13",
-            "14",
-            "15"
-    };
 
     protected String dateListed[]={
             "10/10/10",
@@ -61,7 +41,6 @@ public class SearchResultActivity extends AppCompatActivity implements AdapterVi
         myListView.setAdapter(adapter);
         myListView.setOnItemClickListener(this);
 
-        // UNCOMMENT WHEN USING REAL DATA FROM DATABASE
         getJsonObject();
 
         try {
@@ -71,8 +50,6 @@ public class SearchResultActivity extends AppCompatActivity implements AdapterVi
         }
 
         parseJsonToBook(mBook);
-
-       // drawListRows();
     }
 
     @Override
@@ -107,7 +84,6 @@ public class SearchResultActivity extends AppCompatActivity implements AdapterVi
                 mBook.jsonBookPrice.add(jobj.getString("book_price"));
                 mBook.jsonBookYear.add(jobj.getString("book_year"));
 
-                // ** WHEN USING REAL DATA ADD PARAMETERS TO drawListRows(mBook, i) METHOD
                 drawListRows(mBook, i);
             }
         } catch (Exception e) {
