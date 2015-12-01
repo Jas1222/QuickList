@@ -97,9 +97,6 @@ public class BrowseCourseListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (degreeTypeSet && courseSet && yearSet) {
-                    Intent i = new Intent(getActivity(), BrowseResultActivity.class);
-                    startActivity(i);
-                   // i.putExtra("keyTitle", selectedCourse);
 //                    handler.getCourseListingTest(getActivity().getApplicationContext(), selectedCourse, selectedYear, new ConnectionHandler.VolleyCallback() {
 //                        @Override
 //                        public void onSuccess(JSONObject result) {
@@ -110,6 +107,9 @@ public class BrowseCourseListFragment extends Fragment {
 //                            startActivity(i);
 //                        }
 //                    });
+                    Intent i = new Intent(getActivity(), BrowseResultActivity.class);
+                    startActivity(i);
+                    // i.putExtra("keyTitle", selectedCourse);
                 } else {
                     Snackbar.make(getView(), "Ensure you have selected all fields", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();

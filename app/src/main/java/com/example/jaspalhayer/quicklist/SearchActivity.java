@@ -30,7 +30,6 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.search_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         setVariablesToUiElements();
         sButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,7 +39,7 @@ public class SearchActivity extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(), SearchResultActivity.class);
                     i.putExtra("jsonObject", jsOb.toString());
                     startActivity(i);
-                    // launch GET query
+                    // ** When server is back up, launch the GET request below and start activity, delete code above
 //                    handler.searchListings(getApplicationContext(), input_isbn, input_title, input_author, new ConnectionHandler.VolleyCallback() {
 //                        @Override
 //                        public void onSuccess(JSONObject result) {
