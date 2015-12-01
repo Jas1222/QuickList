@@ -1,6 +1,5 @@
 package com.example.jaspalhayer.quicklist;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -21,6 +20,7 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
     protected JSONObject jsonObject;
     protected String selectedCourseYear;
     protected String selectedCourseTitle;
+    Books mBook = new Books();
 
     //TODO Get real dates from database
     protected String year_published[] = {
@@ -35,11 +35,10 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse_result);
-        getInputtedStrings();
+        getPreviousUserInputStrings();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(courseTitle);
-        Books mBook = new Books();
         rowItems = new ArrayList<>();
 
         BrowseCustomAdapter adapter = new BrowseCustomAdapter(this, rowItems);
@@ -47,7 +46,7 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
         myListView.setAdapter(adapter);
         myListView.setOnItemClickListener(this);
 
-        getInputtedStrings();
+        getPreviousUserInputStrings();
         getJsonObject();
 
         try {
@@ -68,7 +67,7 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
                 Toast.LENGTH_SHORT).show();
     }
 
-    protected void getInputtedStrings(){
+    protected void getPreviousUserInputStrings(){
         courseTitle = getIntent().getStringExtra("keyTitle");
         selectedCourseTitle = getIntent().getStringExtra("keyTitle");
         selectedCourseYear = getIntent().getStringExtra("keyUniYear");

@@ -37,16 +37,19 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View view) {
                 saveUserInputText();
                 if(validInputFields()) {
+                    Intent i = new Intent(getApplicationContext(), SearchResultActivity.class);
+                    i.putExtra("jsonObject", jsOb.toString());
+                    startActivity(i);
                     // launch GET query
-                    handler.searchListings(getApplicationContext(), input_isbn, input_title, input_author, new ConnectionHandler.VolleyCallback() {
-                        @Override
-                        public void onSuccess(JSONObject result) {
-//                        jsOb = result;
-//                        Intent i = new Intent(this, SearchResultActivity.class);
-//                        i.putExtra("jsonObject", jsOb.toString());
-//                        startActivity(i);
-                        }
-                    });
+//                    handler.searchListings(getApplicationContext(), input_isbn, input_title, input_author, new ConnectionHandler.VolleyCallback() {
+//                        @Override
+//                        public void onSuccess(JSONObject result) {
+//                          jsOb = result;
+//                          Intent i = new Intent(this, SearchResultActivity.class);
+//                          i.putExtra("jsonObject", jsOb.toString());
+//                          startActivity(i);
+//                        }
+//                    });
                 } else {
                     Snackbar.make(view, "Ensure you have selected all fields", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();

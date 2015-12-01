@@ -30,4 +30,8 @@ public class Books {
     List<String> jsonUniYear = new ArrayList<String>();
     List<String> jsonUniCourse = new ArrayList<String>();
 
+    public Books(){
+
+    }
+
 }
