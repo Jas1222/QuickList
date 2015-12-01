@@ -61,18 +61,18 @@ public class SearchResultActivity extends AppCompatActivity implements AdapterVi
         myListView.setAdapter(adapter);
         myListView.setOnItemClickListener(this);
 
-        /* UNCOMMENT WHEN USING REAL DATA FROM DATABASE
+        // UNCOMMENT WHEN USING REAL DATA FROM DATABASE
         getJsonObject();
 
         try {
-            jsArray = jsonObject.getJSONArray("books");
+            jsArray = jsonObject.getJSONArray("listing");
         } catch (Exception e) {
             System.out.println("Parsing the JSON object to array fucked up");
         }
 
         parseJsonToBook(mBook);
-        */
-        drawListRows();
+
+       // drawListRows();
     }
 
     @Override
@@ -84,15 +84,12 @@ public class SearchResultActivity extends AppCompatActivity implements AdapterVi
                 Toast.LENGTH_SHORT).show();
     }
 
-    protected void drawListRows(){
-        // ** WHEN USING REAL DATA, ADD mBook and i PARAMETERS **
-        for(int i=0; i < titles.length; i++){
-            BrowseRowItem item = new BrowseRowItem(titles[i], authors[i], prices[i], dateListed[i]);
-            rowItems.add(item);
-        }
+    protected void drawListRows(Books mBook, int i){
+        BrowseRowItem item = new BrowseRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), mBook.jsonBookPrice.get(i), dateListed[i]);
+        rowItems.add(item);
     }
 
-    private void getJsonObject(){
+    protected void getJsonObject(){
         try {
             jsonObject = new JSONObject(getIntent().getStringExtra("jsonObject"));
         } catch (Exception e) {
@@ -107,14 +104,11 @@ public class SearchResultActivity extends AppCompatActivity implements AdapterVi
 
                 mBook.jsonBookTitle.add(jobj.getString("book_title"));
                 mBook.jsonBookAuthor.add(jobj.getString("book_author"));
-                mBook.jsonUniCourse.add(jobj.getString("uni_course"));
                 mBook.jsonBookPrice.add(jobj.getString("book_price"));
-                mBook.jsonUniYear.add(jobj.getString("uni_year"));
-                mBook.jsonBookIsbn.add(jobj.getString("isbn"));
                 mBook.jsonBookYear.add(jobj.getString("book_year"));
 
                 // ** WHEN USING REAL DATA ADD PARAMETERS TO drawListRows(mBook, i) METHOD
-                //drawListRows(mBook, i);
+                drawListRows(mBook, i);
             }
         } catch (Exception e) {
             System.out.println("Parsing JSON object to Book object fucked up");

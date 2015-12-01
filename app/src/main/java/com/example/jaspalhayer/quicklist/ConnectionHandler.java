@@ -25,6 +25,7 @@ import java.util.Map;
 public class ConnectionHandler {
     String postUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/create_book_listingTest.php";
     String getCourseListUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/get_book_listingTest.php";
+    String getSearchUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/search_book_listings.php";
 
     String localCreatePostUrl = "http://10.0.2.2:8080/quicklist/create_book_listingTest.php";
     String localSearchUrl="http://10.0.2.2:8080/quicklist/search_book_listings.php";
@@ -32,7 +33,7 @@ public class ConnectionHandler {
     JSONObject result = new JSONObject();
 
     public void createListingPost(Context context) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, localCreatePostUrl,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, postUrl,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -64,7 +65,7 @@ public class ConnectionHandler {
     }
 
     public void getCourseListingTest(final Context context, final String uniCourse, final String uniYear, final VolleyCallback callback) {
-        String getTestUrl = localPostUrl+"?uni_year="+uniYear+"&uni_course="+uniCourse;
+        String getTestUrl = getCourseListUrl+"?uni_year="+uniYear+"&uni_course="+uniCourse;
         getTestUrl = getTestUrl.replaceAll(" ", "%20");
 
         JsonObjectRequest update_request = new JsonObjectRequest(getTestUrl,
@@ -109,7 +110,7 @@ public class ConnectionHandler {
     }
 
     public void searchListings(final Context context, final String isbn, final String book_title, final String book_author, final VolleyCallback callback){
-        String getTestUrl = localSearchUrl+"?isbn="+isbn+"&book_title="+book_title+"&book_author="+book_author;
+        String getTestUrl = getSearchUrl+"?isbn="+isbn+"&book_title="+book_title+"&book_author="+book_author;
         getTestUrl = getTestUrl.replaceAll(" ", "%20");
 
         JsonObjectRequest update_request = new JsonObjectRequest(getTestUrl,
