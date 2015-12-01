@@ -96,7 +96,7 @@ public class BrowseCourseListFragment extends Fragment {
         mLookup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (degreeTypeSet == true && courseSet == true && yearSet == true) {
+                if (degreeTypeSet && courseSet && yearSet) {
                     handler.getCourseListingTest(getActivity().getApplicationContext(), selectedCourse, selectedYear, new ConnectionHandler.VolleyCallback() {
                         @Override
                         public void onSuccess(JSONObject result) {
@@ -150,7 +150,6 @@ public class BrowseCourseListFragment extends Fragment {
             postGradCourse = true;
 
             courseSpinner.setAdapter(pgCourseAdapter);
-
         } else {
             degreeTypeSet = false;
         }

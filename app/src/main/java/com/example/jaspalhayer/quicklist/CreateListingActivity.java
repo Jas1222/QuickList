@@ -62,7 +62,7 @@ public class CreateListingActivity extends AppCompatActivity {
     }
 
     private void setVariablesToUiElements(){
-        titleText = (EditText)findViewById(R.id.sIsbn);
+        titleText = (EditText)findViewById(R.id.titleText);
         authorText = (EditText)findViewById(R.id.authorText);
         yearText = (EditText)findViewById(R.id.yearText);
         descText = (EditText)findViewById(R.id.descText);
