@@ -37,6 +37,7 @@
             android:label="Create a Listing"
             android:parentActivityName=".MainActivity" >
         </activity>
+
         <activity
             android:name=".BrowseUniCourseActivity"
             android:label="Browse by Course"
@@ -45,10 +46,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.jaspalhayer.quicklist.MainActivity" />
         </activity>
+
         <activity
             android:name=".BrowseResultActivity"
-            android:label="CHANGE TO COURSE" >
+            android:label="CHANGE TO COURSE"
+            android:parentActivityName=".BrowseUniCourseActivity" >
         </activity>
+
         <activity
             android:name=".SearchActivity"
             android:label="@string/search"

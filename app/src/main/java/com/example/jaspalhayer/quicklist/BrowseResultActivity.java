@@ -1,5 +1,6 @@
 package com.example.jaspalhayer.quicklist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -57,7 +58,7 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
 
         parseJsonToBook(mBook);
     }
-
+    
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
