@@ -118,7 +118,6 @@
 
         <EditText
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/isbnText"
             android:hint="Tap to enter the ISBN"
             android:minWidth="320dip"
@@ -128,6 +127,7 @@
             android:layout_marginBottom="10dp"
             android:layout_below="@+id/descText"
             android:layout_centerHorizontal="true"
+            android:drawableLeft="@drawable/desc_icon"
             android:maxLength="250"/>
 
         <!-- Uni Year -->
