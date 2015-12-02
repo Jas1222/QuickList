@@ -1,137 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="3">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView" >
 
-        <!-- Title Icon -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/titleText"
-            android:hint="What is the book title?"
-            android:minWidth="320dip"
-            android:maxWidth="320dip"
-            android:maxLength="120"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            <!-- Title Icon -->
 
-        <ImageView
-            android:layout_width="20dip"
-            android:layout_height="20dip"
-            android:id="@+id/titleIcon"
-            android:src="@drawable/title_icon"
-            android:layout_alignBottom="@+id/titleText"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="5dp"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/titleText"
+                android:hint="What is the book title?"
+                android:minWidth="320dip"
+                android:maxWidth="320dip"
+                android:maxLength="120"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp" />
 
-        <!-- Author Icon -->
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/authorText"
-            android:layout_below="@+id/titleText"
-            android:hint="Who are the book authors?"
-            android:layout_centerHorizontal="true"
-            android:minWidth="320dip"
-            android:maxWidth="320dip"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:maxLength="120" />
+            <ImageView
+                android:layout_width="20dip"
+                android:layout_height="20dip"
+                android:id="@+id/titleIcon"
+                android:src="@drawable/title_icon"
+                android:layout_alignBottom="@+id/titleText"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="5dp"/>
 
-        <ImageView
-            android:layout_width="20dip"
-            android:layout_height="20dip"
-            android:id="@+id/author_icon"
-            android:src="@drawable/author_icon"
-            android:layout_alignBottom="@+id/authorText"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="5dp"/>
+            <!-- Author Icon -->
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/authorText"
+                android:layout_below="@+id/titleText"
+                android:hint="Who are the book authors?"
+                android:layout_centerHorizontal="true"
+                android:minWidth="320dip"
+                android:maxWidth="320dip"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:maxLength="120" />
 
-        <!-- Year Icon -->
+            <ImageView
+                android:layout_width="20dip"
+                android:layout_height="20dip"
+                android:id="@+id/author_icon"
+                android:src="@drawable/author_icon"
+                android:layout_alignBottom="@+id/authorText"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="5dp"/>
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/yearText"
-            android:hint="What year was the book published?"
-            android:minWidth="320dip"
-            android:maxWidth="320dip"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@+id/authorText"
-            android:maxLength="4"
-            android:inputType="number"/>
-        <ImageView
-            android:layout_width="20dip"
-            android:layout_height="20dip"
-            android:id="@+id/year_icon"
-            android:src="@drawable/year_icon"
-            android:layout_alignBottom="@+id/yearText"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="5dp"/>
+            <!-- Year Icon -->
 
-        <!-- Description Icon -->
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/yearText"
+                android:hint="What year was the book published?"
+                android:minWidth="320dip"
+                android:maxWidth="320dip"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/authorText"
+                android:maxLength="4"
+                android:inputType="number"/>
+            <ImageView
+                android:layout_width="20dip"
+                android:layout_height="20dip"
+                android:id="@+id/year_icon"
+                android:src="@drawable/year_icon"
+                android:layout_alignBottom="@+id/yearText"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="5dp"/>
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/descText"
-            android:hint="Tap to enter a short description"
-            android:minWidth="320dip"
-            android:maxWidth="320dip"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@+id/yearText"
-            android:layout_centerHorizontal="true"
-            android:maxLength="250"/>
+            <!-- Description Icon -->
 
-        <ImageView
-            android:layout_width="18dip"
-            android:layout_height="18dip"
-            android:id="@+id/descIcon"
-            android:src="@drawable/desc_icon"
-            android:layout_alignBottom="@+id/descText"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="5dp"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/descText"
+                android:hint="Tap to enter a short description"
+                android:minWidth="320dip"
+                android:maxWidth="320dip"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/yearText"
+                android:layout_centerHorizontal="true"
+                android:maxLength="250"/>
 
-        <!-- ISBN Icon -->
+            <ImageView
+                android:layout_width="18dip"
+                android:layout_height="18dip"
+                android:id="@+id/descIcon"
+                android:src="@drawable/desc_icon"
+                android:layout_alignBottom="@+id/descText"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="5dp"/>
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:id="@+id/isbnText"
-            android:hint="Tap to enter the ISBN"
-            android:minWidth="320dip"
-            android:maxWidth="320dip"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@+id/descText"
-            android:layout_centerHorizontal="true"
-            android:drawableLeft="@drawable/desc_icon"
-            android:maxLength="250"/>
+            <!-- ISBN Icon -->
 
-        <!-- Uni Year -->
-        <!--<EditText-->
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/isbnText"
+                android:hint="Tap to enter the ISBN"
+                android:minWidth="320dip"
+                android:maxWidth="320dip"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/descText"
+                android:layout_centerHorizontal="true"
+                android:maxLength="250"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/priceText"
+                android:textColor="@color/colorPrimary"
+                android:maxLength="6"
+                android:hint="Tap to enter desired price"
+                android:textStyle="bold"
+                android:minWidth="320dip"
+                android:maxWidth="320dip"
+                android:inputType="numberDecimal"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="10dp"
+                android:layout_below="@+id/isbnText"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentStart="true" />
+
+            <!-- Uni Year -->
+            <!--<EditText-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"-->
             <!--android:id="@+id/uniYearText"-->
@@ -144,56 +167,70 @@
             <!--android:layout_below="@+id/yearText"-->
             <!--android:layout_centerHorizontal="true"-->
             <!--android:maxLength="250"/>-->
-        <!-- Uni Course -->
+            <!-- Uni Course -->
 
-        <!-- Uni Year -->
+            <!-- Uni Year -->
 
-        <!-- Rectangle footer -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:background="@drawable/grey_rectangle"
-            android:layout_height="70dip"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true">
-
-            <EditText
-                android:layout_width="wrap_content"
+            <Spinner
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/priceText"
-                android:textColor="@color/colorPrimary"
-                android:maxLength="6"
-                android:layout_marginLeft="48dip"
-                android:textSize="25dip"
-                android:textStyle="bold"
-                android:hint="Price"
-                android:inputType="numberDecimal"
-                android:layout_centerVertical="true"
-                android:layout_alignParentStart="false" />
+                android:id="@+id/spinner"
+                android:layout_below="@+id/priceText"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <Spinner
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="£"
-                android:textSize="30dip"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimary"
-                android:id="@+id/poundSymbol"
-                android:layout_marginStart="28dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentStart="true" />
+                android:id="@+id/spinner2"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@+id/spinner"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner3"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@+id/spinner2"
+                android:layout_centerHorizontal="true" />
+
+
+            <!-- Rectangle footer -->
+
         </RelativeLayout>
+    </ScrollView>
 
-        <Button
-            android:layout_width="150dip"
-            android:layout_height="wrap_content"
-            android:text="Make Listing"
-            android:id="@+id/makeListingBtn"
-            android:layout_alignParentBottom="true"
-            android:layout_alignEnd="@+id/descText"
-            android:layout_marginBottom="10dp"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/white"
-            android:shadowColor="@color/colorPrimaryDark"/>
-    </RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:text="Make Listing"
+        android:id="@+id/makeListingBtn"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:shadowColor="@color/colorPrimaryDark"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentBottom="true"
+        android:singleLine="false"
+        android:layout_alignParentEnd="false" />
+
+    <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Make Listing"-->
+        <!--android:id="@+id/makeListingBtn"-->
+        <!--android:background="@color/colorPrimary"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:shadowColor="@color/colorPrimaryDark" />-->
+
 </LinearLayout>

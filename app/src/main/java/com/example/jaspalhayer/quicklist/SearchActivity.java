@@ -60,7 +60,7 @@ public class SearchActivity extends AppCompatActivity {
         field_isbn = (EditText)findViewById(R.id.sIsbn);
         field_title = (EditText)findViewById(R.id.sTitle);
         field_author = (EditText)findViewById(R.id.sAuthor);
-        sButton = (Button)findViewById(R.id.makeListingBtn);
+        sButton = (Button)findViewById(R.id.search_button);
     }
 
     private boolean validInputFields(){

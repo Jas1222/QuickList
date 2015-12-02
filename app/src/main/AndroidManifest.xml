@@ -35,6 +35,7 @@
         <activity
             android:name=".CreateListingActivity"
             android:label="Create a Listing"
+            android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".MainActivity" >
         </activity>
 
