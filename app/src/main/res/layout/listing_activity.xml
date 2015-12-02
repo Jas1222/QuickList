@@ -205,20 +205,23 @@
         </RelativeLayout>
     </ScrollView>
 
-    <Button
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:text="Make Listing"
-        android:id="@+id/makeListingBtn"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/white"
-        android:shadowColor="@color/colorPrimaryDark"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_alignParentBottom="true"
-        android:singleLine="false"
-        android:layout_alignParentEnd="false" />
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Make Listing"
+            android:id="@+id/makeListingBtn"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/white"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
 
     <!--<Button-->
         <!--android:layout_width="match_parent"-->
