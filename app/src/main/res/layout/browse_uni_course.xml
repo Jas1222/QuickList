@@ -4,67 +4,56 @@
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-<TableLayout
-    android:layout_width="fill_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:stretchColumns="1"
-    android:shrinkColumns="1"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Tap on the dropdown menus to make your selection"
+        android:gravity="center_horizontal"
+        android:id="@+id/headerText"
+        android:textSize="20sp"
+        android:textColor="@color/colorAlt"
+        android:layout_marginBottom="60dp"
+        android:layout_above="@+id/degreeTypeSpinner"
+        android:layout_centerHorizontal="true" />
 
-    <TableRow
+    <Spinner
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:id="@+id/yearSpinner"
+        android:layout_marginTop="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="60dp"
+        android:layout_centerInParent="true" />
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="60dip"
-            android:id="@+id/degreeTypeSpinner"
-            android:layout_span="5" />
-    </TableRow>
-
-    <TableRow
+    <Spinner
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/degreeTypeSpinner"
+        android:layout_above="@id/yearSpinner"/>
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/yearSpinner"
-            android:layout_marginBottom="60dip"
-            android:layout_span="5" />
-    </TableRow>
-
-    <TableRow
+    <Spinner
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:id="@+id/courseSpinner"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@id/yearSpinner"/>
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/courseSpinner"
-            android:layout_marginBottom="60dip"
-            android:layout_span="5" />
-    </TableRow>
-
-    <FrameLayout
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lookup"
-            android:id="@+id/mLookupButton"
-            android:layout_marginBottom="10dp"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/white"
-            android:layout_gravity="center_horizontal|bottom" />
-    </FrameLayout>
-
-</TableLayout>
+        android:layout_height="wrap_content"
+        android:text="Lookup"
+        android:id="@+id/mLookupButton"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal|bottom" />
 </RelativeLayout>
 

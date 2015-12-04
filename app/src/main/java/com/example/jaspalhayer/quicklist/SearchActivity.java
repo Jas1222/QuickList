@@ -75,4 +75,8 @@ public class SearchActivity extends AppCompatActivity {
             return true;
         }
     }
+
+    private void defaultDropdownColours(){
+
+    }
 }
