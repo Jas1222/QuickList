@@ -178,7 +178,7 @@ public class BrowseCourseListFragment extends Fragment {
         degreeTypeSpinner = (Spinner)rootView.findViewById(R.id.degreeTypeSpinner);
         courseSpinner = (Spinner)rootView.findViewById(R.id.courseSpinner);
         yearSpinner = (Spinner)rootView.findViewById(R.id.yearSpinner);
-        mLookup = (Button)rootView.findViewById(R.id.makeListingBtn);
+        mLookup = (Button)rootView.findViewById(R.id.mLookupButton);
     }
 
 }

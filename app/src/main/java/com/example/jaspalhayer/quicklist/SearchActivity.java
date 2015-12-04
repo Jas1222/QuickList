@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
 
 import org.json.JSONObject;
 
@@ -18,6 +21,7 @@ public class SearchActivity extends AppCompatActivity {
     protected String input_isbn;
     protected String input_title;
     protected String input_author;
+
     JSONObject jsOb = new JSONObject();
     ConnectionHandler handler = new ConnectionHandler();
 
@@ -61,6 +65,7 @@ public class SearchActivity extends AppCompatActivity {
         field_title = (EditText)findViewById(R.id.sTitle);
         field_author = (EditText)findViewById(R.id.sAuthor);
         sButton = (Button)findViewById(R.id.search_button);
+
     }
 
     private boolean validInputFields(){
