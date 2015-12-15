@@ -49,12 +49,13 @@ public class ConnectionHandler {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
+
+                // TODO REFACTOR putParams();
                 params.put("book_title", CreateListingActivity.bookInfoField);
                 params.put("book_author", CreateListingActivity.authorInfoField);
                 params.put("book_year", CreateListingActivity.yearInfoField);
                 params.put("book_desc", CreateListingActivity.descInfoField);
                 params.put("book_price", CreateListingActivity.priceInfoField);
-
                 return params;
             }
 
