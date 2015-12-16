@@ -36,15 +36,11 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Launching All products Activity
                 Intent i = new Intent(getApplicationContext(), CreateListingActivity.class);
                 startActivity(i);
             }
         });
 
-
-
-        // Listener event for icons - refactor?
         setHomeIcons();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -74,8 +70,10 @@ public class MainActivity extends AppCompatActivity
         barcodeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Will open 'Barcode' Intent", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(v, "Will open 'Barcode' Intent", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(i);
             }
         });
 

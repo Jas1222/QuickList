@@ -399,10 +399,11 @@
         <item>2014</item>
     </string-array>
 
-<!-- TODO: Add title string names here -->
+    <!-- TODO: Add title string names here -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_browse_result">BrowseResultActivity</string>
     <string name="title_activity_search">Search</string>
     <string name="title_activity_search_result">Search Results</string>
+    <string name="title_activity_register">RegisterActivity</string>
 
 </resources>

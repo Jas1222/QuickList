@@ -9,35 +9,33 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 /**
  * Created by jaspalhayer on 07/11/2015.
  */
 public class BrowseCustomAdapter extends BaseAdapter {
-    List<BrowseRowItem> browseRowItems;
+    List<ListingRowItem> listingRowItems;
     Context context;
 
-    BrowseCustomAdapter(Context context, List<BrowseRowItem> browseRowItems) {
+    BrowseCustomAdapter(Context context, List<ListingRowItem> listingRowItems) {
         this.context = context;
-        this.browseRowItems = browseRowItems;
+        this.listingRowItems = listingRowItems;
     }
 
     @Override
     public int getCount() {
-        return browseRowItems.size();
+        return listingRowItems.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return browseRowItems.get(position);
+        return listingRowItems.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return browseRowItems.indexOf(getItem(position));
+        return listingRowItems.indexOf(getItem(position));
     }
 
     private class ViewHolder {
@@ -63,7 +61,7 @@ public class BrowseCustomAdapter extends BaseAdapter {
             holder.date_text = (TextView) convertView.findViewById(R.id.date_text);
             holder.price_text = (TextView) convertView.findViewById(R.id.price_text);
 
-            BrowseRowItem row_pos = browseRowItems.get(position);
+            ListingRowItem row_pos = listingRowItems.get(position);
 
             holder.book_title.setText(row_pos.bookTitle);
             holder.author_text.setText(row_pos.bookAuthor);

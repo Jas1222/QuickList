@@ -26,7 +26,7 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
             "1985"
     };
 
-    List<BrowseRowItem> rowItems;
+    List<ListingRowItem> rowItems;
     ListView myListView;
 
     @Override
@@ -99,7 +99,7 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
     }
 
     protected void drawListRows(Books mBook, int i){
-        BrowseRowItem item = new BrowseRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), mBook.jsonBookPrice.get(i), year_published[i]);
+        ListingRowItem item = new ListingRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), mBook.jsonBookPrice.get(i), year_published[i]);
         rowItems.add(item);
     }
 }

@@ -1,7 +1,6 @@
 package com.example.jaspalhayer.quicklist;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchResultActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
-    List<BrowseRowItem> rowItems;
+    List<ListingRowItem> rowItems;
     ListView myListView;
     protected JSONObject jsonObject;
     protected JSONArray jsArray = new JSONArray();
@@ -62,7 +61,7 @@ public class SearchResultActivity extends AppCompatActivity implements AdapterVi
     }
 
     protected void drawListRows(Books mBook, int i){
-        BrowseRowItem item = new BrowseRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), mBook.jsonBookPrice.get(i), dateListed[i]);
+        ListingRowItem item = new ListingRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), mBook.jsonBookPrice.get(i), dateListed[i]);
         rowItems.add(item);
     }
 
