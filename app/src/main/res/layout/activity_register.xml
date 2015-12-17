@@ -82,12 +82,29 @@
             android:layout_marginBottom="25dp"
             android:text="Password" />
 
-        <View android:background="#000000"
+        <!-- Border lines TODO Add colours to  colours.xml -->
+
+        <View android:background="#757575"
             android:layout_width = "fill_parent"
             android:layout_height="1dip"
-            android:layout_centerVertical ="true"
-            android:layout_below="@+id/signup_button"/>
+            android:layout_below="@+id/signup_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:id="@+id/line1"
+            android:layout_alignEnd="@+id/orText"
+            android:layout_marginRight="35dp"
+            android:layout_marginLeft="15dp"/>
 
+        <View android:background="#757575"
+            android:layout_width = "fill_parent"
+            android:layout_height="1dip"
+            android:layout_below="@+id/signup_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:id="@+id/line2"
+            android:layout_alignStart="@+id/orText"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="15dp"/>
 
         <Button
             android:layout_width="match_parent"
@@ -102,5 +119,54 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="OR"
+            android:layout_marginTop="15dp"
+            android:textColor="#757575"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/orText"
+            android:layout_below="@+id/signup_button" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/orText"
+            android:text="Connect with Facebook"
+            android:id="@+id/facebook_button"
+            android:background="#3B5998"
+            android:textColor="@color/white"
+            android:shadowColor="@color/colorPrimaryDark"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="If you already have an account"
+            android:layout_below="@id/facebook_button"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/existingAccountText"
+            android:layout_marginTop="25dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Login here."
+            android:textColor="#000000"
+            android:layout_below="@id/existingAccountText"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/loginHereText"
+            android:layout_marginTop="5dp"/>
     </RelativeLayout>
+
 </LinearLayout>
