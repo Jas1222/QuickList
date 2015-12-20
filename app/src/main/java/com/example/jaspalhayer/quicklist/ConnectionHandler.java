@@ -154,10 +154,6 @@ public class ConnectionHandler {
         requestQueue.add(update_request);
     }
 
-    public void registerUser(final Context context, final String email, final String password){
-
-    }
-
     public interface VolleyCallback{
         void onSuccess(JSONObject result);
     }

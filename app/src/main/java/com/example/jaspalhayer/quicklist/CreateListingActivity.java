@@ -54,7 +54,6 @@ public class CreateListingActivity extends AppCompatActivity {
         setSpinnerToAdapter();
         setAdapter();
 
-
         mListing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
