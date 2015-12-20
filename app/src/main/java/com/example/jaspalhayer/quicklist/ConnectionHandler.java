@@ -11,11 +11,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +21,8 @@ import java.util.Map;
  * Created by jaspalhayer on 29/10/2015.
  */
 public class ConnectionHandler {
-    String postUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/create_book_listingTest.php";
+    String createListingPostUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/create_book_listingTest.php";
+    String registerPostUrl =  "http://qt003605.webs.sse.reading.ac.uk/android_login_api/register.php";
     String getCourseListUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/get_book_listingTest.php";
     String getSearchUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/search_book_listings.php";
 
@@ -33,7 +32,7 @@ public class ConnectionHandler {
     JSONObject result = new JSONObject();
 
     public void createListingPost(Context context) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, postUrl,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, createListingPostUrl,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -65,7 +64,7 @@ public class ConnectionHandler {
         requestQueue.add(stringRequest);
     }
 
-    public void getCourseListingTest(final Context context, final String uniCourse, final String uniYear, final VolleyCallback callback) {
+    public void getCourseListings(final Context context, final String uniCourse, final String uniYear, final VolleyCallback callback) {
         String getTestUrl = getCourseListUrl+"?uni_year="+uniYear+"&uni_course="+uniCourse;
         getTestUrl = getTestUrl.replaceAll(" ", "%20");
 
@@ -153,6 +152,10 @@ public class ConnectionHandler {
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(update_request);
+    }
+
+    public void registerUser(final Context context, final String email, final String password){
+
     }
 
     public interface VolleyCallback{

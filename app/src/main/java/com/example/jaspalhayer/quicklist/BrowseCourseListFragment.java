@@ -97,7 +97,7 @@ public class BrowseCourseListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (degreeTypeSet && courseSet && yearSet) {
-                    handler.getCourseListingTest(getActivity().getApplicationContext(), selectedCourse, selectedYear, new ConnectionHandler.VolleyCallback() {
+                    handler.getCourseListings(getActivity().getApplicationContext(), selectedCourse, selectedYear, new ConnectionHandler.VolleyCallback() {
                         @Override
                         public void onSuccess(JSONObject result) {
                             jsOb = result;
