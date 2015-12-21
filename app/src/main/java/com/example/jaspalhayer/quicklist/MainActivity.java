@@ -81,8 +81,10 @@ public class MainActivity extends AppCompatActivity
         messageIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Will open 'My Messages' Intent", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(v, "Will open 'My Messages' Intent", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                Intent i = new Intent(getApplicationContext(), ViewListingActivity.class);
+                startActivity(i);
             }
         });
 

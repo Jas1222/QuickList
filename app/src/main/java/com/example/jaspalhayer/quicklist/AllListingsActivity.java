@@ -1,12 +1,8 @@
 package com.example.jaspalhayer.quicklist;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
-import android.view.MenuItem;
-
-import java.net.HttpURLConnection;
 
 /**
  * Created by jaspalhayer on 26/10/2015.
@@ -18,7 +14,7 @@ public class AllListingsActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.listing_activity);
+        setContentView(R.layout.create_listing_activity);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

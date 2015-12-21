@@ -45,7 +45,7 @@ public class CreateListingActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.listing_activity);
+        setContentView(R.layout.create_listing_activity);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
