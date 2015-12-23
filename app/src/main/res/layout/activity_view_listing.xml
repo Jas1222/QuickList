@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#000000"
@@ -20,16 +20,17 @@
         android:id="@+id/view_title_icon"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginLeft="25dp"
         android:layout_alignTop="@id/view_title_text"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
         android:src="@drawable/title_icon" />
 
     <TextView
         android:id="@+id/view_author_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/view_title_text"
         android:layout_alignStart="@id/view_title_text"
+        android:layout_below="@id/view_title_text"
         android:layout_marginTop="25dp"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall"
@@ -49,6 +50,8 @@
         android:id="@+id/view_year_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@id/view_author_text"
+        android:layout_marginTop="25dp"
         android:layout_below="@id/view_author_text"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall"
@@ -59,28 +62,49 @@
         android:id="@+id/view_year_icon"
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:layout_alignTop="@id/view_year_text"
+        android:layout_marginLeft="25dp"
         android:src="@drawable/year_icon" />
 
-
-    <ImageView
-        android:id="@+id/view_isbn_icon"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/isbn_icon" />
-
     <TextView
-        android:id="@+id/view_desc_text"
+        android:id="@+id/view_isbn_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@id/view_title_text"
-        android:layout_alignTop="@id/view_isbn_icon"
+        android:layout_alignStart="@id/view_year_text"
+        android:layout_marginTop="25dp"
         android:layout_below="@id/view_year_text"
         android:text="Small Text"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#757575"
         android:textSize="16sp" />
 
+    <ImageView
+        android:id="@+id/view_isbn_icon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignTop="@id/view_isbn_text"
+        android:layout_marginLeft="25dp"
+        android:src="@drawable/isbn_icon" />
 
+
+    <TextView
+        android:id="@+id/view_desc_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/view_isbn_text"
+        android:layout_marginTop="25dp"
+        android:layout_below="@id/view_isbn_text"
+        android:text="Small Text"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_alignTop="@id/view_desc_text"
+        android:layout_marginLeft="25dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/desc_icon" />
     <!-- Footer Layout -->
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -116,10 +140,7 @@
             android:textSize="36sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/desc_icon" />
+
     </RelativeLayout>
 
 
