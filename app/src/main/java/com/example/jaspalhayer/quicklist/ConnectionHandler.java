@@ -21,14 +21,15 @@ import java.util.Map;
  * Created by jaspalhayer on 29/10/2015.
  */
 public class ConnectionHandler {
-    String createListingPostUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/create_book_listingTest.php";
-    String registerPostUrl =  "http://qt003605.webs.sse.reading.ac.uk/android_login_api/register.php";
-    String getCourseListUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/get_book_listingTest.php";
+    String createListingPostUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/create_book_listing.php";
+    String getCourseListUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/get_book_listing.php";
     String getSearchUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/search_book_listings.php";
+    String getBookListingDetailUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/get_book_listing_details.php";
 
     String localCreatePostUrl = "http://10.0.2.2:8080/quicklist/create_book_listingTest.php";
     String localSearchUrl="http://10.0.2.2:8080/quicklist/search_book_listings.php";
     String localPostUrl="http://10.0.2.2:8080/quicklist/get_book_listingTest.php";
+
     JSONObject result = new JSONObject();
 
     public void createListingPost(Context context) {

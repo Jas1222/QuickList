@@ -88,8 +88,9 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
                 mBook.jsonUniCourse.add(jobj.getString("uni_course"));
                 mBook.jsonBookPrice.add(jobj.getString("book_price"));
                 mBook.jsonUniYear.add(jobj.getString("uni_year"));
-                mBook.jsonBookIsbn.add(jobj.getString("isbn"));
+                mBook.jsonBookIsbn.add(jobj.getString("book_isbn"));
                 mBook.jsonBookYear.add(jobj.getString("book_year"));
+                mBook.jsonListId.add(jobj.getString("list_id"));
 
                 drawListRows(mBook, i);
             }
