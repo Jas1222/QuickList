@@ -40,10 +40,10 @@ public class SearchActivity extends AppCompatActivity {
                     handler.searchListings(getApplicationContext(), input_isbn, input_title, input_author, new ConnectionHandler.VolleyCallback() {
                         @Override
                         public void onSuccess(JSONObject result) {
-                          jsOb = result;
-                          Intent i = new Intent(getApplicationContext(), SearchResultActivity.class);
-                          i.putExtra("jsonObject", jsOb.toString());
-                          startActivity(i);
+                            jsOb = result;
+                            Intent i = new Intent(getApplicationContext(), SearchResultActivity.class);
+                            i.putExtra("jsonObject", jsOb.toString());
+                            startActivity(i);
                         }
                     });
                 } else {

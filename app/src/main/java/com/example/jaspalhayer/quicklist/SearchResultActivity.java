@@ -1,6 +1,5 @@
 package com.example.jaspalhayer.quicklist;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,9 +17,7 @@ public class SearchResultActivity extends AppCompatActivity implements AdapterVi
     List<ListingRowItem> rowItems;
     ListView myListView;
     protected JSONObject jsonObject;
-    protected JSONObject jsOb = new JSONObject();
     protected JSONArray jsArray = new JSONArray();
-    ConnectionHandler handler = new ConnectionHandler();
 
     Books mBook = new Books();
 
@@ -57,17 +54,10 @@ public class SearchResultActivity extends AppCompatActivity implements AdapterVi
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
-        final String member_list_id = rowItems.get(position).bookListId;
-        handler.getCourseListingsDetails(getApplicationContext(), member_list_id, new ConnectionHandler.VolleyCallback() {
-            @Override
-            public void onSuccess(JSONObject result) {
-                jsOb = result;
-                Intent i = new Intent(getApplicationContext(), ViewListingActivity.class);
-                i.putExtra("keyTitle", member_list_id);
-                i.putExtra("jsonObject", jsOb.toString());
-                startActivity(i);
-            }
-        });
+
+        String member_name = rowItems.get(position).bookTitle;
+        Toast.makeText(getApplicationContext(), "" + member_name,
+                Toast.LENGTH_SHORT).show();
     }
 
     protected void drawListRows(Books mBook, int i){
@@ -92,6 +82,7 @@ public class SearchResultActivity extends AppCompatActivity implements AdapterVi
                 mBook.jsonBookAuthor.add(jobj.getString("book_author"));
                 mBook.jsonBookPrice.add(jobj.getString("book_price"));
                 mBook.jsonBookYear.add(jobj.getString("book_year"));
+                mBook.jsonBookListId.add(jobj.getString("list_id"));
 
                 drawListRows(mBook, i);
             }
