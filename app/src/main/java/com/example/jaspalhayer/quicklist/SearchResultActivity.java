@@ -61,7 +61,7 @@ public class SearchResultActivity extends AppCompatActivity implements AdapterVi
     }
 
     protected void drawListRows(Books mBook, int i){
-        ListingRowItem item = new ListingRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), mBook.jsonBookPrice.get(i), dateListed[i]);
+        ListingRowItem item = new ListingRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), mBook.jsonBookPrice.get(i), dateListed[i], mBook.jsonBookListId.get(i));
         rowItems.add(item);
     }
 

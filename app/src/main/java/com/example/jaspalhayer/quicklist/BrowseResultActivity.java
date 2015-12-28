@@ -1,5 +1,6 @@
 package com.example.jaspalhayer.quicklist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,7 +19,11 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
     protected JSONObject jsonObject;
     protected String selectedCourseYear;
     protected String selectedCourseTitle;
+
+    ConnectionHandler handler = new ConnectionHandler();
     Books mBook = new Books();
+    JSONObject jsOb = new JSONObject();
+
 
     //TODO Get real dates from database
     protected String year_published[] = {
@@ -58,7 +63,17 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
-
+        final String member_list_id = rowItems.get(position).bookListId;
+        handler.getCourseListingsDetails(getApplicationContext(), member_list_id, new ConnectionHandler.VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject result) {
+                jsOb = result;
+                Intent i = new Intent(getApplicationContext(), ViewListingActivity.class);
+                i.putExtra("keyTitle", member_list_id);
+                i.putExtra("jsonObject", jsOb.toString());
+                startActivity(i);
+            }
+        });
         String member_name = rowItems.get(position).bookTitle;
         Toast.makeText(getApplicationContext(), "" + member_name,
                 Toast.LENGTH_SHORT).show();
@@ -85,12 +100,10 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
 
                 mBook.jsonBookTitle.add(jobj.getString("book_title"));
                 mBook.jsonBookAuthor.add(jobj.getString("book_author"));
-                mBook.jsonUniCourse.add(jobj.getString("uni_course"));
                 mBook.jsonBookPrice.add(jobj.getString("book_price"));
-                mBook.jsonUniYear.add(jobj.getString("uni_year"));
                 mBook.jsonBookIsbn.add(jobj.getString("book_isbn"));
                 mBook.jsonBookYear.add(jobj.getString("book_year"));
-                mBook.jsonListId.add(jobj.getString("list_id"));
+                mBook.jsonBookListId.add(jobj.getString("list_id"));
 
                 drawListRows(mBook, i);
             }
@@ -100,7 +113,7 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
     }
 
     protected void drawListRows(Books mBook, int i){
-        ListingRowItem item = new ListingRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), mBook.jsonBookPrice.get(i), year_published[i]);
+        ListingRowItem item = new ListingRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), mBook.jsonBookPrice.get(i), year_published[i], mBook.jsonBookListId.get(i));
         rowItems.add(item);
     }
 }

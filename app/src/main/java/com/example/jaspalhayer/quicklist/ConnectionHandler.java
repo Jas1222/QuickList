@@ -110,6 +110,51 @@ public class ConnectionHandler {
         requestQueue.add(update_request);
     }
 
+    public void getCourseListingsDetails(final Context context, final String listId, final VolleyCallback callback) {
+        String getTestUrl = getBookListingDetailUrl+"?list_id="+listId;
+        getTestUrl = getTestUrl.replaceAll(" ", "%20");
+
+        JsonObjectRequest update_request = new JsonObjectRequest(getTestUrl,
+                null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                System.out.println(response);
+
+                try {
+                    int success = response.getInt("success");
+
+                    if (success == 1) {
+                        Toast.makeText(context,
+                                "Retrieved Successfully",
+                                Toast.LENGTH_SHORT).show();
+                        result=response;
+                        callback.onSuccess(result);
+
+                    } else {
+                        Toast.makeText(context,
+                                "failed to update", Toast.LENGTH_SHORT)
+                                .show();
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error);
+
+            }
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(update_request);
+    }
+
     public void searchListings(final Context context, final String isbn, final String book_title, final String book_author, final VolleyCallback callback){
         String getTestUrl = getSearchUrl+"?isbn="+isbn+"&book_title="+book_title+"&book_author="+book_author;
         getTestUrl = getTestUrl.replaceAll(" ", "%20");

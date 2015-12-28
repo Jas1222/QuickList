@@ -14,7 +14,19 @@ public class Books {
     List<String> jsonBookIsbn = new ArrayList<String>();
     List<String> jsonUniYear = new ArrayList<String>();
     List<String> jsonUniCourse = new ArrayList<String>();
-    List<String> jsonListId = new ArrayList<String>();
+    List<String> jsonBookListId = new ArrayList<String>();
+    List<String> jsonFullName = new ArrayList<String>();
+    List<String> jsonBookDesc = new ArrayList<String>();
+
+    String bookTitle;
+    String bookAuthor;
+    String bookYear;
+    String bookPrice;
+    String bookFullName;
+    String bookDesc;
+    String bookIsbn;
+    String bookListId;
+
 
     public Books(){
 
