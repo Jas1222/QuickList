@@ -36,7 +36,6 @@ public class RegisterActivity extends AppCompatActivity {
                 registerHandler.fullname = editTextName;
                 registerHandler.email = editTextEmail;
                 registerHandler.password = editTextPassword;
-
                 registerHandler.registerUser(getApplicationContext());
             }
         });

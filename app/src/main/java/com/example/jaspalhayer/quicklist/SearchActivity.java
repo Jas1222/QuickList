@@ -61,9 +61,9 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void setVariablesToUiElements(){
-        field_isbn = (EditText)findViewById(R.id.sIsbn);
-        field_title = (EditText)findViewById(R.id.sTitle);
-        field_author = (EditText)findViewById(R.id.sAuthor);
+        field_isbn = (EditText)findViewById(R.id.search_isbn_text);
+        field_title = (EditText)findViewById(R.id.search_title_text);
+        field_author = (EditText)findViewById(R.id.search_author_text);
         sButton = (Button)findViewById(R.id.search_button);
 
     }
