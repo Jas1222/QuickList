@@ -74,9 +74,6 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
                 startActivity(i);
             }
         });
-        String member_name = rowItems.get(position).bookTitle;
-        Toast.makeText(getApplicationContext(), "" + member_name,
-                Toast.LENGTH_SHORT).show();
     }
 
     protected void getPreviousUserInputStrings(){

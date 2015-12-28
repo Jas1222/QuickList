@@ -92,5 +92,6 @@ public class ViewListingActivity extends AppCompatActivity {
         viewPriceText.setText("£"+mBook.bookPrice);
         viewIsbnText.setText(mBook.bookIsbn);
         mMessageButton.setText("Message "+mBook.bookFullName);
+        mMessageButton.setPadding(40, 10, 40, 10);
     }
 }
