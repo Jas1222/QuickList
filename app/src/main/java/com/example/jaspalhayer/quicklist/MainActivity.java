@@ -53,8 +53,6 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-
-
     public void setHomeIcons(){
         bookIcon = (ImageView) findViewById(R.id.bookIcon);
         bookIcon.setOnClickListener(new View.OnClickListener() {

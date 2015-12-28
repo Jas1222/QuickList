@@ -1,5 +1,6 @@
 package com.example.jaspalhayer.quicklist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,6 +18,8 @@ public class SearchResultActivity extends AppCompatActivity implements AdapterVi
     List<ListingRowItem> rowItems;
     ListView myListView;
     protected JSONObject jsonObject;
+    JSONObject jsOb = new JSONObject();
+    ConnectionHandler handler = new ConnectionHandler();
     protected JSONArray jsArray = new JSONArray();
 
     Books mBook = new Books();
@@ -54,10 +57,17 @@ public class SearchResultActivity extends AppCompatActivity implements AdapterVi
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
-
-        String member_name = rowItems.get(position).bookTitle;
-        Toast.makeText(getApplicationContext(), "" + member_name,
-                Toast.LENGTH_SHORT).show();
+        final String member_list_id = rowItems.get(position).bookListId;
+        handler.getCourseListingsDetails(getApplicationContext(), member_list_id, new ConnectionHandler.VolleyCallback() {
+            @Override
+            public void onSuccess(JSONObject result) {
+                jsOb = result;
+                Intent i = new Intent(getApplicationContext(), ViewListingActivity.class);
+                i.putExtra("keyTitle", member_list_id);
+                i.putExtra("jsonObject", jsOb.toString());
+                startActivity(i);
+            }
+        });
     }
 
     protected void drawListRows(Books mBook, int i){

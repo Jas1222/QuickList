@@ -43,6 +43,7 @@ public class SearchActivity extends AppCompatActivity {
                             jsOb = result;
                             Intent i = new Intent(getApplicationContext(), SearchResultActivity.class);
                             i.putExtra("jsonObject", jsOb.toString());
+
                             startActivity(i);
                         }
                     });

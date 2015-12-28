@@ -27,7 +27,6 @@ public class Books {
     String bookIsbn;
     String bookListId;
 
-
     public Books(){
 
     }

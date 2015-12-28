@@ -16,8 +16,7 @@ public class ViewListingActivity extends AppCompatActivity {
     protected Books mBook = new Books();
     protected JSONObject jsonObject;
 
-    String name = "Jaspal";
-    String yearPublished = "2012";
+    String titleListingNumber;
 
     TextView viewTitleText;
     TextView viewAuthorText;
@@ -32,9 +31,12 @@ public class ViewListingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_listing);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setVariablesToUiElements();
+        titleListingNumber = getIntent().getStringExtra("keyTitle");
+        getSupportActionBar().setTitle("Listing #"+titleListingNumber);
 
+        setVariablesToUiElements();
         getJsonObject();
+
 
         try {
             jsArray = jsonObject.getJSONArray("books");
@@ -76,12 +78,12 @@ public class ViewListingActivity extends AppCompatActivity {
                 mBook.bookYear = jobj.getString("book_year");
                 mBook.bookDesc = jobj.getString("book_desc");
                 mBook.bookFullName = jobj.getString("full_name");
+                mBook.bookListId = jobj.getString("list_id");
             }
         } catch (Exception e) {
             System.out.println("Parsing JSON object to Book object fucked up");
         }
     }
-
 
     protected void setValuesToVariables(Books mBook){
         mMessageButton.setText(mBook.bookFullName);

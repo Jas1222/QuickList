@@ -24,7 +24,6 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
     Books mBook = new Books();
     JSONObject jsOb = new JSONObject();
 
-
     //TODO Get real dates from database
     protected String year_published[] = {
             "2012",
