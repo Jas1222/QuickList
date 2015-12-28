@@ -39,6 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/sIsbn"
+        android:maxLines="1"
         android:hint="Search by ISBN number"
         android:inputType="number"
         android:layout_above="@+id/sTitle"
