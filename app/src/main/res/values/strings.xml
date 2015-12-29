@@ -406,5 +406,6 @@
     <string name="title_activity_search_result">Search Results</string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="title_activity_view_listing">ViewListingActivity</string>
+    <string name="title_activity_login">Login</string>
 
 </resources>

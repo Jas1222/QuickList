@@ -6,6 +6,6 @@
     android:textSize="20dip"
     android:textStyle="bold"
     android:paddingLeft="8dip"
-    android:gravity="center_horizontal"
     android:textColor="@color/colorPrimary"
     />
+    <!-- android:gravity="center_horizontal" -->
