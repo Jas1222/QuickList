@@ -17,8 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     ImageView bookIcon;
     ImageView barcodeIcon;
@@ -68,10 +67,8 @@ public class MainActivity extends AppCompatActivity
         barcodeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Snackbar.make(v, "Will open 'Barcode' Intent", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-                Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(i);
+                Snackbar.make(v, "Will open 'Barcode' Intent", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
 
@@ -136,17 +133,19 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camara) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_register) {
+            Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
+            startActivity(i);
+        } else if (id == R.id.nav_login) {
+            Intent i = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(i);
+        } else if (id == R.id.nav_my_listings) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_how) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_help) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_contact_us) {
 
         }
 

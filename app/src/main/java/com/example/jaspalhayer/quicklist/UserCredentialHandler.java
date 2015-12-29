@@ -25,6 +25,9 @@ public class UserCredentialHandler {
     protected static final String KEY_PASSWORD = "password";
     protected static final String KEY_EMAIL = "email";
 
+    protected String userFullName;
+    protected String userEmail;
+
     public boolean isUserLoggedIn;
 
     protected String fullname;

@@ -2,22 +2,39 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_camara" android:icon="@android:drawable/ic_menu_camera"
+        <item
+            android:id="@+id/nav_register"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="Register" />
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="Login" />
+        <item
+            android:id="@+id/nav_my_listings"
+            android:icon="@android:drawable/ic_menu_slideshow"
             android:title="My Listings" />
-        <item android:id="@+id/nav_gallery" android:icon="@android:drawable/ic_menu_gallery"
-            android:title="My Chats" />
-        <item android:id="@+id/nav_slideshow" android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="Browse by course" />
-        <item android:id="@+id/nav_manage" android:icon="@android:drawable/ic_menu_manage"
-            android:title="Help" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Help">
         <menu>
-            <item android:id="@+id/nav_share" android:icon="@android:drawable/ic_menu_share"
-                android:title="Share" />
-            <item android:id="@+id/nav_send" android:icon="@android:drawable/ic_menu_send"
-                android:title="Send" />
+            <item
+                android:id="@+id/nav_how"
+                android:icon="@android:drawable/ic_menu_share"
+                android:title="How does it work?" />
+            <item
+                android:id="@+id/nav_help"
+                android:icon="@android:drawable/ic_menu_send"
+                android:title="Help" />
+        </menu>
+    </item>
+
+    <item android:title="Contact">
+        <menu>
+            <item
+                android:id="@+id/nav_contact_us"
+                android:icon="@android:drawable/ic_menu_send"
+                android:title="Contact us" />
         </menu>
     </item>
 
