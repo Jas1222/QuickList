@@ -140,13 +140,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent i = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_my_listings) {
-
+            // navigate to my listings
         } else if (id == R.id.nav_how) {
-
+            // navigate to how it works page
         } else if (id == R.id.nav_help) {
-
+            // navigate to help page
         } else if (id == R.id.nav_contact_us) {
-
+            // navigate to contact page,
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

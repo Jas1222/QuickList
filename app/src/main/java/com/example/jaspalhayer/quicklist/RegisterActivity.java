@@ -33,9 +33,9 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 saveUserInputText();
 
-                registerHandler.fullname = editTextName;
-                registerHandler.email = editTextEmail;
-                registerHandler.password = editTextPassword;
+                registerHandler.userFullname = editTextName;
+                registerHandler.userEmail = editTextEmail;
+                registerHandler.userPassword = editTextPassword;
                 registerHandler.registerUser(getApplicationContext());
             }
         });
@@ -50,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
         passwordField = (EditText)findViewById(R.id.passwordField);
     }
 
+    //TODO remove editText variables, store in registerHandler object directly instead
     private void saveUserInputText(){
         editTextName = nameField.getText().toString();
         editTextEmail = emailField.getText().toString();
