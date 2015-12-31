@@ -39,7 +39,7 @@ public class LoginActivity extends Activity {
 
     }
 
-    private void saveUserInputText(UserCredentialHandler login){
+    private void saveUserInputText(UserCredentialHandler loginHandler){
         loginHandler.userEmail = loginEmailField.getText().toString();
         loginHandler.userPassword = loginPasswordField.getText().toString();
     }

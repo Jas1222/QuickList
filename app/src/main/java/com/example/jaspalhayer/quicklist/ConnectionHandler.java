@@ -111,6 +111,7 @@ public class ConnectionHandler {
     }
 
     public void getCourseListingsDetails(final Context context, final String listId, final VolleyCallback callback) {
+        //TODO refactor getTestUrl var
         String getTestUrl = getBookListingDetailUrl+"?list_id="+listId;
         getTestUrl = getTestUrl.replaceAll(" ", "%20");
 

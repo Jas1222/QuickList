@@ -10,6 +10,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,7 +24,11 @@ public class UserCredentialHandler {
     protected static final String KEY_PASSWORD = "password";
     protected static final String KEY_EMAIL = "email";
 
+    protected JSONObject jsonResult;
+
     public boolean isUserLoggedIn = false;
+    protected String loginResponse;
+    protected String loginMessage;
 
     protected String userFullname;
     protected String userEmail;
@@ -62,7 +69,21 @@ public class UserCredentialHandler {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+                        try {
+                            JSONObject jsonObjectResponse = new JSONObject(response);
+                            loginResponse = jsonObjectResponse.getString("error");
+                            if (loginError(loginResponse)){
+                                loginMessage = jsonObjectResponse.getString("error_msg");
+                                Toast.makeText(context, loginMessage, Toast.LENGTH_LONG).show();
+                            } else {
+                                loginMessage = jsonObjectResponse.getString("login_msg");
+                                isUserLoggedIn = true;
+                                Toast.makeText(context, loginMessage, Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -81,5 +102,20 @@ public class UserCredentialHandler {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
+    }
+
+    protected boolean loginError(String error){
+        if (error == "true"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    protected void updateUserState(){
+        if (isUserLoggedIn){
+
+        }
     }
 }
