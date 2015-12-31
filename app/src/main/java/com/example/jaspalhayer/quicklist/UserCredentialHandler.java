@@ -1,6 +1,7 @@
 package com.example.jaspalhayer.quicklist;
 
 import android.content.Context;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -64,7 +65,7 @@ public class UserCredentialHandler {
         requestQueue.add(stringRequest);
     }
 
-    protected void loginUser(final Context context){
+    protected void loginUser(final Context context, final VolleyCallBack callback){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, loginUrl,
                 new Response.Listener<String>() {
                     @Override
@@ -77,8 +78,11 @@ public class UserCredentialHandler {
                                 Toast.makeText(context, loginMessage, Toast.LENGTH_LONG).show();
                             } else {
                                 loginMessage = jsonObjectResponse.getString("login_msg");
+                                userEmail = jsonObjectResponse.getString("email");
+                                userFullname = jsonObjectResponse.getString("name");
                                 isUserLoggedIn = true;
                                 Toast.makeText(context, loginMessage, Toast.LENGTH_LONG).show();
+                                callback.onSuccess();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -112,10 +116,13 @@ public class UserCredentialHandler {
         }
     }
 
-
-    protected void updateUserState(){
-        if (isUserLoggedIn){
-
-        }
+    public interface VolleyCallBack{
+        void onSuccess();
     }
+
+//    protected void updateUserState(){
+//        if (isUserLoggedIn){
+//            TextView navName = (TextView)
+//        }
+//    }
 }

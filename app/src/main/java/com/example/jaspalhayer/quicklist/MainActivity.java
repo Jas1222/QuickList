@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ImageView barcodeIcon;
     ImageView messageIcon;
     ImageView listIcon;
+
+    UserCredentialHandler loginHandler = new UserCredentialHandler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
