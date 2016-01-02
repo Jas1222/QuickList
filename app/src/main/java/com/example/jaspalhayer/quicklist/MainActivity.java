@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager
                 .beginTransaction();
-        fragmentTransaction.replace(R.id.main_container,homeFragment));
+        fragmentTransaction.replace(R.id.main_container,homeFragment);
         fragmentTransaction.commit();
     }
 

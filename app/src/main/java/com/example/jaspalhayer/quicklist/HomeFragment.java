@@ -1,6 +1,6 @@
 package com.example.jaspalhayer.quicklist;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
