@@ -1,6 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-</LinearLayout>
+        <!-- Book icon and text -->
+        <ImageView
+            android:id="@+id/bookIcon"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:layout_marginLeft="50dip"
+            android:layout_marginTop="110dip"
+            android:src="@drawable/book" />
+
+        <TextView
+            android:id="@+id/bookLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bookIcon"
+            android:layout_marginLeft="20dip"
+            android:text="@string/bookLabel"
+            android:textColor="@color/colorAlt"
+            android:textStyle="bold" />
+
+
+        <!-- Barcode icon and text -->
+        <ImageView
+            android:id="@+id/barcodeIcon"
+            android:layout_width="95dip"
+            android:layout_height="95dip"
+            android:layout_marginLeft="260dip"
+            android:layout_marginTop="120dip"
+            android:src="@drawable/barcode" />
+
+        <TextView
+            android:id="@+id/barcodeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/barcodeIcon"
+            android:layout_marginLeft="260dip"
+            android:paddingTop="5dip"
+            android:text="@string/barcodeLabel"
+            android:textColor="@color/colorAlt"
+            android:textStyle="bold" />
+
+
+        <!-- Message icon and text -->
+        <ImageView
+            android:id="@+id/messageIcon"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:layout_marginLeft="50dip"
+            android:layout_marginTop="350dip"
+            android:src="@drawable/email" />
+
+        <TextView
+            android:id="@+id/messageLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/messageIcon"
+            android:layout_marginLeft="55dip"
+            android:text="@string/messageLabel"
+            android:textColor="@color/colorAlt"
+            android:textStyle="bold" />
+
+        <!-- List icon and text -->
+        <ImageView
+            android:id="@+id/listIcon"
+            android:layout_width="95dip"
+            android:layout_height="95dip"
+            android:layout_marginLeft="260dip"
+            android:layout_marginTop="350dip"
+            android:src="@drawable/list" />
+
+        <TextView
+            android:id="@+id/listLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/listIcon"
+            android:layout_marginLeft="273dip"
+            android:paddingTop="5dip"
+            android:text="@string/listLabel"
+            android:textColor="@color/colorAlt"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+</FrameLayout>

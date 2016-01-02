@@ -5,7 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -27,21 +32,12 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.browse_uni_course, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        FloatingActionButton fab = (FloatingActionButton)rootView.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getActivity().getApplicationContext(), CreateListingActivity.class);
-                startActivity(i);
-            }
-        });
-
+       // setHasOptionsMenu(true);
         setHomeIcons(rootView);
         return rootView;
     }
-
 
     public void setHomeIcons(View rootView){
         bookIcon = (ImageView)rootView.findViewById(R.id.bookIcon);

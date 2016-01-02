@@ -64,16 +64,17 @@
             android:name=".RegisterActivity"
             android:label="Sign-up"
             android:parentActivityName=".MainActivity" />
-
         <activity
             android:name=".ViewListingActivity"
             android:label="Listing"
-            android:parentActivityName=".MainActivity"></activity>
-
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".HomeFragment"
+            android:label="@string/title_activity_home_fragement"></activity>
     </application>
 
 </manifest>
