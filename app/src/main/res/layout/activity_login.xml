@@ -17,7 +17,7 @@
             android:id="@+id/login_title_text"
             android:layout_alignParentTop="true"
             android:textSize="40sp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="100dp"
             android:fontFamily="sans-serif-light"
             android:textColor="@color/colorAlt"
             android:layout_centerHorizontal="true" />

@@ -50,8 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         TextView navNameEmail = (TextView)findViewById(R.id.nav_email_header);
-        navNameEmail.setText(prefs.getString("NAV_HEADER_EMAIL", null));
-
+       // navNameEmail.setText(prefs.getString("NAV_HEADER_EMAIL", null));
 
 
         FragmentManager fragmentManager = getSupportFragmentManager();
