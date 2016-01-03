@@ -31,6 +31,9 @@ public class UserCredentialHandler {
     protected String loginResponse;
     protected String loginMessage;
 
+    protected String registerResponse;
+    protected String registerMessage;
+
     protected String userFullname;
     protected String userEmail;
     protected String userPassword;
@@ -43,7 +46,21 @@ public class UserCredentialHandler {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(context, response, Toast.LENGTH_LONG).show();
+                        try {
+                            JSONObject jsonObjectResponse = new JSONObject(response);
+                            if(registerError(jsonObjectResponse.getString("error"))){
+                                registerMessage = jsonObjectResponse.getString("error_msg");
+                                Toast.makeText(context, registerMessage, Toast.LENGTH_LONG).show();
+                            } else {
+                                registerMessage = jsonObjectResponse.getString("rgstr_msg");
+                                Toast.makeText(context, registerMessage, Toast.LENGTH_LONG).show();
+                                // TODO Auto login after registration?
+                            }
+
+                        } catch (Exception e){
+                            e.printStackTrace();
+                            Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -82,6 +99,7 @@ public class UserCredentialHandler {
                                 userFullname = jsonObjectResponse.getString("name");
                                 isUserLoggedIn = true;
                                 Toast.makeText(context, loginMessage, Toast.LENGTH_LONG).show();
+                                //TODO Auto direct back to homescreen?
                                 callback.onSuccess();
                             }
                         } catch (JSONException e) {
@@ -113,6 +131,14 @@ public class UserCredentialHandler {
             return true;
         } else {
             return false;
+        }
+    }
+
+    protected boolean registerError(String error){
+        if (error == "false"){
+            return false;
+        } else {
+            return true;
         }
     }
 

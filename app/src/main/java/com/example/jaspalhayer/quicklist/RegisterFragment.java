@@ -3,107 +3,88 @@ package com.example.jaspalhayer.quicklist;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link RegisterFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link RegisterFragment#newInstance} factory method to
- * create an instance of this fragment.
- *
- */
 public class RegisterFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    Button mRegister;
+
+    protected String editTextName;
+    protected String editTextEmail;
+    protected String editTextPassword;
+
+    protected EditText nameField;
+    protected EditText emailField;
+    protected EditText passwordField;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RegisterFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static RegisterFragment newInstance(String param1, String param2) {
-        RegisterFragment fragment = new RegisterFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
     public RegisterFragment() {
         // Required empty public constructor
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        TextView textView = new TextView(getActivity());
-        textView.setText(R.string.hello_blank_fragment);
-        return textView;
+        final UserCredentialHandler registerHandler = new UserCredentialHandler();
+        View rootView = inflater.inflate(R.layout.activity_register, container, false);
+
+        setVariablesToUiElements(rootView);
+
+        mRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveUserInputText();
+
+                if(validInputFields()) {
+                    registerHandler.userFullname = editTextName;
+                    registerHandler.userEmail = editTextEmail;
+                    registerHandler.userPassword = editTextPassword;
+                    registerHandler.registerUser(getActivity().getApplicationContext());
+                } else {
+                    Snackbar.make(v, "Ensure you have filled in all fields", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();                }
+            }
+        });
+        return rootView;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+
+    private void setVariablesToUiElements(View rootView){
+        mRegister = (Button)rootView.findViewById(R.id.signup_button);
+
+        nameField = (EditText)rootView.findViewById(R.id.nameField);
+        emailField = (EditText)rootView.findViewById(R.id.emailField);
+        passwordField = (EditText)rootView.findViewById(R.id.passwordField);
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+    //TODO remove editText variables, store in registerHandler object directly instead
+    private void saveUserInputText(){
+        editTextName = nameField.getText().toString();
+        editTextEmail = emailField.getText().toString();
+        editTextPassword = passwordField.getText().toString();
+    }
+
+    private boolean validInputFields(){
+        if (editTextName.isEmpty() && editTextName.isEmpty() && editTextPassword.isEmpty()) {
+            return false;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+            return true;
         }
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }
