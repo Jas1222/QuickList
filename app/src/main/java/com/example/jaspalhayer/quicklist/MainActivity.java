@@ -50,12 +50,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences prefs = getSharedPreferences(USER_PREFS, 0);
-                String message = prefs.getString(KEY_USER_STATUS, "");
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
-
-//                Intent i = new Intent(getApplicationContext(), CreateListingActivity.class);
-//                startActivity(i);
+                Intent i = new Intent(getApplicationContext(), CreateListingActivity.class);
+                startActivity(i);
             }
         });
 
@@ -65,9 +61,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         register = navigationView.getMenu().getItem(0);
         login = navigationView.getMenu().getItem(1);
         logout = navigationView.getMenu().getItem(2);
-
-        SharedPreferences prefs = getSharedPreferences(USER_PREFS, 0);
-        String message = prefs.getString(KEY_USER_STATUS, "");
 
         if(userStatus.checkIfUserIsLoggedIn(getApplicationContext())){
             userStatus.setNavHeaderOnLogin(getApplicationContext(), navigationView);
