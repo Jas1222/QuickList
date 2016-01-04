@@ -11,6 +11,10 @@
             android:icon="@drawable/nav_login_icon"
             android:title="Login" />
         <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/nav_login_icon"
+            android:title="Logout" />
+        <item
             android:id="@+id/nav_my_listings"
             android:icon="@drawable/nav_listings_icon"
             android:title="My Listings" />

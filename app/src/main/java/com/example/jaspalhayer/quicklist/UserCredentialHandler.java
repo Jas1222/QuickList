@@ -1,6 +1,7 @@
 package com.example.jaspalhayer.quicklist;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -142,13 +143,24 @@ public class UserCredentialHandler {
         }
     }
 
+    protected void storeUserEmailAndName(SharedPreferences prefs){
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("NAV_NAME", this.userFullname).apply();
+        editor.putString("NAV_EMAIL", this.userEmail).apply();
+    }
+
+    protected boolean checkIfUserIsLoggedIn(Context context){
+        String getStatus;
+        SharedPreferences prefs = context.getSharedPreferences("userNamePrefs", 0);
+        getStatus = prefs.getString("USER_STATUS", "");
+        if (getStatus == "true"){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public interface VolleyCallBack{
         void onSuccess();
     }
-
-//    protected void updateUserState(){
-//        if (isUserLoggedIn){
-//            TextView navName = (TextView)
-//        }
-//    }
 }

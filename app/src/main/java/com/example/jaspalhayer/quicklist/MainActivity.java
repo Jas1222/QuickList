@@ -17,11 +17,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, LoginFragment.OnLoginCallback {
+    MenuItem register;
+    MenuItem login;
+    MenuItem logout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        UserCredentialHandler userStatus = new UserCredentialHandler();
 
         final HomeFragment homeFragment = new HomeFragment();
 
@@ -34,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,22 +49,55 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences("userNamePrefs", 0);
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        SharedPreferences prefs = getApplicationContext().getSharedPreferences("userNamePrefs", 0);
+        register = navigationView.getMenu().getItem(0);
+        login = navigationView.getMenu().getItem(1);
+        logout = navigationView.getMenu().getItem(2);
 
-
-        TextView navNameEmail = (TextView)findViewById(R.id.nav_email_header);
-       // navNameEmail.setText(prefs.getString("NAV_HEADER_EMAIL", null));
-
+        if(userStatus.checkIfUserIsLoggedIn(getApplicationContext())){
+            register.setVisible(false);
+            login.setVisible(false);
+            logout.setVisible(true);
+        } else {
+            logout.setVisible(false);
+        }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager
                 .beginTransaction();
         fragmentTransaction.replace(R.id.main_container,homeFragment);
         fragmentTransaction.commit();
+    }
 
+    @Override
+    public void onLoginSuccess() {
+        HomeFragment homeFragment = new HomeFragment();
+
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences("userNamePrefs", 0);
+
+        TextView navHeaderText = (TextView)findViewById(R.id.nav_fullname);
+        TextView navHeaderEmail = (TextView)findViewById(R.id.nav_email_header);
+
+        navHeaderText.setText(prefs.getString("NAV_NAME", ""));
+        navHeaderEmail.setText(prefs.getString("NAV_EMAIL", ""));
+
+        register.setVisible(false);
+        login.setVisible(false);
+        logout.setVisible(true);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager
+                .beginTransaction();
+        fragmentTransaction.replace(R.id.main_container,homeFragment);
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void updateNavDrawerList(){
 
     }
 

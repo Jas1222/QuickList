@@ -20,12 +20,18 @@ public class LoginFragment extends Fragment {
     EditText loginPasswordField;
     Button mLoginButton;
 
+    OnLoginCallback mCallback;
+
     UserCredentialHandler loginHandler = new UserCredentialHandler();
 
     public LoginFragment() {
         // Required empty public constructor
     }
 
+    public interface OnLoginCallback{
+        void onLoginSuccess();
+        void updateNavDrawerList();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,7 +40,9 @@ public class LoginFragment extends Fragment {
         setVariablesToUiElements(rootView);
 
 
-        SharedPreferences prefs = getActivity().getApplicationContext().getSharedPreferences("userNamePrefs", 0);
+        mCallback = (OnLoginCallback) getActivity();
+
+        final SharedPreferences prefs = getActivity().getApplicationContext().getSharedPreferences("userNamePrefs", 0);
 
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("NAV_HEADER_EMAIL", "test value").apply();
@@ -48,21 +56,12 @@ public class LoginFragment extends Fragment {
                 loginHandler.loginUser(getActivity().getApplicationContext(), new UserCredentialHandler.VolleyCallBack() {
                     @Override
                     public void onSuccess() {
-
-                        if (loginHandler.isUserLoggedIn = true){
-//                            TextView navNameText = (TextView)navHeader.findViewById(R.id.nav_fullname);
-//                            TextView navNameEmail = (TextView)navHeader.findViewById(R.id.nav_email_header);
-//                            navNameText.setText(loginHandler.userFullname);
-//                            navNameEmail.setText(loginHandler.userEmail);
-                        }
+                        //store username and email
+                        loginHandler.storeUserEmailAndName(prefs);
+                        //update nav view
+                        mCallback.onLoginSuccess();
                     }
                 });
-//                if (loginHandler.isUserLoggedIn = true){
-//                    TextView navNameText = (TextView)findViewById(R.id.nav_fullname);
-//                    TextView navNameEmail = (TextView)findViewById(R.id.nav_email_header);
-//                    navNameText.setText(loginHandler.userFullname);
-//                    navNameEmail.setText(loginHandler.userEmail);
-//                }
 
             }
         });
@@ -81,4 +80,7 @@ public class LoginFragment extends Fragment {
         loginHandler.userPassword = loginPasswordField.getText().toString();
     }
 
+    public void setNavHeader(TextView navNameText, TextView navEmailText, View mainView){
+
+    }
 }
