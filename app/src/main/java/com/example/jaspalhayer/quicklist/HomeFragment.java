@@ -51,24 +51,5 @@ public class HomeFragment extends Fragment {
                         .setAction("Action", null).show();
             }
         });
-
-        messageIcon = (ImageView)rootView.findViewById(R.id.messageIcon);
-        messageIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(v, "Will open 'My Messages' Intent", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-            }
-        });
-
-        listIcon = (ImageView)rootView.findViewById(R.id.listIcon);
-        listIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(v, "Will open 'My Listings' Intent", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 }
