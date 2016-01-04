@@ -15,18 +15,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, LoginFragment.OnLoginCallback {
     MenuItem register;
     MenuItem login;
     MenuItem logout;
+    NavigationView navigationView;
+    UserCredentialHandler userStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        UserCredentialHandler userStatus = new UserCredentialHandler();
+        userStatus = new UserCredentialHandler();
 
         final HomeFragment homeFragment = new HomeFragment();
 
@@ -49,14 +50,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-        SharedPreferences prefs = getApplicationContext().getSharedPreferences("userNamePrefs", 0);
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         register = navigationView.getMenu().getItem(0);
         login = navigationView.getMenu().getItem(1);
         logout = navigationView.getMenu().getItem(2);
+
 
         if(userStatus.checkIfUserIsLoggedIn(getApplicationContext())){
             register.setVisible(false);
@@ -76,14 +76,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onLoginSuccess() {
         HomeFragment homeFragment = new HomeFragment();
+        userStatus.setNavHeaderOnLogin(getApplicationContext(), navigationView);
 
-        SharedPreferences prefs = getApplicationContext().getSharedPreferences("userNamePrefs", 0);
-
-        TextView navHeaderText = (TextView)findViewById(R.id.nav_fullname);
-        TextView navHeaderEmail = (TextView)findViewById(R.id.nav_email_header);
-
-        navHeaderText.setText(prefs.getString("NAV_NAME", ""));
-        navHeaderEmail.setText(prefs.getString("NAV_EMAIL", ""));
+        updateNavDrawer("login",register,login,logout);
 
         register.setVisible(false);
         login.setVisible(false);
@@ -96,10 +91,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
     }
 
-    @Override
-    public void updateNavDrawerList(){
-
-    }
 
     @Override
     public void onBackPressed() {
@@ -164,6 +155,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .addToBackStack(null)
                     .commit();
 
+        } else if(id == R.id.nav_logout) {
+            userStatus.logoutUser(getApplicationContext(), navigationView);
+            userStatus.setNavHeaderOnLogout(getApplicationContext(), navigationView);
+            updateNavDrawer("logout",register,login,logout);
+
         } else if (id == R.id.nav_my_listings) {
             // navigate to my listings
         } else if (id == R.id.nav_how) {
@@ -178,4 +174,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void updateNavDrawer(String action, MenuItem register, MenuItem login, MenuItem logout){
+        if(action=="login"){
+            register.setVisible(false);
+            login.setVisible(false);
+            logout.setVisible(true);
+        } else {
+            register.setVisible(true);
+            login.setVisible(true);
+            logout.setVisible(false);
+        }
+    }
+
 }

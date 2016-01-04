@@ -2,6 +2,7 @@ package com.example.jaspalhayer.quicklist;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.design.widget.NavigationView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +28,9 @@ public class UserCredentialHandler {
     protected static final String KEY_PASSWORD = "password";
     protected static final String KEY_EMAIL = "email";
 
-    protected JSONObject jsonResult;
+    protected static final String KEY_NAV_NAME = "NAV_NAME";
+    protected static final String KEY_NAV_EMAIL = "NAV_EMAIL";
+
 
     public boolean isUserLoggedIn = false;
     protected String loginResponse;
@@ -42,19 +46,21 @@ public class UserCredentialHandler {
     protected String registerUrl = "http://qt003605.webs.sse.reading.ac.uk/android_login_api/register.php";
     protected String loginUrl = "http://qt003605.webs.sse.reading.ac.uk/android_login_api/login.php";
 
-    protected void registerUser(final Context context) {
+    protected void registerUser(final Context context, final VolleyCallBack callBack) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, registerUrl,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObjectResponse = new JSONObject(response);
-                            if(registerError(jsonObjectResponse.getString("error"))){
+                            registerResponse = jsonObjectResponse.getString("error");
+                            if(registerError(registerResponse)){
                                 registerMessage = jsonObjectResponse.getString("error_msg");
                                 Toast.makeText(context, registerMessage, Toast.LENGTH_LONG).show();
                             } else {
                                 registerMessage = jsonObjectResponse.getString("rgstr_msg");
                                 Toast.makeText(context, registerMessage, Toast.LENGTH_LONG).show();
+                                callBack.onSuccess();
                                 // TODO Auto login after registration?
                             }
 
@@ -83,7 +89,7 @@ public class UserCredentialHandler {
         requestQueue.add(stringRequest);
     }
 
-    protected void loginUser(final Context context, final VolleyCallBack callback){
+    protected void loginUser(final Context context, final SharedPreferences prefs, final VolleyCallBack callback){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, loginUrl,
                 new Response.Listener<String>() {
                     @Override
@@ -99,8 +105,8 @@ public class UserCredentialHandler {
                                 userEmail = jsonObjectResponse.getString("email");
                                 userFullname = jsonObjectResponse.getString("name");
                                 isUserLoggedIn = true;
+                                storeUserEmailAndName(prefs);
                                 Toast.makeText(context, loginMessage, Toast.LENGTH_LONG).show();
-                                //TODO Auto direct back to homescreen?
                                 callback.onSuccess();
                             }
                         } catch (JSONException e) {
@@ -158,6 +164,35 @@ public class UserCredentialHandler {
         } else {
             return false;
         }
+    }
+    protected void logoutUser(Context context, NavigationView navigationView){
+        isUserLoggedIn=false;
+        SharedPreferences prefs = context.getSharedPreferences("userNamePrefs", 0);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        editor.putString("USER_STATUS", "false").apply();
+        editor.putString("NAV_NAME", "").apply();
+        editor.putString("NAV_EMAIL", "").apply();
+    }
+
+    protected void setNavHeaderOnLogin(Context context, NavigationView navigationView){
+        SharedPreferences prefs = context.getSharedPreferences("userNamePrefs", 0);
+
+        TextView navHeaderFullName = (TextView)navigationView.findViewById(R.id.nav_fullname);
+        TextView navHeaderEmail = (TextView)navigationView.findViewById(R.id.nav_email_header);
+
+        navHeaderEmail.setText(prefs.getString(KEY_NAV_EMAIL, this.userFullname));
+        navHeaderFullName.setText(prefs.getString(KEY_NAV_NAME, this.userEmail));
+    }
+
+    protected void setNavHeaderOnLogout(Context context, NavigationView navigationView){
+        SharedPreferences prefs = context.getSharedPreferences("userNamePrefs", 0);
+
+        TextView navHeaderFullName = (TextView)navigationView.findViewById(R.id.nav_fullname);
+        TextView navHeaderEmail = (TextView)navigationView.findViewById(R.id.nav_email_header);
+
+        navHeaderFullName.setText("You are not logged in");
+        navHeaderEmail.setText("Please login below");
     }
 
     public interface VolleyCallBack{

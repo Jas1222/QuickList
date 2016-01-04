@@ -24,13 +24,13 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:id="@+id/nav_fullname"
-        android:text="Android Studio"
+        android:text="You are not logged-in"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="android.studio@android.com"
+        android:text="Please login below."
         android:id="@+id/nav_email_header" />
 
 </LinearLayout>

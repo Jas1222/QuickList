@@ -1,6 +1,7 @@
 package com.example.jaspalhayer.quicklist;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -35,12 +36,15 @@ public class RegisterFragment extends Fragment {
         // Required empty public constructor
     }
 
+    LoginFragment.OnLoginCallback mCallback;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final UserCredentialHandler registerHandler = new UserCredentialHandler();
         View rootView = inflater.inflate(R.layout.activity_register, container, false);
+
+        final SharedPreferences prefs = getActivity().getApplicationContext().getSharedPreferences("userNamePrefs", 0);
 
         setVariablesToUiElements(rootView);
 
@@ -53,7 +57,18 @@ public class RegisterFragment extends Fragment {
                     registerHandler.userFullname = editTextName;
                     registerHandler.userEmail = editTextEmail;
                     registerHandler.userPassword = editTextPassword;
-                    registerHandler.registerUser(getActivity().getApplicationContext());
+                    registerHandler.registerUser(getActivity().getApplicationContext(), new UserCredentialHandler.VolleyCallBack() {
+                        @Override
+                        public void onSuccess() {
+                            registerHandler.loginUser(getActivity().getApplicationContext(), prefs, new UserCredentialHandler.VolleyCallBack() {
+                                @Override
+                                public void onSuccess() {
+                                    mCallback = (LoginFragment.OnLoginCallback) getActivity();
+                                    mCallback.onLoginSuccess();
+                                }
+                            });
+                        }
+                    });
                 } else {
                     Snackbar.make(v, "Ensure you have filled in all fields", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();                }

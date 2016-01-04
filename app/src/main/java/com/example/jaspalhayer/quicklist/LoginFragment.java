@@ -30,7 +30,6 @@ public class LoginFragment extends Fragment {
 
     public interface OnLoginCallback{
         void onLoginSuccess();
-        void updateNavDrawerList();
     }
 
     @Override
@@ -44,21 +43,15 @@ public class LoginFragment extends Fragment {
 
         final SharedPreferences prefs = getActivity().getApplicationContext().getSharedPreferences("userNamePrefs", 0);
 
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("NAV_HEADER_EMAIL", "test value").apply();
-
-
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 saveUserInputText(loginHandler);
-                loginHandler.loginUser(getActivity().getApplicationContext(), new UserCredentialHandler.VolleyCallBack() {
+                loginHandler.loginUser(getActivity().getApplicationContext(), prefs, new UserCredentialHandler.VolleyCallBack() {
                     @Override
                     public void onSuccess() {
-                        //store username and email
-                        loginHandler.storeUserEmailAndName(prefs);
-                        //update nav view
+
                         mCallback.onLoginSuccess();
                     }
                 });
@@ -80,7 +73,6 @@ public class LoginFragment extends Fragment {
         loginHandler.userPassword = loginPasswordField.getText().toString();
     }
 
-    public void setNavHeader(TextView navNameText, TextView navEmailText, View mainView){
 
-    }
+
 }
