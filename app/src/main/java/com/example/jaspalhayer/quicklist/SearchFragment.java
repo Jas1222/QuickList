@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ import org.json.JSONObject;
  * A simple {@link Fragment} subclass.
  */
 public class SearchFragment extends Fragment {
-    protected Button sButton;
+    protected CardView sButton;
     protected EditText field_isbn;
     protected EditText field_title;
     protected EditText field_author;
@@ -29,6 +30,8 @@ public class SearchFragment extends Fragment {
     JSONObject jsOb = new JSONObject();
     ConnectionHandler handler = new ConnectionHandler();
 
+    Button newButton;
+
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -38,6 +41,8 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.search_activity, container, false);
+
+
 
         setVariablesToUiElements(rootView);
         sButton.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +80,7 @@ public class SearchFragment extends Fragment {
         field_isbn = (EditText)rootView.findViewById(R.id.search_isbn_text);
         field_title = (EditText)rootView.findViewById(R.id.search_title_text);
         field_author = (EditText)rootView.findViewById(R.id.search_author_text);
-        sButton = (Button)rootView.findViewById(R.id.search_button);
+        sButton = (CardView)rootView.findViewById(R.id.search_material_button);
 
     }
 
