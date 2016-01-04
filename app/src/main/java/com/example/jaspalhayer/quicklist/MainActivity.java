@@ -3,6 +3,7 @@ package com.example.jaspalhayer.quicklist;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -15,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, LoginFragment.OnLoginCallback {
     MenuItem register;
@@ -22,6 +24,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     MenuItem logout;
     NavigationView navigationView;
     UserCredentialHandler userStatus;
+
+    protected static final String KEY_USER_STATUS = "USER_STATUS";
+    protected static final String USER_PREFS = "userNamePrefs";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +50,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), CreateListingActivity.class);
-                startActivity(i);
+                SharedPreferences prefs = getSharedPreferences(USER_PREFS, 0);
+                String message = prefs.getString(KEY_USER_STATUS, "");
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
+//                Intent i = new Intent(getApplicationContext(), CreateListingActivity.class);
+//                startActivity(i);
             }
         });
 
@@ -57,13 +66,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         login = navigationView.getMenu().getItem(1);
         logout = navigationView.getMenu().getItem(2);
 
+        SharedPreferences prefs = getSharedPreferences(USER_PREFS, 0);
+        String message = prefs.getString(KEY_USER_STATUS, "");
 
         if(userStatus.checkIfUserIsLoggedIn(getApplicationContext())){
-            register.setVisible(false);
-            login.setVisible(false);
-            logout.setVisible(true);
+            userStatus.setNavHeaderOnLogin(getApplicationContext(), navigationView);
+            updateNavDrawer("login", register, login, logout);
         } else {
-            logout.setVisible(false);
+            userStatus.setNavHeaderOnLogout(getApplicationContext(), navigationView);
+            updateNavDrawer("logout", register, login, logout);
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -156,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .commit();
 
         } else if(id == R.id.nav_logout) {
-            userStatus.logoutUser(getApplicationContext(), navigationView);
+            userStatus.logoutUser(getApplicationContext());
             userStatus.setNavHeaderOnLogout(getApplicationContext(), navigationView);
             updateNavDrawer("logout",register,login,logout);
 

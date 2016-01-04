@@ -41,14 +41,12 @@ public class LoginFragment extends Fragment {
 
         mCallback = (OnLoginCallback) getActivity();
 
-        final SharedPreferences prefs = getActivity().getApplicationContext().getSharedPreferences("userNamePrefs", 0);
-
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 saveUserInputText(loginHandler);
-                loginHandler.loginUser(getActivity().getApplicationContext(), prefs, new UserCredentialHandler.VolleyCallBack() {
+                loginHandler.loginUser(getActivity().getApplicationContext(), new UserCredentialHandler.VolleyCallBack() {
                     @Override
                     public void onSuccess() {
 

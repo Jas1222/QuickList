@@ -60,7 +60,7 @@ public class RegisterFragment extends Fragment {
                     registerHandler.registerUser(getActivity().getApplicationContext(), new UserCredentialHandler.VolleyCallBack() {
                         @Override
                         public void onSuccess() {
-                            registerHandler.loginUser(getActivity().getApplicationContext(), prefs, new UserCredentialHandler.VolleyCallBack() {
+                            registerHandler.loginUser(getActivity().getApplicationContext(), new UserCredentialHandler.VolleyCallBack() {
                                 @Override
                                 public void onSuccess() {
                                     mCallback = (LoginFragment.OnLoginCallback) getActivity();

@@ -15,7 +15,6 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,13 +23,17 @@ import java.util.Map;
  * Created by Jas1222 on 20/12/2015.
  */
 public class UserCredentialHandler {
-    protected static final String KEY_FULLNAME = "name";
-    protected static final String KEY_PASSWORD = "password";
-    protected static final String KEY_EMAIL = "email";
+    protected static final String POST_KEY_FULLNAME = "name";
+    protected static final String POST_KEY_PASSWORD = "password";
+    protected static final String POST_KEY_EMAIL = "email";
 
     protected static final String KEY_NAV_NAME = "NAV_NAME";
     protected static final String KEY_NAV_EMAIL = "NAV_EMAIL";
+    protected static final String KEY_USER_STATUS = "USER_STATUS";
+    protected static final String USER_PREFS = "userNamePrefs";
 
+    protected static final String userLoggedIn = "true";
+    protected static final String userNotLoggedIn = "false";
 
     public boolean isUserLoggedIn = false;
     protected String loginResponse;
@@ -79,9 +82,9 @@ public class UserCredentialHandler {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put(KEY_FULLNAME, userFullname);
-                params.put(KEY_PASSWORD, userPassword);
-                params.put(KEY_EMAIL, userEmail);
+                params.put(POST_KEY_FULLNAME, userFullname);
+                params.put(POST_KEY_PASSWORD, userPassword);
+                params.put(POST_KEY_EMAIL, userEmail);
                 return params;
             }
         };
@@ -89,7 +92,7 @@ public class UserCredentialHandler {
         requestQueue.add(stringRequest);
     }
 
-    protected void loginUser(final Context context, final SharedPreferences prefs, final VolleyCallBack callback){
+    protected void loginUser(final Context context, final VolleyCallBack callback){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, loginUrl,
                 new Response.Listener<String>() {
                     @Override
@@ -105,7 +108,8 @@ public class UserCredentialHandler {
                                 userEmail = jsonObjectResponse.getString("email");
                                 userFullname = jsonObjectResponse.getString("name");
                                 isUserLoggedIn = true;
-                                storeUserEmailAndName(prefs);
+
+                                storeUserEmailAndName(context);
                                 Toast.makeText(context, loginMessage, Toast.LENGTH_LONG).show();
                                 callback.onSuccess();
                             }
@@ -124,8 +128,8 @@ public class UserCredentialHandler {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put(KEY_PASSWORD, userPassword);
-                params.put(KEY_EMAIL, userEmail);
+                params.put(POST_KEY_PASSWORD, userPassword);
+                params.put(POST_KEY_EMAIL, userEmail);
                 return params;
             }
         };
@@ -149,34 +153,39 @@ public class UserCredentialHandler {
         }
     }
 
-    protected void storeUserEmailAndName(SharedPreferences prefs){
+    protected void storeUserEmailAndName(Context context){
+        SharedPreferences prefs = context.getSharedPreferences(USER_PREFS, 0);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("NAV_NAME", this.userFullname).apply();
-        editor.putString("NAV_EMAIL", this.userEmail).apply();
+        editor.putString(KEY_NAV_NAME, this.userFullname).apply();
+        editor.putString(KEY_NAV_EMAIL, this.userEmail).apply();
+        editor.putString(KEY_USER_STATUS, "true").apply();
     }
 
     protected boolean checkIfUserIsLoggedIn(Context context){
         String getStatus;
-        SharedPreferences prefs = context.getSharedPreferences("userNamePrefs", 0);
-        getStatus = prefs.getString("USER_STATUS", "");
-        if (getStatus == "true"){
+        SharedPreferences prefs = context.getSharedPreferences(USER_PREFS, 0);
+        getStatus = prefs.getString(KEY_USER_STATUS, "");
+        if (getStatus.equals("true")){
             return true;
         } else {
             return false;
         }
     }
-    protected void logoutUser(Context context, NavigationView navigationView){
+    protected void logoutUser(Context context){
         isUserLoggedIn=false;
-        SharedPreferences prefs = context.getSharedPreferences("userNamePrefs", 0);
+        SharedPreferences prefs = context.getSharedPreferences(USER_PREFS, 0);
         SharedPreferences.Editor editor = prefs.edit();
 
-        editor.putString("USER_STATUS", "false").apply();
-        editor.putString("NAV_NAME", "").apply();
-        editor.putString("NAV_EMAIL", "").apply();
+        editor.putString(KEY_USER_STATUS, userNotLoggedIn).apply();
+        editor.putString(KEY_NAV_NAME, "").apply();
+        editor.putString(KEY_NAV_EMAIL, "").apply();
+
+        Toast.makeText(context, "You have logged out!", Toast.LENGTH_LONG).show();
     }
 
+
     protected void setNavHeaderOnLogin(Context context, NavigationView navigationView){
-        SharedPreferences prefs = context.getSharedPreferences("userNamePrefs", 0);
+        SharedPreferences prefs = context.getSharedPreferences(USER_PREFS, 0);
 
         TextView navHeaderFullName = (TextView)navigationView.findViewById(R.id.nav_fullname);
         TextView navHeaderEmail = (TextView)navigationView.findViewById(R.id.nav_email_header);
@@ -186,8 +195,6 @@ public class UserCredentialHandler {
     }
 
     protected void setNavHeaderOnLogout(Context context, NavigationView navigationView){
-        SharedPreferences prefs = context.getSharedPreferences("userNamePrefs", 0);
-
         TextView navHeaderFullName = (TextView)navigationView.findViewById(R.id.nav_fullname);
         TextView navHeaderEmail = (TextView)navigationView.findViewById(R.id.nav_email_header);
 
