@@ -47,8 +47,11 @@ public class HomeFragment extends Fragment {
         barcodeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Will open 'Barcode' Intent", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent i = new Intent(getActivity().getApplicationContext(), ScanActivity.class);
+                startActivity(i);
+//
+//                Snackbar.make(v, "Will open 'Barcode' Intent", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
     }

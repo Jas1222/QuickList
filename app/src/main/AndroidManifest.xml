@@ -4,6 +4,8 @@
 
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+
 
     <application
         android:allowBackup="true"
@@ -52,6 +54,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.jaspalhayer.quicklist.MainActivity" />
         </activity>
+        <activity
+            android:name=".ScanActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="Scan"
+            />
+        <activity android:name=".BarcodeScanner"
+            android:parentActivityName=".ScanActivity"
+            android:label="Scan"/>
         <activity
             android:name=".SearchResultActivity"
             android:label="@string/title_activity_search_result"
