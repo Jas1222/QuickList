@@ -61,6 +61,7 @@
             />
         <activity android:name=".BarcodeScanner"
             android:parentActivityName=".ScanActivity"
+            android:screenOrientation="landscape"
             android:label="Scan"/>
         <activity
             android:name=".SearchResultActivity"

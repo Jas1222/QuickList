@@ -17,7 +17,7 @@ import android.widget.Toast;
 import net.sourceforge.zbar.Symbol;
 
 
-public class ScanActivity extends Activity {
+public class ScanActivity extends AppCompatActivity {
 
     private static final int ZBAR_SCANNER_REQUEST = 0;
     private static final int ZBAR_QR_SCANNER_REQUEST = 1;
