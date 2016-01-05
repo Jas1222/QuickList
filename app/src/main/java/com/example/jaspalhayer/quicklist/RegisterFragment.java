@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ public class RegisterFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    Button mRegister;
+    CardView mRegister;
 
     protected String editTextName;
     protected String editTextEmail;
@@ -77,9 +78,8 @@ public class RegisterFragment extends Fragment {
         return rootView;
     }
 
-
     private void setVariablesToUiElements(View rootView){
-        mRegister = (Button)rootView.findViewById(R.id.signup_button);
+        mRegister = (CardView) rootView.findViewById(R.id.signup_button);
 
         nameField = (EditText)rootView.findViewById(R.id.nameField);
         emailField = (EditText)rootView.findViewById(R.id.emailField);

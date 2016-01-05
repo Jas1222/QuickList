@@ -106,19 +106,6 @@
             android:layout_marginLeft="35dp"
             android:layout_marginRight="15dp"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/passwordField"
-            android:text="Sign up"
-            android:id="@+id/signup_button"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/white"
-            android:shadowColor="@color/colorPrimaryDark"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_centerHorizontal="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -131,23 +118,88 @@
             android:id="@+id/orText"
             android:layout_below="@+id/signup_button" />
 
-        <Button
+
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/orText"-->
+            <!--android:text="Connect with Facebook"-->
+            <!--android:id="@+id/facebook_button"-->
+            <!--android:background="#3B5998"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:shadowColor="@color/colorPrimaryDark"-->
+            <!--android:drawableLeft="@drawable/register_facebook_icon"-->
+            <!--android:paddingLeft="20dp"-->
+            <!--android:drawablePadding="-20dp"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:layout_marginTop="15dp"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:layout_centerHorizontal="true" />-->
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_below="@+id/orText"
-            android:text="Connect with Facebook"
+            android:layout_marginTop="15dp"
+            android:layout_height="wrap_content"
             android:id="@+id/facebook_button"
-            android:background="#3B5998"
-            android:textColor="@color/white"
-            android:shadowColor="@color/colorPrimaryDark"
             android:drawableLeft="@drawable/register_facebook_icon"
             android:paddingLeft="20dp"
-            android:drawablePadding="-20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="15dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_centerHorizontal="true" />
+            card_view:cardBackgroundColor="#3B5998"
+            card_view:cardCornerRadius="2dp"
+            card_view:cardElevation="6dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/register_facebook_icon"/>
+
+            <TextView
+                android:id="@+id/register_facebook_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="13dp"
+                android:paddingLeft="20dp"
+                android:paddingBottom="13dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#FFF"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Connect with Facebook" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/signup_button"
+            android:layout_gravity="center_vertical"
+            android:layout_below="@+id/passwordField"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            card_view:cardBackgroundColor="#E91E63"
+            card_view:cardCornerRadius="2dp"
+            card_view:cardElevation="6dp">
+
+            <TextView
+                android:id="@+id/register_material_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#FFF"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Sign up" />
+        </android.support.v7.widget.CardView>
 
         <TextView
             android:layout_width="wrap_content"

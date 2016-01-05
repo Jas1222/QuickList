@@ -4,6 +4,7 @@ package com.example.jaspalhayer.quicklist;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ public class LoginFragment extends Fragment {
 
     EditText loginEmailField;
     EditText loginPasswordField;
-    Button mLoginButton;
+    CardView mLoginButton;
 
     OnLoginCallback mCallback;
 
@@ -49,11 +50,9 @@ public class LoginFragment extends Fragment {
                 loginHandler.loginUser(getActivity().getApplicationContext(), new UserCredentialHandler.VolleyCallBack() {
                     @Override
                     public void onSuccess() {
-
                         mCallback.onLoginSuccess();
                     }
                 });
-
             }
         });
         return rootView;
@@ -62,7 +61,7 @@ public class LoginFragment extends Fragment {
     private void setVariablesToUiElements(View rootView){
         loginEmailField = (EditText)rootView.findViewById(R.id.login_emailField);
         loginPasswordField = (EditText)rootView.findViewById(R.id.login_passwordField);
-        mLoginButton = (Button)rootView.findViewById(R.id.login_login_button);
+        mLoginButton = (CardView)rootView.findViewById(R.id.login_login_button);
 
     }
 
@@ -70,7 +69,4 @@ public class LoginFragment extends Fragment {
         loginHandler.userEmail = loginEmailField.getText().toString();
         loginHandler.userPassword = loginPasswordField.getText().toString();
     }
-
-
-
 }

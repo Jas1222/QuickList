@@ -21,7 +21,6 @@
         <!--android:layout_marginRight="20dp"-->
         <!--android:layout_centerHorizontal="true" />-->
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -77,14 +76,13 @@
             <TextView android:id="@+id/material_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
                 android:layout_gravity="center_horizontal"
                 android:textColor="#FFF"
                 android:textSize="20sp"
                 android:fontFamily="sans-serif-medium"
                 android:text="Search" />
-
         </android.support.v7.widget.CardView>
 
     <EditText

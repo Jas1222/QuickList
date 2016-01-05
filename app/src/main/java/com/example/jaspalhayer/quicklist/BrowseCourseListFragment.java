@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,7 @@ public class BrowseCourseListFragment extends Fragment {
     protected JSONObject jsOb = new JSONObject();
 
     protected ListView lstView;
-    protected Button mLookup;
+    protected CardView mLookup;
     protected String selectedCourse;
     protected String selectedYear;
 
@@ -178,7 +179,7 @@ public class BrowseCourseListFragment extends Fragment {
         degreeTypeSpinner = (Spinner)rootView.findViewById(R.id.degreeTypeSpinner);
         courseSpinner = (Spinner)rootView.findViewById(R.id.courseSpinner);
         yearSpinner = (Spinner)rootView.findViewById(R.id.yearSpinner);
-        mLookup = (Button)rootView.findViewById(R.id.mLookupButton);
+        mLookup = (CardView) rootView.findViewById(R.id.mLookupButton);
     }
 
 }
