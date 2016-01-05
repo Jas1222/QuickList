@@ -79,20 +79,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onLoginSuccess() {
-        HomeFragment homeFragment = new HomeFragment();
         userStatus.setNavHeaderOnLogin(getApplicationContext(), navigationView);
 
         updateNavDrawer("login",register,login,logout);
-
-        register.setVisible(false);
-        login.setVisible(false);
-        logout.setVisible(true);
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager
-                .beginTransaction();
-        fragmentTransaction.replace(R.id.main_container,homeFragment);
-        fragmentTransaction.commit();
+        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
 

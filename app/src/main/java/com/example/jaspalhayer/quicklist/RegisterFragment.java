@@ -79,7 +79,7 @@ public class RegisterFragment extends Fragment {
     }
 
     private void setVariablesToUiElements(View rootView){
-        mRegister = (CardView) rootView.findViewById(R.id.signup_button);
+        mRegister = (CardView) rootView.findViewById(R.id.signup_button2);
 
         nameField = (EditText)rootView.findViewById(R.id.nameField);
         emailField = (EditText)rootView.findViewById(R.id.emailField);
