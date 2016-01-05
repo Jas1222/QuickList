@@ -23,19 +23,10 @@ import net.sourceforge.zbar.SymbolSet;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.hardware.Camera;
-import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
-import net.sourceforge.zbar.Config;
-import net.sourceforge.zbar.Image;
-import net.sourceforge.zbar.ImageScanner;
-import net.sourceforge.zbar.Symbol;
-import net.sourceforge.zbar.SymbolSet;
 
 public class BarcodeScanner extends Activity implements Camera.PreviewCallback, ZBarConstants {
 
@@ -88,21 +79,6 @@ public class BarcodeScanner extends Activity implements Camera.PreviewCallback, 
             }
         }
     }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-//    {
-//        if (resultCode == RESULT_OK)
-//        {
-//            // Scan result is available by making a call to data.getStringExtra(ZBarConstants.SCAN_RESULT)
-//            // Type of the scan result is available by making a call to data.getStringExtra(ZBarConstants.SCAN_RESULT_TYPE)
-//            Toast.makeText(this, "Scan Result = " + data.getStringExtra(ZBarConstants.SCAN_RESULT), Toast.LENGTH_SHORT).show();
-//            Toast.makeText(this, "Scan Result Type = " + data.getIntExtra(ZBarConstants.SCAN_RESULT_TYPE, 0), Toast.LENGTH_SHORT).show();
-//            // The value of type indicates one of the symbols listed in Advanced Options below.
-//        } else if(resultCode == RESULT_CANCELED) {
-//            Toast.makeText(this, "Camera unavailable", Toast.LENGTH_SHORT).show();
-//        }
-//    }
 
     @Override
     protected void onResume() {

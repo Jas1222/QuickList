@@ -44,7 +44,7 @@ class CameraPreview extends ViewGroup implements SurfaceHolder.Callback {
 
         if (mCamera != null) {
             // ** Can set portait or landscape here **
-            camera.setDisplayOrientation(180);
+           //camera.setDisplayOrientation(180);
             mSupportedPreviewSizes = mCamera.getParameters().getSupportedPreviewSizes();
             requestLayout();
         }

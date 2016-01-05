@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import net.sourceforge.zbar.Symbol;
 
 
@@ -31,6 +30,7 @@ public class ScanActivity extends AppCompatActivity {
     public void launchScanner(View v) {
         if (isCameraAvailable()) {
             Intent intent = new Intent(this, BarcodeScanner.class);
+            //intent.putExtra(ZBarConstants.SCAN_MODES, new int[]{Symbol.QRCODE, Symbol.ISBN10, Symbol.ISBN13});
             startActivityForResult(intent, ZBAR_SCANNER_REQUEST);
         } else {
             Toast.makeText(this, "Rear Facing Camera Unavailable", Toast.LENGTH_SHORT).show();
