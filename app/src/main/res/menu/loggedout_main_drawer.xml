@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_register"
@@ -20,10 +19,12 @@
             android:title="My Active Listings" />
         <item
             android:id="@+id/nav_complete_list"
-            android:title="My Complete Listings"/>
+            android:icon="@drawable/complete_icon"
+            android:title="My Completed Listings" />
         <item
             android:id="@+id/nav_expired_list"
-            android:title="My Expired Listings"/>
+            android:icon="@drawable/exp_icon"
+            android:title="My Expired Listings" />
     </group>
 
     <item android:title="Help">

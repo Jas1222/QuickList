@@ -62,22 +62,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-//        register = navigationView.getMenu().getItem(0);
-//        login = navigationView.getMenu().getItem(1);
-//        logout = navigationView.getMenu().getItem(2);
-//        activeListing = navigationView.getMenu().getItem(3);
-//        completeListing = navigationView.getMenu().getItem(4);
-//        expiredListing = navigationView.getMenu().getItem(5);
-
         getMenuItems(navigationView);
 
         if(userStatus.checkIfUserIsLoggedIn(getApplicationContext())){
             userStatus.setNavHeaderOnLogin(getApplicationContext(), navigationView);
-            updateNavDrawer("login", register, login, logout);
+            updateNavDrawer("login", register, login, logout, expiredListing, completeListing, activeListing);
         } else {
-            userStatus.setNavHeaderOnLogout(getApplicationContext(), navigationView);
-            updateNavDrawer("logout", register, login, logout);
+            userStatus.setNavHeaderOnLogout(navigationView);
+            updateNavDrawer("logout", register, login, logout, expiredListing, completeListing, activeListing);
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -92,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         HomeFragment homeFragment = new HomeFragment();
         userStatus.setNavHeaderOnLogin(getApplicationContext(), navigationView);
 
-        updateNavDrawer("login",register,login,logout);
+        updateNavDrawer("login",register,login,logout, expiredListing, completeListing, activeListing);
 
         register.setVisible(false);
         login.setVisible(false);
@@ -140,9 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .replace(R.id.main_container, searchFragment)
                     .addToBackStack(null)
                     .commit();
-
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -171,8 +161,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if(id == R.id.nav_logout) {
             userStatus.logoutUser(getApplicationContext());
-            userStatus.setNavHeaderOnLogout(getApplicationContext(), navigationView);
-            updateNavDrawer("logout",register,login,logout);
+            userStatus.setNavHeaderOnLogout(navigationView);
+            updateNavDrawer("logout",register,login,logout, expiredListing, completeListing, activeListing);
 
         } else if (id == R.id.nav_my_listings) {
             // navigate to my listings
@@ -189,15 +179,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void updateNavDrawer(String action, MenuItem register, MenuItem login, MenuItem logout){
+    private void updateNavDrawer(String action, MenuItem register, MenuItem login, MenuItem logout, MenuItem expiredListing, MenuItem completeListing, MenuItem activeListing){
         if(action=="login"){
             register.setVisible(false);
             login.setVisible(false);
             logout.setVisible(true);
+            completeListing.setVisible(true);
+            activeListing.setVisible(true);
+            expiredListing.setVisible(true);
         } else {
             register.setVisible(true);
             login.setVisible(true);
             logout.setVisible(false);
+            completeListing.setVisible(false);
+            activeListing.setVisible(false);
+            expiredListing.setVisible(false);
         }
     }
 

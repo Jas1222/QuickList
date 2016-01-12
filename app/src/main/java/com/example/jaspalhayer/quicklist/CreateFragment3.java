@@ -19,6 +19,7 @@ public class CreateFragment3 extends Fragment {
     protected static String bookDesc;
     protected static String bookPrice;
     protected static String bookIsbn;
+    protected static final String statusCode = "1";
 
     protected static String courseType;
     protected static String courseDegree;
@@ -70,7 +71,7 @@ public class CreateFragment3 extends Fragment {
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                handler.createListingPost(getActivity().getApplicationContext(), bookTitle, bookAuthor, bookYear, bookIsbn, bookPrice, bookDesc, courseType, courseDegree, courseYear);
+                handler.createListingPost(getActivity().getApplicationContext(), bookTitle, bookAuthor, bookYear, bookIsbn, bookPrice, bookDesc, courseType, courseDegree, courseYear, statusCode);
             }
         });
 

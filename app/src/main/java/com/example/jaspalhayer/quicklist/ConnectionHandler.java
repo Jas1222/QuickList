@@ -32,7 +32,7 @@ public class ConnectionHandler {
 
     JSONObject result = new JSONObject();
 
-    public void createListingPost(Context context, final String title, final String author, final String year, final String isbn, final String price, final String desc, final String courseType, final String courseDegree, final String courseYear) {
+    public void createListingPost(Context context, final String title, final String author, final String year, final String isbn, final String price, final String desc, final String courseType, final String courseDegree, final String courseYear, final String status_code) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, createListingPostUrl,
                 new Response.Listener<String>() {
                     @Override
@@ -59,6 +59,7 @@ public class ConnectionHandler {
                 params.put("uni_course_type", courseType);
                 params.put("uni_year", courseYear);
                 params.put("uni_course", courseDegree);
+                params.put("status_code", status_code);
 
                 return params;
             }

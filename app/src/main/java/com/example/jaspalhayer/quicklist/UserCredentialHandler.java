@@ -64,7 +64,6 @@ public class UserCredentialHandler {
                                 registerMessage = jsonObjectResponse.getString("rgstr_msg");
                                 Toast.makeText(context, registerMessage, Toast.LENGTH_LONG).show();
                                 callBack.onSuccess();
-                                // TODO Auto login after registration?
                             }
 
                         } catch (Exception e){
@@ -194,7 +193,7 @@ public class UserCredentialHandler {
         navHeaderFullName.setText(prefs.getString(KEY_NAV_NAME, this.userEmail));
     }
 
-    protected void setNavHeaderOnLogout(Context context, NavigationView navigationView){
+    protected void setNavHeaderOnLogout(NavigationView navigationView){
         TextView navHeaderFullName = (TextView)navigationView.findViewById(R.id.nav_fullname);
         TextView navHeaderEmail = (TextView)navigationView.findViewById(R.id.nav_email_header);
 
