@@ -62,7 +62,6 @@ public class ConnectionHandler {
 
                 return params;
             }
-
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);

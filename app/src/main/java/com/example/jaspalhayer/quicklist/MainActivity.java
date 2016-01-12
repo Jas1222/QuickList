@@ -22,6 +22,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     MenuItem register;
     MenuItem login;
     MenuItem logout;
+    MenuItem completeListing;
+    MenuItem expiredListing;
+    MenuItem activeListing;
+
     NavigationView navigationView;
     UserCredentialHandler userStatus;
 
@@ -58,9 +62,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        register = navigationView.getMenu().getItem(0);
-        login = navigationView.getMenu().getItem(1);
-        logout = navigationView.getMenu().getItem(2);
+
+//        register = navigationView.getMenu().getItem(0);
+//        login = navigationView.getMenu().getItem(1);
+//        logout = navigationView.getMenu().getItem(2);
+//        activeListing = navigationView.getMenu().getItem(3);
+//        completeListing = navigationView.getMenu().getItem(4);
+//        expiredListing = navigationView.getMenu().getItem(5);
+
+        getMenuItems(navigationView);
 
         if(userStatus.checkIfUserIsLoggedIn(getApplicationContext())){
             userStatus.setNavHeaderOnLogin(getApplicationContext(), navigationView);
@@ -189,6 +199,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             login.setVisible(true);
             logout.setVisible(false);
         }
+    }
+
+    private void getMenuItems(NavigationView nv){
+        register = nv.getMenu().getItem(0);
+        login = nv.getMenu().getItem(1);
+        logout = nv.getMenu().getItem(2);
+        activeListing = nv.getMenu().getItem(3);
+        completeListing = nv.getMenu().getItem(4);
+        expiredListing = nv.getMenu().getItem(5);
     }
 
 }
