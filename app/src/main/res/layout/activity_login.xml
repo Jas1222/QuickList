@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".LoginFragment"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -33,7 +33,7 @@
             android:layout_marginRight="20dp"
             android:ems="10"
             android:id="@+id/login_emailField"
-            android:layout_above="@+id/login_passwordField" />
+            android:layout_below="@+id/login_title_text" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,13 +44,6 @@
 
 
         <!-- Password section -->
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/register_password_icon"
-            android:layout_alignBottom="@id/login_passwordField"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="10dp"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -58,25 +51,19 @@
             android:inputType="textPassword"
             android:layout_marginTop="10dp"
             android:hint="Password"
+            android:layout_below="@id/login_emailField"
             android:id="@+id/login_passwordField"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="25dp" />
 
-        <!--<Button-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@+id/login_passwordField"-->
-            <!--android:text="Login"-->
-            <!--android:id="@+id/login_login_button"-->
-            <!--android:background="@color/colorPrimary"-->
-            <!--android:textColor="@color/white"-->
-            <!--android:shadowColor="@color/colorPrimaryDark"-->
-            <!--android:layout_gravity="center_vertical"-->
-            <!--android:layout_marginLeft="20dp"-->
-            <!--android:layout_marginRight="20dp"-->
-            <!--android:layout_centerHorizontal="true" />-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/register_password_icon"
+            android:layout_alignBottom="@id/login_passwordField"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="10dp"/>
 
         <android.support.v7.widget.CardView
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -117,7 +104,7 @@
             android:gravity="center"
             android:layout_centerHorizontal="true"
             android:id="@+id/login_footer_text"
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="20dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -128,7 +115,7 @@
             android:gravity="center"
             android:layout_centerHorizontal="true"
             android:id="@+id/loginForgottenTapText"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="10dp"/>
     </RelativeLayout>
 
-</LinearLayout>
+</ScrollView>

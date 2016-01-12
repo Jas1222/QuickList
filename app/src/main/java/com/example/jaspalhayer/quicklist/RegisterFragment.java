@@ -83,7 +83,7 @@ public class RegisterFragment extends Fragment {
 
         nameField = (EditText)rootView.findViewById(R.id.nameField);
         emailField = (EditText)rootView.findViewById(R.id.emailField);
-        passwordField = (EditText)rootView.findViewById(R.id.passwordField);
+        passwordField = (EditText)rootView.findViewById(R.id.register_passwordField);
     }
 
     //TODO remove editText variables, store in registerHandler object directly instead
