@@ -125,24 +125,24 @@ public class CreateListingActivity extends AppCompatActivity {
         degreeTypeSpinner.setAdapter(degreeTypeAdapter);
     }*/
 
-    class CreateBookListing extends AsyncTask<String, String, String> {
-
-        /**
-         * Before starting background thread Show Progress Dialog
-         */
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        protected String doInBackground(String... args) {
-            ConnectionHandler handler = new ConnectionHandler();
-            try {
-                handler.createListingPost(getApplicationContext());
-            } catch (Exception e) {
-                System.out.println("Unable to create listing");
-            }
-            return null;
-        }
-    }
+//    class CreateBookListing extends AsyncTask<String, String, String> {
+//
+//        /**
+//         * Before starting background thread Show Progress Dialog
+//         */
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//        }
+//
+//        protected String doInBackground(String... args) {
+//            ConnectionHandler handler = new ConnectionHandler();
+//            try {
+//                handler.createListingPost(getApplicationContext());
+//            } catch (Exception e) {
+//                System.out.println("Unable to create listing");
+//            }
+//            return null;
+//        }
+//    }
 }

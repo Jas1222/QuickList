@@ -32,7 +32,7 @@ public class ConnectionHandler {
 
     JSONObject result = new JSONObject();
 
-    public void createListingPost(Context context) {
+    public void createListingPost(Context context, final String title, final String author, final String year, final String isbn, final String price, final String desc, final String courseType, final String courseDegree, final String courseYear) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, createListingPostUrl,
                 new Response.Listener<String>() {
                     @Override
@@ -50,12 +50,16 @@ public class ConnectionHandler {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
 
-                // TODO REFACTOR putParams();
-                params.put("book_title", CreateListingActivity.bookInfoField);
-                params.put("book_author", CreateListingActivity.authorInfoField);
-                params.put("book_year", CreateListingActivity.yearInfoField);
-                params.put("book_desc", CreateListingActivity.descInfoField);
-                params.put("book_price", CreateListingActivity.priceInfoField);
+                params.put("book_title", title);
+                params.put("book_author", author);
+                params.put("book_year", year);
+                params.put("book_desc", desc);
+                params.put("book_price", price);
+                params.put("book_isbn", isbn);
+                params.put("uni_course_type", courseType);
+                params.put("uni_year", courseYear);
+                params.put("uni_course", courseDegree);
+
                 return params;
             }
 

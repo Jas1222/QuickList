@@ -36,6 +36,7 @@ public class CreateFragment3 extends Fragment {
     TextView courseYearLabel;
 
     protected CardView mSubmit;
+    ConnectionHandler handler = new ConnectionHandler();
 
 
     Bundle create3Bundle;
@@ -47,13 +48,13 @@ public class CreateFragment3 extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        ConnectionHandler handler = new ConnectionHandler();
 
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             create3Bundle = this.getArguments();
             getBundleStrings();
         }
+
     }
 
     @Override
@@ -65,6 +66,13 @@ public class CreateFragment3 extends Fragment {
         setVariablesToUi(rootView);
         setLabelText();
 
+
+        mSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handler.createListingPost(getActivity().getApplicationContext(), bookTitle, bookAuthor, bookYear, bookIsbn, bookPrice, bookDesc, courseType, courseDegree, courseYear);
+            }
+        });
 
         return rootView;
     }

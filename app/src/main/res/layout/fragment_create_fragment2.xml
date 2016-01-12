@@ -20,27 +20,27 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Enter the book details"
-        android:gravity="center_horizontal"
-        android:id="@+id/create_subheader_2"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/colorAlt"
-        android:layout_marginBottom="60dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/create_header_2"/>
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceMedium"
+    android:text="Enter the book details"
+    android:gravity="center_horizontal"
+    android:id="@+id/create_subheader_2"
+    android:layout_marginTop="10dp"
+    android:textColor="@color/colorAlt"
+    android:layout_marginBottom="60dp"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@id/create_header_2"/>
 
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="What is the book title?"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="20dp"
-        android:layout_below="@id/create_subheader_2"
-        android:id="@+id/create_book_title_field"/>
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="What is the book title?"
+    android:layout_marginLeft="50dp"
+    android:layout_marginRight="20dp"
+    android:layout_below="@id/create_subheader_2"
+    android:id="@+id/create_book_title_field"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -69,15 +69,39 @@
         android:paddingBottom="8dp"
         android:layout_marginLeft="20dp"/>
 
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="What year was the book published?"
         android:layout_marginLeft="50dp"
+        android:inputType="number"
         android:layout_marginRight="20dp"
         android:layout_below="@id/create_book_author_field"
         android:layout_marginTop="5dp"
+        android:maxLength="4"
         android:id="@+id/create_book_year_field"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/year_icon"
+        android:layout_alignBottom="@id/create_book_year_field"
+        android:paddingBottom="8dp"
+        android:layout_marginLeft="20dp"/>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="What is the book ISBN?"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="20dp"
+        android:maxLength="13"
+        android:inputType="number"
+        android:layout_below="@id/create_book_year_field"
+        android:layout_marginTop="5dp"
+        android:id="@+id/create_ISBN_field"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -90,22 +114,29 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="What is the book ISBN?"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="20dp"
-        android:layout_below="@id/create_book_year_field"
-        android:layout_marginTop="5dp"
-        android:id="@+id/create_ISBN_field"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:hint="Tap to enter the desired price"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="20dp"
         android:layout_below="@id/create_ISBN_field"
         android:layout_marginTop="5dp"
+        android:maxLength="4"
+        android:inputType="numberDecimal"
         android:id="@+id/create_book_price_field"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/create_isbn"
+        android:layout_alignBottom="@id/create_ISBN_field"
+        android:paddingBottom="8dp"
+        android:layout_marginLeft="20dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/pound_icon"
+        android:layout_alignBottom="@id/create_book_price_field"
+        android:paddingBottom="8dp"
+        android:layout_marginLeft="20dp"/>
 
     <EditText
         android:layout_width="match_parent"

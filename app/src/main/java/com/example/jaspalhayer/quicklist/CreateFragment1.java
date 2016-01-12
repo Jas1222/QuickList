@@ -209,6 +209,9 @@ public class CreateFragment1 extends Fragment {
         } else {
             degreeTypeSet = false;
         }
+
+        selectedCourseType = courseSpinner.getItemAtPosition(i).toString();
+
     }
 
     protected void setValidYearField(int i){
