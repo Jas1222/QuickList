@@ -2,6 +2,9 @@ package com.example.jaspalhayer.quicklist;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
@@ -15,20 +18,15 @@ import android.widget.Spinner;
  * Created by jaspalhayer on 03/11/2015.
  */
 public class CreateListingActivity extends AppCompatActivity {
-
-    EditText titleText;
-    EditText authorText;
-    EditText yearText;
-    EditText descText;
-    EditText priceText;
-
-    Button mListing;
-
     public static String bookInfoField;
     public static String authorInfoField;
     public static String yearInfoField;
     public static String descInfoField;
     public static String priceInfoField;
+
+
+
+
     protected ListView lstView;
 
     protected Spinner degreeTypeSpinner;
@@ -47,29 +45,42 @@ public class CreateListingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_listing_activity);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        CreateFragment1 createFragment1 = new CreateFragment1();
 
-        setVariablesToUiElements();
-        createArrayAdapters();
-        setSpinnerToAdapter();
-        setAdapter();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager
+                .beginTransaction();
+        fragmentTransaction.replace(R.id.create_main_container, createFragment1);
+        fragmentTransaction.commit();
 
-        mListing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                saveUserInputText();
-                new CreateBookListing().execute();
-            }
-        });
+
+//        setVariablesToUiElements();
+//        createArrayAdapters();
+//        setSpinnerToAdapter();
+//        setAdapter();
+
+//        mListing.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                saveUserInputText();
+//                new CreateBookListing().execute();
+//            }
+//        });
+    }
+
+    @Override
+    public void onBackPressed() {
+            getSupportFragmentManager().popBackStack();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.create_listing_toolbar, menu);
+        // DONT NEED TOOLBAR?
+        //getMenuInflater().inflate(R.menu.create_listing_toolbar, menu);
         return true;
     }
-
+/*
     private void saveUserInputText(){
         bookInfoField = titleText.getText().toString();
         authorInfoField = authorText.getText().toString();
@@ -112,7 +123,7 @@ public class CreateListingActivity extends AppCompatActivity {
         yearSpinner.setAdapter(yearAdapter);
         courseSpinner.setAdapter(ugCourseAdapter);
         degreeTypeSpinner.setAdapter(degreeTypeAdapter);
-    }
+    }*/
 
     class CreateBookListing extends AsyncTask<String, String, String> {
 

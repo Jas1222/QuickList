@@ -3,21 +3,22 @@ package com.example.jaspalhayer.quicklist;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link CreateFragment1.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link CreateFragment1#newInstance} factory method to
- * create an instance of this fragment.
- *
- */
 public class CreateFragment1 extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +29,31 @@ public class CreateFragment1 extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    CardView mNextButton1;
+
+    protected String selectedCourse;
+    protected String selectedCourseType;
+    protected String selectedYear;
+
+    protected ListView lstView;
+
+    protected Spinner degreeTypeSpinner;
+    protected Spinner courseSpinner;
+    protected Spinner yearSpinner;
+
+    protected boolean degreeTypeSet = false;
+    protected boolean yearSet = false;
+    protected boolean courseSet = false;
+
+    protected boolean underGradCourse;
+    protected boolean postGradCourse;
+
+    protected ArrayAdapter<CharSequence> degreeTypeAdapter;
+    protected ArrayAdapter<CharSequence> ugCourseAdapter;
+    protected ArrayAdapter<CharSequence> pgCourseAdapter;
+    protected ArrayAdapter<CharSequence> yearAdapter;
+    protected ArrayAdapter<CharSequence> initialCourseAdapter;
+
 
     /**
      * Use this factory method to create a new instance of
@@ -64,45 +89,143 @@ public class CreateFragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_fragment1, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_create_fragment1, container, false);
+
+        setVariablesToUiElements(rootView);
+        createArrayAdapters();
+        setSpinnerToAdapter();
+        setAdapter();
+
+        yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                setValidYearField(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // AUTO-generated stub
+            }
+        });
+
+        courseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                setValidCourseField(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // AUTO-generated stub
+            }
+        });
+
+        degreeTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                setValidCourseTypeField(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // AUTO-generated stub
+            }
+        });
+
+        mNextButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (degreeTypeSet && courseSet && yearSet) {
+                    // Capture all selected options
+                    // Pass selection options to next fragment
+
+                    CreateFragment2 createFragment2 = new CreateFragment2();
+                    Bundle create1Bundle = new Bundle();
+
+                    create1Bundle.putString("COURSE_TYPE", selectedCourseType);
+                    create1Bundle.putString("COURSE_DEGREE", selectedCourse);
+                    create1Bundle.putString("COURSE_YEAR", selectedYear);
+
+                    createFragment2.setArguments(create1Bundle);
+
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager
+                            .beginTransaction();
+                    fragmentTransaction.replace(R.id.create_main_container, createFragment2).addToBackStack(null);
+                    fragmentTransaction.commit();
+
+                } else {
+                    Snackbar.make(getView(), "Ensure you have entered all fields", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
+            }
+        });
+
+        return rootView;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+
+    private void setVariablesToUiElements(View rootView){
+        lstView = (ListView)rootView.findViewById(R.id.courseList);
+        degreeTypeSpinner = (Spinner)rootView.findViewById(R.id.create_degree_type_spinner);
+        courseSpinner = (Spinner)rootView.findViewById(R.id.create_course_spinner);
+        yearSpinner = (Spinner)rootView.findViewById(R.id.create_year_spinner);
+        mNextButton1 = (CardView)rootView.findViewById(R.id.create_next_1_btn);
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+    protected void createArrayAdapters(){
+        degreeTypeAdapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.course_type, R.layout.course_spinner_layout_create);
+        ugCourseAdapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.undergrad_courses, R.layout.course_spinner_layout_create);
+        pgCourseAdapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.postgrad_courses, R.layout.course_spinner_layout_create);
+        yearAdapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.course_year_array, R.layout.course_spinner_layout_create);
+        initialCourseAdapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.initial_course, R.layout.course_spinner_layout_create);
+    }
+
+    protected void setSpinnerToAdapter(){
+        ugCourseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        pgCourseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        degreeTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        initialCourseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    }
+
+    protected void setAdapter(){
+        yearSpinner.setAdapter(yearAdapter);
+        courseSpinner.setAdapter(initialCourseAdapter);
+        degreeTypeSpinner.setAdapter(degreeTypeAdapter);
+    }
+
+    protected void setValidCourseTypeField(int i){
+        if (i == 1) {
+            degreeTypeSet = true;
+            underGradCourse = true;
+
+            courseSpinner.setAdapter(ugCourseAdapter);
+        } else if (i == 2) {
+            degreeTypeSet = true;
+            postGradCourse = true;
+
+            courseSpinner.setAdapter(pgCourseAdapter);
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+            degreeTypeSet = false;
         }
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    protected void setValidYearField(int i){
+        if (i != 0) {
+            yearSet = true;
+            selectedYear = yearSpinner.getItemAtPosition(i).toString();
+        } else {
+            yearSet = false;
+        }
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    protected void setValidCourseField(int i){
+        if (i != 0) {
+            courseSet = true;
+            selectedCourse = courseSpinner.getItemAtPosition(i).toString();
+        } else {
+            courseSet = false;
+        }
     }
 }
