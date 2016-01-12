@@ -16,6 +16,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,11 +31,13 @@
         <activity
             android:name=".CreateListingActivity"
             android:label="Create a Listing"
+            android:configChanges="orientation|screenSize"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".BrowseUniCourseActivity"
             android:label="Browse by Course"
+            android:configChanges="orientation|screenSize"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
