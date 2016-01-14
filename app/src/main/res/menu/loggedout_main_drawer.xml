@@ -14,7 +14,7 @@
             android:icon="@drawable/nav_login_icon"
             android:title="Logout" />
         <item
-            android:id="@+id/nav_my_listings"
+            android:id="@+id/nav_my_active_listings"
             android:icon="@drawable/nav_listings_icon"
             android:title="My Active Listings" />
         <item

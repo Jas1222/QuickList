@@ -44,7 +44,7 @@
                 android:value="com.example.jaspalhayer.quicklist.MainActivity" />
         </activity>
         <activity
-            android:name=".BrowseResultActivity"
+            android:name=".ResultActivity"
             android:label="CHANGE TO COURSE"
             android:parentActivityName=".BrowseUniCourseActivity" />
         <activity

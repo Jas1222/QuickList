@@ -6,29 +6,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BrowseResultActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class ResultActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     protected String courseTitle;
     protected JSONArray jsArray = new JSONArray();
     protected JSONObject jsonObject;
     protected String selectedCourseYear;
     protected String selectedCourseTitle;
+    protected String cameFrom;
+
+    boolean cameFromExpired = false;
+    boolean cameFromCompleted = false;
+    boolean cameFromBrowse = false;
+    boolean cameFromActive = false;
 
     ConnectionHandler handler = new ConnectionHandler();
     Books mBook = new Books();
     JSONObject jsOb = new JSONObject();
-
-    //TODO Get real dates from database
-    protected String year_published[] = {
-            "2012",
-            "1985"
-    };
 
     List<ListingRowItem> rowItems;
     ListView myListView;
@@ -37,10 +36,9 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse_result);
-        getPreviousUserInputStrings();
-
+        cameFrom();
+        getPreviousStringsAndSetTitle();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(courseTitle);
         rowItems = new ArrayList<>();
 
         BrowseCustomAdapter adapter = new BrowseCustomAdapter(this, rowItems);
@@ -49,13 +47,7 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
         myListView.setOnItemClickListener(this);
 
         getJsonObject();
-
-        try {
-            jsArray = jsonObject.getJSONArray("books");
-        } catch (Exception e) {
-            System.out.println("Parsing the JSON object to array fucked up");
-        }
-
+        convertJsonObjectToArray();
         parseJsonToBook(mBook);
     }
     
@@ -75,10 +67,35 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
         });
     }
 
-    protected void getPreviousUserInputStrings(){
-        courseTitle = getIntent().getStringExtra("keyTitle");
-        selectedCourseTitle = getIntent().getStringExtra("keyTitle");
-        selectedCourseYear = getIntent().getStringExtra("keyUniYear");
+    protected void getPreviousStringsAndSetTitle(){
+        if (cameFromBrowse) {
+            courseTitle = getIntent().getStringExtra("keyTitle");
+            selectedCourseTitle = getIntent().getStringExtra("keyTitle");
+            selectedCourseYear = getIntent().getStringExtra("keyUniYear");
+
+            getSupportActionBar().setTitle(courseTitle);
+        } else if (cameFromActive){
+            getSupportActionBar().setTitle("My Listings");
+        } else if (cameFromCompleted){
+            getSupportActionBar().setTitle("My Completed Listings");
+        } else if (cameFromExpired){
+            getSupportActionBar().setTitle("My Expired Listings");
+        }
+    }
+
+    protected void cameFrom(){
+        cameFrom = getIntent().getStringExtra("CAME_FROM");
+        if(cameFrom.contains("active")){
+            cameFromActive = true;
+        } else if (cameFrom.contains("expired")) {
+            cameFromExpired = true;
+        } else if(cameFrom.contains("complete")){
+            cameFromCompleted = true;
+        } else if(cameFrom.contains("browse")){
+            cameFromBrowse = true;
+        } else {
+            System.out.println("Can't tell where came from");
+        }
     }
 
     protected void getJsonObject(){
@@ -86,6 +103,14 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
             jsonObject = new JSONObject(getIntent().getStringExtra("jsonObject"));
         } catch (Exception e) {
             System.out.println("Fucked up retrieving jsonObject from Intent");
+        }
+    }
+
+    protected void convertJsonObjectToArray(){
+        try {
+            jsArray = jsonObject.getJSONArray("books");
+        } catch (Exception e) {
+            System.out.println("Casting the JSON object to array fucked up");
         }
     }
 
@@ -109,7 +134,7 @@ public class BrowseResultActivity extends AppCompatActivity implements AdapterVi
     }
 
     protected void drawListRows(Books mBook, int i){
-        ListingRowItem item = new ListingRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), mBook.jsonBookPrice.get(i), year_published[i], mBook.jsonBookListId.get(i));
+        ListingRowItem item = new ListingRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), mBook.jsonBookPrice.get(i), mBook.jsonBookYear.get(i), mBook.jsonBookListId.get(i));
         rowItems.add(item);
     }
 }

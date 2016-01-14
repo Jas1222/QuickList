@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -102,7 +101,8 @@ public class BrowseCourseListFragment extends Fragment {
                         @Override
                         public void onSuccess(JSONObject result) {
                             jsOb = result;
-                            Intent i = new Intent(getActivity(), BrowseResultActivity.class);
+                            Intent i = new Intent(getActivity(), ResultActivity.class);
+                            i.putExtra("CAME_FROM", "browse");
                             i.putExtra("keyTitle", selectedCourse);
                             i.putExtra("jsonObject", jsOb.toString());
                             startActivity(i);

@@ -3,7 +3,6 @@ package com.example.jaspalhayer.quicklist;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,7 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, LoginFragment.OnLoginCallback {
     MenuItem register;
@@ -25,9 +25,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     MenuItem completeListing;
     MenuItem expiredListing;
     MenuItem activeListing;
+    Bundle bundle;
+    SharedPreferences prefs;
 
     NavigationView navigationView;
     UserCredentialHandler userStatus;
+    ConnectionHandler request;
 
     protected static final String KEY_USER_STATUS = "USER_STATUS";
     protected static final String USER_PREFS = "userNamePrefs";
@@ -37,6 +40,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         userStatus = new UserCredentialHandler();
+        request = new ConnectionHandler();
+        bundle = new Bundle();
+
+        prefs = getSharedPreferences(USER_PREFS, 0);
 
         final HomeFragment homeFragment = new HomeFragment();
 
@@ -64,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         getMenuItems(navigationView);
 
-        if(userStatus.checkIfUserIsLoggedIn(getApplicationContext())){
+        if (userStatus.checkIfUserIsLoggedIn(getApplicationContext())) {
             userStatus.setNavHeaderOnLogin(getApplicationContext(), navigationView);
             updateNavDrawer("login", register, login, logout, expiredListing, completeListing, activeListing);
         } else {
@@ -75,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager
                 .beginTransaction();
-        fragmentTransaction.replace(R.id.main_container,homeFragment);
+        fragmentTransaction.replace(R.id.main_container, homeFragment);
         fragmentTransaction.commit();
     }
 
@@ -84,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         HomeFragment homeFragment = new HomeFragment();
         userStatus.setNavHeaderOnLogin(getApplicationContext(), navigationView);
 
-        updateNavDrawer("login",register,login,logout, expiredListing, completeListing, activeListing);
+        updateNavDrawer("login", register, login, logout, expiredListing, completeListing, activeListing);
 
         register.setVisible(false);
         login.setVisible(false);
@@ -93,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager
                 .beginTransaction();
-        fragmentTransaction.replace(R.id.main_container,homeFragment);
+        fragmentTransaction.replace(R.id.main_container, homeFragment);
         fragmentTransaction.commit();
     }
 
@@ -125,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        } else if (id == R.id.search_mag_icon){
+        } else if (id == R.id.search_mag_icon) {
             SearchFragment searchFragment = new SearchFragment();
             getSupportFragmentManager()
                     .beginTransaction()
@@ -159,19 +166,54 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .addToBackStack(null)
                     .commit();
 
-        } else if(id == R.id.nav_logout) {
+        } else if (id == R.id.nav_logout) {
             userStatus.logoutUser(getApplicationContext());
             userStatus.setNavHeaderOnLogout(navigationView);
-            updateNavDrawer("logout",register,login,logout, expiredListing, completeListing, activeListing);
+            updateNavDrawer("logout", register, login, logout, expiredListing, completeListing, activeListing);
 
-        } else if (id == R.id.nav_my_listings) {
-            // navigate to my listings
         } else if (id == R.id.nav_how) {
             // navigate to how it works page
         } else if (id == R.id.nav_help) {
             // navigate to help page
         } else if (id == R.id.nav_contact_us) {
             // navigate to contact page,
+        } else if (id == R.id.nav_complete_list) {
+            String userId = prefs.getString("NAV_EMAIL", null);
+
+            request.getUserListings(this, "2", userId, new ConnectionHandler.VolleyCallback() {
+                @Override
+                public void onSuccess(JSONObject result) {
+                    Intent i = new Intent(getApplicationContext(), ResultActivity.class);
+                    i.putExtra("jsonObject", result.toString());
+                    i.putExtra("CAME_FROM", "complete");
+                    startActivity(i);
+                }
+            });
+        } else if (id == R.id.nav_expired_list) {
+            String userId = prefs.getString("NAV_EMAIL", null);
+
+            request.getUserListings(this, "0", userId, new ConnectionHandler.VolleyCallback() {
+                @Override
+                public void onSuccess(JSONObject result) {
+                    Intent i = new Intent(getApplicationContext(), ResultActivity.class);
+                    i.putExtra("CAME_FROM", "expired");
+                    i.putExtra("jsonObject", result.toString());
+                    startActivity(i);
+                }
+            });
+
+        } else if (id == R.id.nav_my_active_listings) {
+            String userId = prefs.getString("NAV_EMAIL", null);
+
+            request.getUserListings(this, "1", userId, new ConnectionHandler.VolleyCallback() {
+                @Override
+                public void onSuccess(JSONObject result) {
+                    Intent i = new Intent(getApplicationContext(), ResultActivity.class);
+                    i.putExtra("CAME_FROM", "active");
+                    i.putExtra("jsonObject", result.toString());
+                    startActivity(i);
+                }
+            });
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -179,8 +221,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void updateNavDrawer(String action, MenuItem register, MenuItem login, MenuItem logout, MenuItem expiredListing, MenuItem completeListing, MenuItem activeListing){
-        if(action=="login"){
+    private void updateNavDrawer(String action, MenuItem register, MenuItem login, MenuItem logout, MenuItem expiredListing, MenuItem completeListing, MenuItem activeListing) {
+        if (action == "login") {
             register.setVisible(false);
             login.setVisible(false);
             logout.setVisible(true);
@@ -197,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private void getMenuItems(NavigationView nv){
+    private void getMenuItems(NavigationView nv) {
         register = nv.getMenu().getItem(0);
         login = nv.getMenu().getItem(1);
         logout = nv.getMenu().getItem(2);
@@ -205,5 +247,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         completeListing = nv.getMenu().getItem(4);
         expiredListing = nv.getMenu().getItem(5);
     }
-
 }

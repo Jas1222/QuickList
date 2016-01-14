@@ -25,6 +25,7 @@ public class ConnectionHandler {
     String getCourseListUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/get_book_listing.php";
     String getSearchUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/search_book_listings.php";
     String getBookListingDetailUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/get_book_listing_details.php";
+    String getUserListingsUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/get_user_listing.php";
 
     String localCreatePostUrl = "http://10.0.2.2:8080/quicklist/create_book_listingTest.php";
     String localSearchUrl="http://10.0.2.2:8080/quicklist/search_book_listings.php";
@@ -134,6 +135,51 @@ public class ConnectionHandler {
                                 "Retrieved Successfully",
                                 Toast.LENGTH_SHORT).show();
                         result=response;
+                        callback.onSuccess(result);
+
+                    } else {
+                        Toast.makeText(context,
+                                "failed to update", Toast.LENGTH_SHORT)
+                                .show();
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error);
+
+            }
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(update_request);
+    }
+
+    public void getUserListings(final Context context, final String listStatus, final String userId, final VolleyCallback callback) {
+        String getTestUrl = getUserListingsUrl+"?list_status="+listStatus+"&user_id="+userId;
+        getTestUrl = getTestUrl.replaceAll(" ", "%20");
+
+        JsonObjectRequest update_request = new JsonObjectRequest(getTestUrl,
+                null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                System.out.println(response);
+
+                try {
+                    int success = response.getInt("success");
+
+                    if (success == 1) {
+                        Toast.makeText(context,
+                                "Retrieved Successfully",
+                                Toast.LENGTH_SHORT).show();
+                        result = response;
                         callback.onSuccess(result);
 
                     } else {
