@@ -18,9 +18,9 @@ import java.util.List;
 
 public class ResultActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    protected String courseTitle;
     protected JSONArray jsArray = new JSONArray();
     protected JSONObject jsonObject;
+    protected String courseTitle;
     protected String selectedCourseYear;
     protected String selectedCourseTitle;
     protected String cameFrom;
@@ -33,7 +33,7 @@ public class ResultActivity extends AppCompatActivity implements AdapterView.OnI
     ConnectionHandler handler = new ConnectionHandler();
     Books mBook = new Books();
     JSONObject jsOb = new JSONObject();
-
+    BrowseCustomAdapter adapter;
     List<ListingRowItem> rowItems;
     ListView myListView;
 
@@ -46,7 +46,7 @@ public class ResultActivity extends AppCompatActivity implements AdapterView.OnI
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         rowItems = new ArrayList<>();
 
-        BrowseCustomAdapter adapter = new BrowseCustomAdapter(this, rowItems);
+        adapter = new BrowseCustomAdapter(this, rowItems);
         myListView = (ListView) findViewById(R.id.listView);
         myListView.setAdapter(adapter);
         myListView.setOnItemClickListener(this);
@@ -94,10 +94,12 @@ public class ResultActivity extends AppCompatActivity implements AdapterView.OnI
                 return true;
             case R.id.listing_delete:
                 handler.deleteListing(getApplicationContext(), member_list_id);
+                myListView.invalidateViews();
                 // edit stuff here
                 return true;
             case R.id.listing_completed:
                 handler.markListingAsCompleted(getApplicationContext(), member_list_id);
+                myListView.invalidateViews();
 
                 // edit stuff here
                 return true;
@@ -105,7 +107,6 @@ public class ResultActivity extends AppCompatActivity implements AdapterView.OnI
                 return super.onContextItemSelected(item);
         }
     }
-
 
     protected void getPreviousStringsAndSetTitle() {
         if (cameFromBrowse) {
