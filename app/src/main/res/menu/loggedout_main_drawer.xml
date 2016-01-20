@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_register"
+            android:icon="@drawable/nav_register"
+            android:title="Register" />
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@drawable/nav_login_icon"
+            android:title="Login" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/nav_login_icon"
+            android:title="Logout" />
+        <item
+            android:id="@+id/nav_my_active_listings"
+            android:icon="@drawable/nav_listings_icon"
+            android:title="My Active Listings" />
+        <item
+            android:id="@+id/nav_complete_list"
+            android:icon="@drawable/complete_icon"
+            android:title="My Completed Listings" />
+        <item
+            android:id="@+id/nav_expired_list"
+            android:icon="@drawable/exp_icon"
+            android:title="My Expired Listings" />
+    </group>
+
+    <item android:title="Help">
+        <menu>
+            <item
+                android:id="@+id/nav_how"
+                android:icon="@drawable/nav_how"
+                android:title="How it works" />
+            <item
+                android:id="@+id/nav_help"
+                android:icon="@drawable/nav_help"
+                android:title="Help" />
+        </menu>
+    </item>
+
+    <item android:title="Contact">
+        <menu>
+            <item
+                android:id="@+id/nav_contact_us"
+                android:icon="@drawable/nav_contact"
+                android:title="Contact us" />
+        </menu>
+    </item>
+
+</menu>

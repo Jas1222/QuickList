@@ -3,6 +3,410 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="bookLabel">Browse by Course</string>
+    <string name="barcodeLabel">Scan a Barcode</string>
+    <string name="messageLabel">My Messages</string>
+    <string name="listLabel">My Listings</string>
 
     <string name="action_settings">Settings</string>
+    <string name="title_activity_browse_uni_course">BrowseUniCourseActivity</string>
+
+    <string-array name="course_type">
+        <item>Select your degree type</item>
+        <item>Undergraduate</item>
+        <item>Postgraduate</item>
+    </string-array>
+
+    <string name="search">Search</string>
+
+    <string-array name="initial_course">
+        <item>
+            Select your degree type first
+        </item>
+    </string-array>
+
+    <string-array name="undergrad_courses">
+        <item>Select your course</item>
+        <item>Accounting and Business</item>
+        <item>Accounting and Finance</item>
+        <item>Accounting and Management</item>
+        <item>Accounting and Economics</item>
+        <item>Agricultural Business Management</item>
+        <item>Agriculture</item>
+        <item>Ancient History</item>
+        <item>Ancient History and Archaeology</item>
+        <item>Ancient History and History</item>
+        <item>Animal Science</item>
+        <item>Archaeology</item>
+        <item>Archaeology and Classical Studies</item>
+        <item>Archaeology and History</item>
+        <item>Art</item>
+        <item>Art and English Literature</item>
+        <item>Art and Film</item>
+        <item>Art and Theatre</item>
+        <item>Art and Film &amp; Theatre</item>
+        <item>Art and History of Art</item>
+        <item>Art and Philosophy</item>
+        <item>Art and Psychology</item>
+        <item>Artificial Intelligence</item>
+        <item>Biochemistry</item>
+        <item>Biological Sciences</item>
+        <item>Biomedical Sciences</item>
+        <item>Building Surveying</item>
+        <item>Business and Management</item>
+        <item>Business Economics</item>
+        <item>Chemistry</item>
+        <item>Chemistry with Education</item>
+        <item>Chemistry with Forensic Analysis</item>
+        <item>Childrens Development and Learning</item>
+        <item>Classical and Medieval Studies</item>
+        <item>Classical Studies</item>
+        <item>Classical Studies and English Literature</item>
+        <item>Classics</item>
+        <item>Computational Mathematics</item>
+        <item>Computer Science</item>
+        <item>Construction Management</item>
+        <item>Construction Management and Surveying</item>
+        <item>Consumer Behaviour and Marketing</item>
+        <item>Cybernetics</item>
+        <item>Ecology and Wildlife Conservation</item>
+        <item>Economics (BA)</item>
+        <item>Economics (BSc)</item>
+        <item>Economics and Econometrics</item>
+        <item>Economics and Finance</item>
+        <item>Electronic Engineering (BEng)</item>
+        <item>Electronic Engineering (MEng)</item>
+        <item>English Language</item>
+        <item>English Language and Literature</item>
+        <item>English Language Studies</item>
+        <item>English Literature</item>
+        <item>English Literature and Film &amp; Theatre</item>
+        <item>English Literature and Film</item>
+        <item>English Literature and German</item>
+        <item>English Literature and Theatre</item>
+        <item>English Literature and International Relations</item>
+        <item>English Literature and Italian</item>
+        <item>English Literature and Politics</item>
+        <item>English Literature with French</item>
+        <item>Entrepreneurship</item>
+        <item>Entrepreneurship and Management</item>
+        <item>Environmental Management</item>
+        <item>Environmental Physics</item>
+        <item>Environmental Science</item>
+        <item>Environmental Science (MEnvSci)</item>
+        <item>Ethics, Value and Philosophy</item>
+        <item>European Studies</item>
+        <item>Film</item>
+        <item>Film &amp; Theatre</item>
+        <item>Finance and Business Management</item>
+        <item>Finance and Investment Banking</item>
+        <item>Finance and Psychology</item>
+        <item>Fine Art</item>
+        <item>Food Marketing and Business Economics</item>
+        <item>Food Science</item>
+        <item>Food Science with Business</item>
+        <item>French</item>
+        <item>French and Economics</item>
+        <item>French and English Literature</item>
+        <item>French and German</item>
+        <item>French and History</item>
+        <item>French and International Relations</item>
+        <item>French and Italian</item>
+        <item>French and Management Studies</item>
+        <item>French and Spanish</item>
+        <item>French Studies &amp; English Language</item>
+        <item>Geography (Human and Physical)</item>
+        <item>Geography (Human)</item>
+        <item>Geography (Physical)</item>
+        <item>Geography and Economics</item>
+        <item>German</item>
+        <item>German and Economics</item>
+        <item>German and History</item>
+        <item>German and International Relations</item>
+        <item>German and Italian</item>
+        <item>German and Management Studies</item>
+        <item>German and Spanish</item>
+        <item>German Studies &amp; English Language</item>
+        <item>Graphic Communication</item>
+        <item>History</item>
+        <item>History and Economics</item>
+        <item>History and English Literature</item>
+        <item>History and International Relations</item>
+        <item>History and Philosophy</item>
+        <item>History and Politics</item>
+        <item>Information Technology</item>
+        <item>International Business and Finance</item>
+        <item>International Business and Management</item>
+        <item>International Development</item>
+        <item>International Foundation Programme</item>
+        <item>International Relations and Economics</item>
+        <item>International Management &amp; Business Administration with French</item>
+        <item>International Management &amp; Business Administration with German</item>
+        <item>International Management &amp; Business Administration with Italian</item>
+        <item>International Management &amp; Business Administration with Spanish</item>
+        <item>Investment &amp; Finance in Property</item>
+        <item>Italian</item>
+        <item>Italian and Classical Studies</item>
+        <item>Italian and Economics</item>
+        <item>Italian and History</item>
+        <item>Italian and International Relations</item>
+        <item>Italian and Management Studies</item>
+        <item>Italian and Spanish</item>
+        <item>Italian Studies &amp; English Language</item>
+        <item>Language Sciences and Psychology</item>
+        <item>LLB Law</item>
+        <item>Management with Information Technology</item>
+        <item>Mathematics (BSc)</item>
+        <item>Mathematics (MMath)</item>
+        <item>Mathematics and Economics</item>
+        <item>Mathematics and Meteorology (BSc)</item>
+        <item>Mathematics and Meteorology (MMath)</item>
+        <item>Mathematics and Psychology</item>
+        <item>Mathematics and Statistics</item>
+        <item>Mathematics with Finance and Investment Banking</item>
+        <item>Meteorology and Climate</item>
+        <item>Microbiology</item>
+        <item>Museum and Classical Studies</item>
+        <item>Museum Studies and Archaeology</item>
+        <item>Nutrition and Food Science</item>
+        <item>Nutrition with Food Consumer Sciences</item>
+        <item>Pharmacy</item>
+        <item>Philosophy</item>
+        <item>Philosophy and Classical Studies</item>
+        <item>Philosophy and English Literature</item>
+        <item>Philosophy and International Relations</item>
+        <item>Philosophy and Politics</item>
+        <item>Philosophy, Politics and Economics</item>
+        <item>Politics and Economics</item>
+        <item>Politics and International Relations</item>
+        <item>Psychological Theory and Practice</item>
+        <item>Psychology</item>
+        <item>Psychology and Philosophy</item>
+        <item>Psychology Childhood and Ageing</item>
+        <item>Psychology with Neuroscience</item>
+        <item>Quantity Surveying</item>
+        <item>Real Estate (fuck max)</item>
+        <item>Robotics (BSc)</item>
+        <item>Robotics (MEng)</item>
+        <item>Rural Property and Management</item>
+        <item>Spanish Studies and English Language</item>
+        <item>Spanish and English Literature</item>
+        <item>Spanish and History</item>
+        <item>Spanish and Management Studies</item>
+        <item>Speech and Language Therapy</item>
+        <item>Theatre</item>
+        <item>Theatre Arts, Education and Deaf Studies</item>
+        <item>War Peace and International Relations</item>
+        <item>Zoology</item>
+    </string-array>
+
+    <string-array name="postgrad_courses">
+        <item>Select your course</item>
+        <item>Accounting and Financial Management</item>
+        <item>Accounting and International Management</item>
+        <item>Advanced Computer Science</item>
+        <item>Agricultural Development Economics</item>
+        <item>Agricultural Economics</item>
+        <item>Agriculture and Development</item>
+        <item>Agriculture and Food Economics</item>
+        <item>Ancient Maritime Trade and Navigation</item>
+        <item>Applied Development Studies</item>
+        <item>Applied Linguistics</item>
+        <item>Applied Linguistics (MA)</item>
+        <item>Applied Linguistics (MRes)</item>
+        <item>Applied Management</item>
+        <item>Applied Meteorology</item>
+        <item>Applied Meteorology and Climate with Management</item>
+        <item>Archaeology (MA)</item>
+        <item>Archaeology (MRes)</item>
+        <item>Archaeology of Medieval Europe</item>
+        <item>Archaeology of the Middle East</item>
+        <item>Atmosphere, Oceans and Climate</item>
+        <item>Banking and Finance in Emerging and Developing Economies</item>
+        <item>Banking and Financial Systems in the Global Economy</item>
+        <item>Behavioural Finance</item>
+        <item>Book Design</item>
+        <item>Business Economics</item>
+        <item>Business Economics in Emerging and Developing Markets</item>
+        <item>Business Information Management</item>
+        <item>Business Technology Consulting</item>
+        <item>Capital Markets, Regulation and Compliance</item>
+        <item>Cellular and Molecular Neuroscience</item>
+        <item>Childrens Literature</item>
+        <item>City of Rome</item>
+        <item>Classical Tradition</item>
+        <item>Classics</item>
+        <item>Climate Change and Development</item>
+        <item>Clinical Aspects of Psychology</item>
+        <item>Coaching and Behavioural Change</item>
+        <item>Cognitive Neuroscience</item>
+        <item>Communication for Innovation and Development</item>
+        <item>Conservation of the Historic Environment</item>
+        <item>Construction Cost Management</item>
+        <item>Construction in Emerging Economies</item>
+        <item>Construction Management</item>
+        <item>Corporate Finance</item>
+        <item>Corporate Real Estate</item>
+        <item>Creative Enterprise</item>
+        <item>Creative Enterprise</item>
+        <item>Design and Management of Sustainable Built Environments</item>
+        <item>Development and Psychopathology</item>
+        <item>Development Finance</item>
+        <item>Digital Signal Processing and Communications</item>
+        <item>Diplomacy</item>
+        <item>Economic History</item>
+        <item>Economics of Climate Change</item>
+        <item>Economics of International Business and Finance</item>
+        <item>Education (Early Years)</item>
+        <item>Education (English Language Teaching)</item>
+        <item>Education (Inclusive Education)</item>
+        <item>Education (Leadership and Management)</item>
+        <item>Education (MA)</item>
+        <item>Education (Maths)</item>
+        <item>Education (Music)</item>
+        <item>Education (PGCert)</item>
+        <item>Education (PGDip)</item>
+        <item>Emerging and Developing Economies</item>
+        <item>English (MA)</item>
+        <item>English Language Teaching</item>
+        <item>Entrepreneurship and Financing</item>
+        <item>Entrepreneurship and Management</item>
+        <item>Environmental Archaeology</item>
+        <item>Environmental Management</item>
+        <item>Environmental Pollution</item>
+        <item>Environment and Development</item>
+        <item>Ethics and Political Theory</item>
+        <item>Financial Engineering</item>
+        <item>Financial Risk Management</item>
+        <item>Food Economics and Marketing</item>
+        <item>Food Quality and Health</item>
+        <item>Food Science</item>
+        <item>Food Security and Development</item>
+        <item>Food Technology - Quality Assurance</item>
+        <item>Formulation Design and Analysis</item>
+        <item>French Studies</item>
+        <item>German Studies</item>
+        <item>Henley Executive MBA</item>
+        <item>Henley Flexible Executive MBA</item>
+        <item>Henley Full-Time MBA</item>
+        <item>Henley MBA for the Music and Creative Industries</item>
+        <item>History (MA)</item>
+        <item>Human Geography</item>
+        <item>Informatics</item>
+        <item>Informatics</item>
+        <item>Information Design</item>
+        <item>Information Management and Systems</item>
+        <item>Information Management for Design Construction and Operation</item>
+        <item>International Business</item>
+        <item>International Business and Finance</item>
+        <item>International Economic Development and Business</item>
+        <item>International Energy Studies</item>
+        <item>International Housing Development and Management</item>
+        <item>International Human Resource Management</item>
+        <item>International Management</item>
+        <item>International Planning &amp; Sustainable Urban Management</item>
+        <item>International Relations</item>
+        <item>International Securities, Investment and Banking</item>
+        <item>International Security Studies</item>
+        <item>International Shipping and Finance</item>
+        <item>Investment Banking and Islamic Finance</item>
+        <item>Investment Management</item>
+        <item>Italian Studies</item>
+        <item>Language Sciences</item>
+        <item>Law (MRes)</item>
+        <item>Law and Society</item>
+        <item>Leadership</item>
+        <item>Legal History</item>
+        <item>LLM Advanced Legal Studies </item>
+        <item>LLM Human Rights </item>
+        <item>LLM International Banking Law</item>
+        <item>LLM International Commercial Law</item>
+        <item>LLM International Corporate Finance</item>
+        <item>LLM International Corporate Law</item>
+        <item>LLM International Financial Regulation</item>
+        <item>LLM International Law</item>
+        <item>LLM Law and Economics</item>
+        <item>LLM Oil and Gas</item>
+        <item>Management Information Systems</item>
+        <item>Marketing and International Management</item>
+        <item>Master in Fine Art</item>
+        <item>Medieval Studies</item>
+        <item>Military History and Strategic Studies</item>
+        <item>Modern and Contemporary Literature</item>
+        <item>Modern Italian History</item>
+        <item>Molecular Medicine</item>
+        <item>Nutrition and Food Science</item>
+        <item>PGCE Early Years 3-7</item>
+        <item>PGCE Primary 5-11</item>
+        <item>PGCE Primary with Primary Languages 5-11</item>
+        <item>PGCE Secondary</item>
+        <item>Philosophy</item>
+        <item>Plant Diversity</item>
+        <item>Politics and International Relations</item>
+        <item>Primary</item>
+        <item>Project Management</item>
+        <item>Public Policy</item>
+        <item>Public Policy</item>
+        <item>Real Estate</item>
+        <item>Real Estate Finance</item>
+        <item>Real Estate Investment and Finance</item>
+        <item>Renaissance Literature and Culture</item>
+        <item>Renewable Energy: Technology and Sustainability</item>
+        <item>Research Biomedicine</item>
+        <item>Research Pharmacy Practice</item>
+        <item>Research Systems Engineering</item>
+        <item>Research Typography &amp; Graphic Communication</item>
+        <item>Robotics</item>
+        <item>Rural Land and Business Management</item>
+        <item>SENCO (PGCert)</item>
+        <item>Social Development and Sustainable Livelihoods</item>
+        <item>Spatial Planning and Development</item>
+        <item>Spatial Planning and Research</item>
+        <item>Species Identification and Survey Skills</item>
+        <item>Speech and Language Therapy</item>
+        <item>Strategic Studies</item>
+        <item>Systems Neuroscience and Neuro-engineering</item>
+        <item>Typeface Design</item>
+        <item>Victorian Literature and Culture</item>
+        <item>Wildlife Management and Conservation</item>
+    </string-array>
+
+    <string-array name="course_year_array">
+        <item>Select your year</item>
+        <item>Year 1</item>
+        <item>Year 2</item>
+        <item>Year 3</item>
+        <item>Year 4</item>
+    </string-array>
+
+    <string-array name="testBookTitles">
+        <item>Macroeconomics: An in-depth analysis into the economy</item>
+        <item>Title 2</item>
+        <item>Computer Networking: A top down approach (sixth edition)</item>
+    </string-array>
+
+    <string-array name="testBookAuthor">
+        <item>Author 1</item>
+        <item>Author 2</item>
+        <item>Author 3</item>
+        <item>Author 4</item>
+    </string-array>
+
+    <string-array name="testDateListed">
+        <item>2012</item>
+        <item>2014</item>
+        <item>2013</item>
+        <item>2014</item>
+    </string-array>
+
+    <!-- TODO: Add title string names here -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_browse_result">BrowseResultActivity</string>
+    <string name="title_activity_search">Search</string>
+    <string name="title_activity_search_result">Search Results</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_view_listing">ViewListingActivity</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_home_fragement">HomeFragement</string>
+
 </resources>

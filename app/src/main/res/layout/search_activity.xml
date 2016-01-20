@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/headerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical"
+            android:text="For best results, search by ISBN"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/colorAlt"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/search_isbn_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/headerText"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="20dp"
+            android:hint="Search by ISBN number"
+            android:inputType="number"
+            android:maxLength="13"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/search_title_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/search_isbn_text"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="20dp"
+            android:hint="Search by book title"
+            android:maxLength="120"
+            android:maxWidth="320dip" />
+
+        <EditText
+            android:id="@+id/search_author_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/search_title_text"
+            android:layout_column="16"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:hint="Search by author"
+            android:maxLength="120"
+            android:maxWidth="320dip" />
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/search_material_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/search_author_text"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            card_view:cardBackgroundColor="#E91E63"
+            card_view:cardCornerRadius="2dp"
+            card_view:cardElevation="6dp">
+
+            <TextView
+                android:id="@+id/material_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="sans-serif-medium"
+                android:paddingBottom="13dp"
+                android:paddingTop="13dp"
+                android:text="Search"
+                android:textColor="#FFF"
+                android:textSize="20sp" />
+        </android.support.v7.widget.CardView>
+
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignBottom="@id/search_isbn_text"
+            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/isbn_icon" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@+id/search_title_text"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="9dp"
+            android:src="@drawable/title_icon" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignTop="@id/search_author_text"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/author_icon" />
+
+    </RelativeLayout>
+</ScrollView>
