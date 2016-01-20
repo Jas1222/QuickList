@@ -71,10 +71,12 @@
         <activity android:name=".BarcodeScanner"
             android:label="Scanner"
             android:screenOrientation="reverseLandscape"
+            android:parentActivityName=".ScanActivity"
             ></activity>
 
         <activity android:name=".ScanActivity"
-            android:label="Scan Activity"/>
+            android:label="Scan Activity"
+            android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>
