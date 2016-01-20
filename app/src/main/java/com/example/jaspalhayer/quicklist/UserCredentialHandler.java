@@ -65,7 +65,6 @@ public class UserCredentialHandler {
                                 Toast.makeText(context, registerMessage, Toast.LENGTH_LONG).show();
                                 callBack.onSuccess();
                             }
-
                         } catch (Exception e){
                             e.printStackTrace();
                             Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -181,7 +180,6 @@ public class UserCredentialHandler {
 
         Toast.makeText(context, "You have logged out!", Toast.LENGTH_LONG).show();
     }
-
 
     protected void setNavHeaderOnLogin(Context context, NavigationView navigationView){
         SharedPreferences prefs = context.getSharedPreferences(USER_PREFS, 0);

@@ -3,6 +3,8 @@ package com.example.jaspalhayer.quicklist;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -46,6 +48,8 @@ public class ResultActivity extends AppCompatActivity implements AdapterView.OnI
         myListView.setAdapter(adapter);
         myListView.setOnItemClickListener(this);
 
+        RegisterForContextMenu();
+
         getJsonObject();
         convertJsonObjectToArray();
         parseJsonToBook(mBook);
@@ -66,6 +70,28 @@ public class ResultActivity extends AppCompatActivity implements AdapterView.OnI
             }
         });
     }
+
+    @Override
+    public void onCreateContextMenu(final ContextMenu menu,
+                                    final View v, final ContextMenu.ContextMenuInfo menuInfo) {
+
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch(item.getItemId()) {
+            case R.id.listing_edit:
+                // add stuff here
+                return true;
+            case R.id.listing_delete:
+                // edit stuff here
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
 
     protected void getPreviousStringsAndSetTitle(){
         if (cameFromBrowse) {

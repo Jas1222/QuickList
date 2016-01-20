@@ -1,7 +1,5 @@
 package com.example.jaspalhayer.quicklist;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,7 +8,6 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 
 
@@ -46,16 +43,6 @@ public class CreateFragment2 extends Fragment {
         // Required empty public constructor
     }
 
-//    // TODO: Rename and change types and number of parameters
-//    public static CreateFragment2 newInstance(String param1, String param2) {
-//        CreateFragment2 fragment = new CreateFragment2();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +50,6 @@ public class CreateFragment2 extends Fragment {
         if (getArguments() != null) {
         create2Bundle = this.getArguments();
         }
-
-
     }
 
     @Override
@@ -72,8 +57,6 @@ public class CreateFragment2 extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_create_fragment2, container, false);
-
-
 
         setVariablesToUiElements(rootView);
 
