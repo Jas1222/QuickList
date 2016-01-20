@@ -26,6 +26,9 @@ public class ConnectionHandler {
     String getSearchUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/search_book_listings.php";
     String getBookListingDetailUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/get_book_listing_details.php";
     String getUserListingsUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/get_user_listing.php";
+    String postDeleteUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/delete_listing.php";
+    String postUpdateListingStatus = "http://qt003605.webs.sse.reading.ac.uk/android_connect/update_list_status.php";
+
 
     String localCreatePostUrl = "http://10.0.2.2:8080/quicklist/create_book_listingTest.php";
     String localSearchUrl="http://10.0.2.2:8080/quicklist/search_book_listings.php";
@@ -85,15 +88,12 @@ public class ConnectionHandler {
                     int success = response.getInt("success");
 
                     if (success == 1) {
-                        Toast.makeText(context,
-                                "Retrieved Successfully",
-                                Toast.LENGTH_SHORT).show();
                         result=response;
                         callback.onSuccess(result);
 
                     } else {
                         Toast.makeText(context,
-                                "failed to update", Toast.LENGTH_SHORT)
+                                "No listings found", Toast.LENGTH_SHORT)
                                 .show();
                     }
 
@@ -184,7 +184,7 @@ public class ConnectionHandler {
 
                     } else {
                         Toast.makeText(context,
-                                "failed to update", Toast.LENGTH_SHORT)
+                                "No listings found", Toast.LENGTH_SHORT)
                                 .show();
                     }
 
@@ -204,6 +204,85 @@ public class ConnectionHandler {
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(update_request);
+    }
+
+    //POST or GET?
+    protected void deleteListing(final Context context, final String listId) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, postDeleteUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObjectResponse = new JSONObject(response);
+                            // TODO rename variables
+                            String msg = jsonObjectResponse.getString("message");
+                            String r = jsonObjectResponse.getString("success");
+                            if (r.contains("1")) {
+                                Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("list_id", listId);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    protected void markListingAsCompleted(final Context context, final String listId) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, postUpdateListingStatus,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObjectResponse = new JSONObject(response);
+                            // TODO rename variables
+                            String msg = jsonObjectResponse.getString("message");
+                            String r = jsonObjectResponse.getString("success");
+                            if (r.contains("1")) {
+                                Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("list_id", listId);
+                params.put("list_status", "2");
+
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
     }
 
     public void searchListings(final Context context, final String isbn, final String book_title, final String book_author, final VolleyCallback callback){
@@ -250,6 +329,8 @@ public class ConnectionHandler {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(update_request);
     }
+
+
 
     public interface VolleyCallback{
         void onSuccess(JSONObject result);

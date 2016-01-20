@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,13 +51,13 @@ public class ResultActivity extends AppCompatActivity implements AdapterView.OnI
         myListView.setAdapter(adapter);
         myListView.setOnItemClickListener(this);
 
-        RegisterForContextMenu();
+        registerForContextMenu(myListView);
 
         getJsonObject();
         convertJsonObjectToArray();
         parseJsonToBook(mBook);
     }
-    
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
@@ -74,17 +77,28 @@ public class ResultActivity extends AppCompatActivity implements AdapterView.OnI
     @Override
     public void onCreateContextMenu(final ContextMenu menu,
                                     final View v, final ContextMenu.ContextMenuInfo menuInfo) {
-
+        if (cameFromActive) {
+            if (v.getId() == R.id.listView) {
+                MenuInflater inflater = getMenuInflater();
+                inflater.inflate(R.menu.listing_menu, menu);
+            }
+        }
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        switch(item.getItemId()) {
+        final String member_list_id = rowItems.get(info.position).bookListId;
+        switch (item.getItemId()) {
             case R.id.listing_edit:
-                // add stuff here
                 return true;
             case R.id.listing_delete:
+                handler.deleteListing(getApplicationContext(), member_list_id);
+                // edit stuff here
+                return true;
+            case R.id.listing_completed:
+                handler.markListingAsCompleted(getApplicationContext(), member_list_id);
+
                 // edit stuff here
                 return true;
             default:
@@ -93,38 +107,38 @@ public class ResultActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
 
-    protected void getPreviousStringsAndSetTitle(){
+    protected void getPreviousStringsAndSetTitle() {
         if (cameFromBrowse) {
             courseTitle = getIntent().getStringExtra("keyTitle");
             selectedCourseTitle = getIntent().getStringExtra("keyTitle");
             selectedCourseYear = getIntent().getStringExtra("keyUniYear");
 
             getSupportActionBar().setTitle(courseTitle);
-        } else if (cameFromActive){
+        } else if (cameFromActive) {
             getSupportActionBar().setTitle("My Listings");
-        } else if (cameFromCompleted){
+        } else if (cameFromCompleted) {
             getSupportActionBar().setTitle("My Completed Listings");
-        } else if (cameFromExpired){
+        } else if (cameFromExpired) {
             getSupportActionBar().setTitle("My Expired Listings");
         }
     }
 
-    protected void cameFrom(){
+    protected void cameFrom() {
         cameFrom = getIntent().getStringExtra("CAME_FROM");
-        if(cameFrom.contains("active")){
+        if (cameFrom.contains("active")) {
             cameFromActive = true;
         } else if (cameFrom.contains("expired")) {
             cameFromExpired = true;
-        } else if(cameFrom.contains("complete")){
+        } else if (cameFrom.contains("complete")) {
             cameFromCompleted = true;
-        } else if(cameFrom.contains("browse")){
+        } else if (cameFrom.contains("browse")) {
             cameFromBrowse = true;
         } else {
             System.out.println("Can't tell where came from");
         }
     }
 
-    protected void getJsonObject(){
+    protected void getJsonObject() {
         try {
             jsonObject = new JSONObject(getIntent().getStringExtra("jsonObject"));
         } catch (Exception e) {
@@ -132,7 +146,7 @@ public class ResultActivity extends AppCompatActivity implements AdapterView.OnI
         }
     }
 
-    protected void convertJsonObjectToArray(){
+    protected void convertJsonObjectToArray() {
         try {
             jsArray = jsonObject.getJSONArray("books");
         } catch (Exception e) {
@@ -140,7 +154,7 @@ public class ResultActivity extends AppCompatActivity implements AdapterView.OnI
         }
     }
 
-    protected void parseJsonToBook(Books mBook){
+    protected void parseJsonToBook(Books mBook) {
         try {
             for (int i = 0; i < jsArray.length(); i++) {
                 JSONObject jobj = jsArray.getJSONObject(i);
@@ -159,7 +173,7 @@ public class ResultActivity extends AppCompatActivity implements AdapterView.OnI
         }
     }
 
-    protected void drawListRows(Books mBook, int i){
+    protected void drawListRows(Books mBook, int i) {
         ListingRowItem item = new ListingRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), mBook.jsonBookPrice.get(i), mBook.jsonBookYear.get(i), mBook.jsonBookListId.get(i));
         rowItems.add(item);
     }

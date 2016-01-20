@@ -57,7 +57,7 @@ public class UserCredentialHandler {
                         try {
                             JSONObject jsonObjectResponse = new JSONObject(response);
                             registerResponse = jsonObjectResponse.getString("error");
-                            if(registerError(registerResponse)){
+                            if (registerError(registerResponse)) {
                                 registerMessage = jsonObjectResponse.getString("error_msg");
                                 Toast.makeText(context, registerMessage, Toast.LENGTH_LONG).show();
                             } else {
@@ -65,7 +65,7 @@ public class UserCredentialHandler {
                                 Toast.makeText(context, registerMessage, Toast.LENGTH_LONG).show();
                                 callBack.onSuccess();
                             }
-                        } catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                             Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
@@ -90,7 +90,7 @@ public class UserCredentialHandler {
         requestQueue.add(stringRequest);
     }
 
-    protected void loginUser(final Context context, final VolleyCallBack callback){
+    protected void loginUser(final Context context, final VolleyCallBack callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, loginUrl,
                 new Response.Listener<String>() {
                     @Override
@@ -98,7 +98,7 @@ public class UserCredentialHandler {
                         try {
                             JSONObject jsonObjectResponse = new JSONObject(response);
                             loginResponse = jsonObjectResponse.getString("error");
-                            if (loginError(loginResponse)){
+                            if (loginError(loginResponse)) {
                                 loginMessage = jsonObjectResponse.getString("error_msg");
                                 Toast.makeText(context, loginMessage, Toast.LENGTH_LONG).show();
                             } else {
@@ -135,23 +135,23 @@ public class UserCredentialHandler {
         requestQueue.add(stringRequest);
     }
 
-    protected boolean loginError(String error){
-        if (error == "true"){
+    protected boolean loginError(String error) {
+        if (error == "true") {
             return true;
         } else {
             return false;
         }
     }
 
-    protected boolean registerError(String error){
-        if (error == "false"){
+    protected boolean registerError(String error) {
+        if (error == "false") {
             return false;
         } else {
             return true;
         }
     }
 
-    protected void storeUserEmailAndName(Context context){
+    protected void storeUserEmailAndName(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(USER_PREFS, 0);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(KEY_NAV_NAME, this.userFullname).apply();
@@ -159,18 +159,19 @@ public class UserCredentialHandler {
         editor.putString(KEY_USER_STATUS, "true").apply();
     }
 
-    protected boolean checkIfUserIsLoggedIn(Context context){
+    protected boolean checkIfUserIsLoggedIn(Context context) {
         String getStatus;
         SharedPreferences prefs = context.getSharedPreferences(USER_PREFS, 0);
         getStatus = prefs.getString(KEY_USER_STATUS, "");
-        if (getStatus.equals("true")){
+        if (getStatus.equals("true")) {
             return true;
         } else {
             return false;
         }
     }
-    protected void logoutUser(Context context){
-        isUserLoggedIn=false;
+
+    protected void logoutUser(Context context) {
+        isUserLoggedIn = false;
         SharedPreferences prefs = context.getSharedPreferences(USER_PREFS, 0);
         SharedPreferences.Editor editor = prefs.edit();
 
@@ -181,25 +182,25 @@ public class UserCredentialHandler {
         Toast.makeText(context, "You have logged out!", Toast.LENGTH_LONG).show();
     }
 
-    protected void setNavHeaderOnLogin(Context context, NavigationView navigationView){
+    protected void setNavHeaderOnLogin(Context context, NavigationView navigationView) {
         SharedPreferences prefs = context.getSharedPreferences(USER_PREFS, 0);
 
-        TextView navHeaderFullName = (TextView)navigationView.findViewById(R.id.nav_fullname);
-        TextView navHeaderEmail = (TextView)navigationView.findViewById(R.id.nav_email_header);
+        TextView navHeaderFullName = (TextView) navigationView.findViewById(R.id.nav_fullname);
+        TextView navHeaderEmail = (TextView) navigationView.findViewById(R.id.nav_email_header);
 
         navHeaderEmail.setText(prefs.getString(KEY_NAV_EMAIL, this.userFullname));
         navHeaderFullName.setText(prefs.getString(KEY_NAV_NAME, this.userEmail));
     }
 
-    protected void setNavHeaderOnLogout(NavigationView navigationView){
-        TextView navHeaderFullName = (TextView)navigationView.findViewById(R.id.nav_fullname);
-        TextView navHeaderEmail = (TextView)navigationView.findViewById(R.id.nav_email_header);
+    protected void setNavHeaderOnLogout(NavigationView navigationView) {
+        TextView navHeaderFullName = (TextView) navigationView.findViewById(R.id.nav_fullname);
+        TextView navHeaderEmail = (TextView) navigationView.findViewById(R.id.nav_email_header);
 
         navHeaderFullName.setText("You are not logged in");
         navHeaderEmail.setText("Please login below");
     }
 
-    public interface VolleyCallBack{
+    public interface VolleyCallBack {
         void onSuccess();
     }
 }
