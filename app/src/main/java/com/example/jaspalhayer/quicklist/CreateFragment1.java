@@ -54,24 +54,10 @@ public class CreateFragment1 extends Fragment {
     protected ArrayAdapter<CharSequence> yearAdapter;
     protected ArrayAdapter<CharSequence> initialCourseAdapter;
 
+    protected Bundle createBundle;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CreateFragment1.
-     */
     // TODO: Rename and change types and number of parameters
-    public static CreateFragment1 newInstance(String param1, String param2) {
-        CreateFragment1 fragment = new CreateFragment1();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
     public CreateFragment1() {
         // Required empty public constructor
     }
@@ -80,6 +66,7 @@ public class CreateFragment1 extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            createBundle = getArguments();
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
@@ -140,13 +127,12 @@ public class CreateFragment1 extends Fragment {
                     // Pass selection options to next fragment
 
                     CreateFragment2 createFragment2 = new CreateFragment2();
-                    Bundle create1Bundle = new Bundle();
 
-                    create1Bundle.putString("COURSE_TYPE", selectedCourseType);
-                    create1Bundle.putString("COURSE_DEGREE", selectedCourse);
-                    create1Bundle.putString("COURSE_YEAR", selectedYear);
+                    createBundle.putString("COURSE_TYPE", selectedCourseType);
+                    createBundle.putString("COURSE_DEGREE", selectedCourse);
+                    createBundle.putString("COURSE_YEAR", selectedYear);
 
-                    createFragment2.setArguments(create1Bundle);
+                    createFragment2.setArguments(createBundle);
 
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager
@@ -211,7 +197,6 @@ public class CreateFragment1 extends Fragment {
         }
 
         selectedCourseType = courseSpinner.getItemAtPosition(i).toString();
-
     }
 
     protected void setValidYearField(int i){

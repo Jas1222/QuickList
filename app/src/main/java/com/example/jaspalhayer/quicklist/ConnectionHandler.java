@@ -340,24 +340,6 @@ public class ConnectionHandler {
             public void onResponse(JSONObject response) {
                 System.out.println(response);
                 callback.onSuccess(response);
-
-//                try {
-//                    int success = response.getInt("success");
-//
-//                    if (success == 1) {
-//                        result=response;
-//                        callback.onSuccess(result);
-//
-//                    } else {
-//                        Toast.makeText(context,
-//                                "No listings found", Toast.LENGTH_SHORT)
-//                                .show();
-//                    }
-//
-//                } catch (JSONException e) {
-//
-//                    e.printStackTrace();
-//                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -369,6 +351,33 @@ public class ConnectionHandler {
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(update_request);
+    }
+
+    protected void getGoogleBookRequest2(final Context context, final String isbn, final VolleyCallback callback) {
+        String getTestUrl = googleBooksUrl+isbn+googleBooksCountry;
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, getTestUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObjectResponse = new JSONObject(response);
+                            callback.onSuccess(jsonObjectResponse);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
     }
 
     public interface VolleyCallback{

@@ -63,12 +63,14 @@ public class ScanActivity extends AppCompatActivity {
             case ZBAR_QR_SCANNER_REQUEST:
                 if (resultCode == RESULT_OK) {
                     // Request Google Books
-                    request.getGoogleBookDetails(getApplicationContext(), data.getStringExtra(ZBarConstants.SCAN_RESULT), new ConnectionHandler.VolleyCallback() {
+                    request.getGoogleBookRequest2(getApplicationContext(), data.getStringExtra(ZBarConstants.SCAN_RESULT), new ConnectionHandler.VolleyCallback() {
                         @Override
                         public void onSuccess(JSONObject result) {
+                            //CHECK IF GOOD RESPONSE, IF SO LAUNCH BELOW
                             Intent i = new Intent(getApplicationContext(), CreateListingActivity.class);
                             i.putExtra("jsonObject", result.toString());
                             i.putExtra("CAME_FROM", "scan");
+                            startActivity(i);
                         }
                     });
 

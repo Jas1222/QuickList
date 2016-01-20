@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 
 public class CreateFragment2 extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -22,6 +25,8 @@ public class CreateFragment2 extends Fragment {
     private String mParam2;
 
     Bundle create2Bundle;
+
+    JSONObject jObj;
 
     EditText titleField;
     EditText authorField;
@@ -39,6 +44,7 @@ public class CreateFragment2 extends Fragment {
     protected static String bookPrice;
     protected static String bookIsbn;
 
+
     public CreateFragment2() {
         // Required empty public constructor
     }
@@ -48,7 +54,10 @@ public class CreateFragment2 extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-        create2Bundle = this.getArguments();
+            create2Bundle = this.getArguments();
+            if(doesScanJsonObjectExist()){
+                getExistingJsonObject();
+            }
         }
     }
 
@@ -81,18 +90,18 @@ public class CreateFragment2 extends Fragment {
         return rootView;
     }
 
-    public void setVariablesToUiElements(View rootView){
-        mNext2 = (CardView)rootView.findViewById(R.id.create_next_2_btn);
+    public void setVariablesToUiElements(View rootView) {
+        mNext2 = (CardView) rootView.findViewById(R.id.create_next_2_btn);
 
-        titleField = (EditText)rootView.findViewById(R.id.create_book_title_field);
-        authorField = (EditText)rootView.findViewById(R.id.create_book_author_field);
-        yearField = (EditText)rootView.findViewById(R.id.create_book_year_field);
-        isbnField = (EditText)rootView.findViewById(R.id.create_ISBN_field);
-        priceField = (EditText)rootView.findViewById(R.id.create_book_price_field);
-        descField = (EditText)rootView.findViewById(R.id.create_description_field);
+        titleField = (EditText) rootView.findViewById(R.id.create_book_title_field);
+        authorField = (EditText) rootView.findViewById(R.id.create_book_author_field);
+        yearField = (EditText) rootView.findViewById(R.id.create_book_year_field);
+        isbnField = (EditText) rootView.findViewById(R.id.create_ISBN_field);
+        priceField = (EditText) rootView.findViewById(R.id.create_book_price_field);
+        descField = (EditText) rootView.findViewById(R.id.create_description_field);
     }
 
-    protected void setBundleValues(){
+    protected void setBundleValues() {
         create2Bundle.putString("KEY_TITLE", bookTitle);
         create2Bundle.putString("KEY_AUTHOR", bookAuthor);
         create2Bundle.putString("KEY_YEAR", bookYear);
@@ -101,12 +110,33 @@ public class CreateFragment2 extends Fragment {
         create2Bundle.putString("KEY_ISBN", bookIsbn);
     }
 
-    protected void saveInputText(){
+    protected void saveInputText() {
         bookTitle = titleField.getText().toString();
         bookAuthor = authorField.getText().toString();
         bookYear = yearField.getText().toString();
         bookIsbn = isbnField.getText().toString();
         bookPrice = priceField.getText().toString();
         bookDesc = descField.getText().toString();
+    }
+
+    protected boolean doesScanJsonObjectExist() {
+        if (create2Bundle.getString("JSON_STRING_OBJECT") != null) {
+            getExistingJsonObject();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    protected void getExistingJsonObject(){
+        try {
+            jObj = new JSONObject(create2Bundle.getString("JSON_STRING_OBJECT"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void parseJsonObject(){
+
     }
 }
