@@ -28,7 +28,8 @@ public class ConnectionHandler {
     String getUserListingsUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/get_user_listing.php";
     String postDeleteUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/delete_listing.php";
     String postUpdateListingStatus = "http://qt003605.webs.sse.reading.ac.uk/android_connect/update_list_status.php";
-
+    String googleBooksUrl = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
+    String googleBooksCountry = "&country=UK";
 
     String localCreatePostUrl = "http://10.0.2.2:8080/quicklist/create_book_listingTest.php";
     String localSearchUrl="http://10.0.2.2:8080/quicklist/search_book_listings.php";

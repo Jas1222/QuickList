@@ -4,6 +4,7 @@
 
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -66,6 +67,14 @@
         <activity
             android:name=".HomeFragment"
             android:label="@string/title_activity_home_fragement"></activity>
+
+        <activity android:name=".BarcodeScanner"
+            android:label="Scanner"
+            android:screenOrientation="reverseLandscape"
+            ></activity>
+
+        <activity android:name=".ScanActivity"
+            android:label="Scan Activity"/>
     </application>
 
 </manifest>
