@@ -14,13 +14,15 @@ import org.json.JSONObject;
 public class CreateListingActivity extends AppCompatActivity {
     JSONObject jsonObject;
     Bundle b;
-    boolean cameFromScan;
+    boolean cameFromScan = false;
+    String cameFrom;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_listing_activity);
+
         CreateFragment1 createFragment1 = new CreateFragment1();
         jsonObject = new JSONObject();
         b = new Bundle();
@@ -64,8 +66,12 @@ public class CreateListingActivity extends AppCompatActivity {
     }
 
     protected boolean checkCameFromScanActivity(){
-        String cameFrom = getIntent().getStringExtra("CAME_FROM");
-        if(cameFrom.contains("scan")){
+        if (getIntent().getStringExtra("CAME+FROM") != null) {
+            cameFrom = getIntent().getStringExtra("CAME_FROM");
+            cameFromScan = cameFrom.contains("scan");
+        }
+
+        if(cameFromScan){
             return true;
         } else {
             return false;
