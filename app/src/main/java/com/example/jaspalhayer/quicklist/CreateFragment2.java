@@ -35,6 +35,7 @@ public class CreateFragment2 extends Fragment {
     EditText priceField;
     EditText isbnField;
 
+    Books mBook;
     CardView mNext2;
 
     protected static String bookTitle;
@@ -52,11 +53,13 @@ public class CreateFragment2 extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mBook = new Books();
 
         if (getArguments() != null) {
             create2Bundle = this.getArguments();
             if(doesScanJsonObjectExist()){
                 getExistingJsonObject();
+                parseJsonObject();
             }
         }
     }
@@ -137,6 +140,13 @@ public class CreateFragment2 extends Fragment {
     }
 
     protected void parseJsonObject(){
-
+        try {
+            mBook.bookTitle = jObj.getString("title");
+            mBook.bookAuthor = jObj.getString("authors");
+            mBook.bookYear = jObj.getString("publishedDate");
+            mBook.bookIsbn = jObj.getString("ISBN_13");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

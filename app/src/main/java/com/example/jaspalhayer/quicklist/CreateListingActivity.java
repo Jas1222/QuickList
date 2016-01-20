@@ -34,7 +34,6 @@ public class CreateListingActivity extends AppCompatActivity {
             createFragment1.setArguments(b);
         }
 
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager
                 .beginTransaction();
