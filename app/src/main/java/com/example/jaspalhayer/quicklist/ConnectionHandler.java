@@ -171,8 +171,6 @@ public class ConnectionHandler {
 
             @Override
             public void onResponse(JSONObject response) {
-                System.out.println(response);
-
                 try {
                     int success = response.getInt("success");
 
@@ -331,7 +329,47 @@ public class ConnectionHandler {
         requestQueue.add(update_request);
     }
 
+    public void getGoogleBookDetails(final Context context, final String isbn, final VolleyCallback callback) {
+        String getTestUrl = googleBooksUrl+isbn+googleBooksCountry;
+        getTestUrl = getTestUrl.replaceAll(" ", "%20");
 
+        JsonObjectRequest update_request = new JsonObjectRequest(getTestUrl,
+                null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                System.out.println(response);
+                callback.onSuccess(response);
+
+//                try {
+//                    int success = response.getInt("success");
+//
+//                    if (success == 1) {
+//                        result=response;
+//                        callback.onSuccess(result);
+//
+//                    } else {
+//                        Toast.makeText(context,
+//                                "No listings found", Toast.LENGTH_SHORT)
+//                                .show();
+//                    }
+//
+//                } catch (JSONException e) {
+//
+//                    e.printStackTrace();
+//                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error);
+
+            }
+        });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(update_request);
+    }
 
     public interface VolleyCallback{
         void onSuccess(JSONObject result);

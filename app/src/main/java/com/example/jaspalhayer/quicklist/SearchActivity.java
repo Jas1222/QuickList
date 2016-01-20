@@ -29,7 +29,6 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_activity);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setVariablesToUiElements();
         sButton.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +39,7 @@ public class SearchActivity extends AppCompatActivity {
                     handler.searchListings(getApplicationContext(), input_isbn, input_title, input_author, new ConnectionHandler.VolleyCallback() {
                         @Override
                         public void onSuccess(JSONObject result) {
+                            //TODO get rid jsOb use result instead
                             jsOb = result;
                             Intent i = new Intent(getApplicationContext(), SearchResultActivity.class);
                             i.putExtra("jsonObject", jsOb.toString());

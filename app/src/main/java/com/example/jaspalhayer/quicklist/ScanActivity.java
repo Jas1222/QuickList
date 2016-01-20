@@ -15,16 +15,20 @@ import android.widget.Button;
 import android.widget.Toast;
 import net.sourceforge.zbar.Symbol;
 
+import org.json.JSONObject;
+
 
 public class ScanActivity extends AppCompatActivity {
 
     private static final int ZBAR_SCANNER_REQUEST = 0;
     private static final int ZBAR_QR_SCANNER_REQUEST = 1;
+    protected ConnectionHandler request;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
+        request = new ConnectionHandler();
     }
 
     public void launchScanner(View v) {
@@ -58,8 +62,16 @@ public class ScanActivity extends AppCompatActivity {
             case ZBAR_SCANNER_REQUEST:
             case ZBAR_QR_SCANNER_REQUEST:
                 if (resultCode == RESULT_OK) {
+                    // Request Google Books
+                    request.getGoogleBookDetails(getApplicationContext(), data.getStringExtra(ZBarConstants.SCAN_RESULT), new ConnectionHandler.VolleyCallback() {
+                        @Override
+                        public void onSuccess(JSONObject result) {
+                            Intent i = new Intent(getApplicationContext(), CreateListingActivity.class);
+                            i.putExtra("jsonObject", result.toString());
+                            i.putExtra("CAME_FROM", "scan");
+                        }
+                    });
 
-                    // Request GBooks
                     Toast.makeText(this, "Scan Result = " + data.getStringExtra(ZBarConstants.SCAN_RESULT), Toast.LENGTH_SHORT).show();
                 } else if(resultCode == RESULT_CANCELED && data != null) {
                     String error = data.getStringExtra(ZBarConstants.ERROR_INFO);

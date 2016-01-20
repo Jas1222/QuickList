@@ -18,27 +18,6 @@ import android.widget.Spinner;
  * Created by jaspalhayer on 03/11/2015.
  */
 public class CreateListingActivity extends AppCompatActivity {
-    public static String bookInfoField;
-    public static String authorInfoField;
-    public static String yearInfoField;
-    public static String descInfoField;
-    public static String priceInfoField;
-
-
-
-
-    protected ListView lstView;
-
-    protected Spinner degreeTypeSpinner;
-    protected Spinner courseSpinner;
-    protected Spinner yearSpinner;
-
-    protected ArrayAdapter<CharSequence> degreeTypeAdapter;
-    protected ArrayAdapter<CharSequence> ugCourseAdapter;
-    protected ArrayAdapter<CharSequence> pgCourseAdapter;
-    protected ArrayAdapter<CharSequence> yearAdapter;
-    protected ArrayAdapter<CharSequence> initialCourseAdapter;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
