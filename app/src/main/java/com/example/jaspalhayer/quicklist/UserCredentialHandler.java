@@ -151,11 +151,23 @@ public class UserCredentialHandler {
         }
     }
 
+    protected String getUserEmail(Context context){
+        SharedPreferences prefs = context.getSharedPreferences(USER_PREFS, 0);
+        userEmail = prefs.getString(KEY_NAV_EMAIL, "");
+        return userEmail;
+    }
+
+    protected String getUserFullName(Context context){
+        SharedPreferences prefs = context.getSharedPreferences(USER_PREFS, 0);
+        userFullname = prefs.getString(KEY_NAV_NAME, "");
+        return userEmail;
+    }
+
     protected void storeUserEmailAndName(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(USER_PREFS, 0);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(KEY_NAV_NAME, this.userFullname).apply();
-        editor.putString(KEY_NAV_EMAIL, this.userEmail).apply();
+        editor.putString(KEY_NAV_NAME, userFullname).apply();
+        editor.putString(KEY_NAV_EMAIL, userEmail).apply();
         editor.putString(KEY_USER_STATUS, "true").apply();
     }
 
@@ -199,6 +211,8 @@ public class UserCredentialHandler {
         navHeaderFullName.setText("You are not logged in");
         navHeaderEmail.setText("Please login below");
     }
+
+    //TODO method to check if user is logged in
 
     public interface VolleyCallBack {
         void onSuccess();

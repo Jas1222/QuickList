@@ -1,6 +1,7 @@
 package com.example.jaspalhayer.quicklist;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -39,6 +40,8 @@ public class CreateConfirmFragment extends Fragment {
     protected CardView mSubmit;
     ConnectionHandler handler = new ConnectionHandler();
 
+    String userId;
+    UserCredentialHandler userCred = new UserCredentialHandler();
 
     Bundle create3Bundle;
 
@@ -55,6 +58,7 @@ public class CreateConfirmFragment extends Fragment {
             create3Bundle = this.getArguments();
             getBundleStrings();
         }
+
     }
 
     @Override
@@ -66,11 +70,14 @@ public class CreateConfirmFragment extends Fragment {
         setVariablesToUi(rootView);
         setLabelText();
 
+        SharedPreferences p;
+        p=getActivity().getSharedPreferences("userNamePrefs", 0);
+        userId = p.getString("NAV_EMAIL", null);
 
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                handler.createListingPost(getActivity().getApplicationContext(), bookTitle, bookAuthor, bookYear, bookIsbn, bookPrice, bookDesc, courseType, courseDegree, courseYear, statusCode);
+                handler.createListingPost(getActivity().getApplicationContext(), bookTitle, bookAuthor, bookYear, bookIsbn, bookPrice, bookDesc, courseType, courseDegree, courseYear, statusCode, userId);
             }
         });
 

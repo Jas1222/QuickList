@@ -32,17 +32,23 @@ public class ConnectionHandler {
     String googleBooksCountry = "&country=UK";
 
     String localCreatePostUrl = "http://10.0.2.2:8080/quicklist/create_book_listingTest.php";
-    String localSearchUrl="http://10.0.2.2:8080/quicklist/search_book_listings.php";
-    String localPostUrl="http://10.0.2.2:8080/quicklist/get_book_listingTest.php";
+    String localSearchUrl = "http://10.0.2.2:8080/quicklist/search_book_listings.php";
+    String localPostUrl = "http://10.0.2.2:8080/quicklist/get_book_listingTest.php";
 
     JSONObject result = new JSONObject();
 
-    public void createListingPost(Context context, final String title, final String author, final String year, final String isbn, final String price, final String desc, final String courseType, final String courseDegree, final String courseYear, final String status_code) {
+    public void createListingPost(final Context context, final String title, final String author, final String year, final String isbn, final String price, final String desc, final String courseType, final String courseDegree, final String courseYear, final String status_code, final String userId) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, createListingPostUrl,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println(response);
+                        try {
+                            JSONObject jsonObjectResponse = new JSONObject(response);
+                            String msg = jsonObjectResponse.getString("message");
+                            Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -64,7 +70,8 @@ public class ConnectionHandler {
                 params.put("uni_course_type", courseType);
                 params.put("uni_year", courseYear);
                 params.put("uni_course", courseDegree);
-                params.put("status_code", status_code);
+                params.put("list_status", status_code);
+                params.put("user_id", userId);
 
                 return params;
             }
@@ -75,7 +82,7 @@ public class ConnectionHandler {
     }
 
     public void getCourseListings(final Context context, final String uniCourse, final String uniYear, final VolleyCallback callback) {
-        String getTestUrl = getCourseListUrl+"?uni_year="+uniYear+"&uni_course="+uniCourse;
+        String getTestUrl = getCourseListUrl + "?uni_year=" + uniYear + "&uni_course=" + uniCourse;
         getTestUrl = getTestUrl.replaceAll(" ", "%20");
 
         JsonObjectRequest update_request = new JsonObjectRequest(getTestUrl,
@@ -89,7 +96,7 @@ public class ConnectionHandler {
                     int success = response.getInt("success");
 
                     if (success == 1) {
-                        result=response;
+                        result = response;
                         callback.onSuccess(result);
 
                     } else {
@@ -118,7 +125,7 @@ public class ConnectionHandler {
 
     public void getCourseListingsDetails(final Context context, final String listId, final VolleyCallback callback) {
         //TODO refactor getTestUrl var
-        String getTestUrl = getBookListingDetailUrl+"?list_id="+listId;
+        String getTestUrl = getBookListingDetailUrl + "?list_id=" + listId;
         getTestUrl = getTestUrl.replaceAll(" ", "%20");
 
         JsonObjectRequest update_request = new JsonObjectRequest(getTestUrl,
@@ -135,7 +142,7 @@ public class ConnectionHandler {
                         Toast.makeText(context,
                                 "Retrieved Successfully",
                                 Toast.LENGTH_SHORT).show();
-                        result=response;
+                        result = response;
                         callback.onSuccess(result);
 
                     } else {
@@ -163,7 +170,7 @@ public class ConnectionHandler {
     }
 
     public void getUserListings(final Context context, final String listStatus, final String userId, final VolleyCallback callback) {
-        String getTestUrl = getUserListingsUrl+"?list_status="+listStatus+"&user_id="+userId;
+        String getTestUrl = getUserListingsUrl + "?list_status=" + listStatus + "&user_id=" + userId;
         getTestUrl = getTestUrl.replaceAll(" ", "%20");
 
         JsonObjectRequest update_request = new JsonObjectRequest(getTestUrl,
@@ -284,8 +291,8 @@ public class ConnectionHandler {
         requestQueue.add(stringRequest);
     }
 
-    public void searchListings(final Context context, final String isbn, final String book_title, final String book_author, final VolleyCallback callback){
-        String getTestUrl = getSearchUrl+"?isbn="+isbn+"&book_title="+book_title+"&book_author="+book_author;
+    public void searchListings(final Context context, final String isbn, final String book_title, final String book_author, final VolleyCallback callback) {
+        String getTestUrl = getSearchUrl + "?isbn=" + isbn + "&book_title=" + book_title + "&book_author=" + book_author;
         getTestUrl = getTestUrl.replaceAll(" ", "%20");
 
         JsonObjectRequest update_request = new JsonObjectRequest(getTestUrl,
@@ -302,7 +309,7 @@ public class ConnectionHandler {
                         Toast.makeText(context,
                                 "Retrieved Successfully",
                                 Toast.LENGTH_SHORT).show();
-                        result=response;
+                        result = response;
                         callback.onSuccess(result);
 
                     } else {
@@ -330,7 +337,7 @@ public class ConnectionHandler {
     }
 
     public void getGoogleBookDetails(final Context context, final String isbn, final VolleyCallback callback) {
-        String getTestUrl = googleBooksUrl+isbn+googleBooksCountry;
+        String getTestUrl = googleBooksUrl + isbn + googleBooksCountry;
         getTestUrl = getTestUrl.replaceAll(" ", "%20");
 
         JsonObjectRequest update_request = new JsonObjectRequest(getTestUrl,
@@ -354,7 +361,7 @@ public class ConnectionHandler {
     }
 
     protected void getGoogleBookRequest2(final Context context, final String isbn, final VolleyCallback callback) {
-        String getTestUrl = googleBooksUrl+isbn+googleBooksCountry;
+        String getTestUrl = googleBooksUrl + isbn + googleBooksCountry;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, getTestUrl,
                 new Response.Listener<String>() {
                     @Override
@@ -380,7 +387,7 @@ public class ConnectionHandler {
         requestQueue.add(stringRequest);
     }
 
-    public interface VolleyCallback{
+    public interface VolleyCallback {
         void onSuccess(JSONObject result);
     }
 }
