@@ -66,9 +66,10 @@ public class CreateFragment1 extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            // TODO if totalitems=0, confirm with user
             createBundle = getArguments();
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+        } else {
+            createBundle = new Bundle();
         }
     }
 

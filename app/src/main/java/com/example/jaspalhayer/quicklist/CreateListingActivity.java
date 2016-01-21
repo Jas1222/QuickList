@@ -66,7 +66,7 @@ public class CreateListingActivity extends AppCompatActivity {
     }
 
     protected boolean checkCameFromScanActivity(){
-        if (getIntent().getStringExtra("CAME+FROM") != null) {
+        if (getIntent().getStringExtra("CAME_FROM") != null) {
             cameFrom = getIntent().getStringExtra("CAME_FROM");
             cameFromScan = cameFrom.contains("scan");
         }
