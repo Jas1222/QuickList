@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class CreateFragment2 extends Fragment {
@@ -54,7 +56,7 @@ public class CreateFragment2 extends Fragment {
 
         if (getArguments() != null) {
             create2Bundle = this.getArguments();
-            if(doesScanJsonObjectExist()){
+            if (doesScanJsonObjectExist()) {
                 getExistingJsonObject();
                 parseJsonObject();
             }
@@ -86,6 +88,10 @@ public class CreateFragment2 extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+        if (doesScanJsonObjectExist()) {
+            setTextFromJsonScan();
+        }
 
         return rootView;
     }
@@ -128,7 +134,7 @@ public class CreateFragment2 extends Fragment {
         }
     }
 
-    protected void getExistingJsonObject(){
+    protected void getExistingJsonObject() {
         try {
             jObj = new JSONObject(create2Bundle.getString("JSON_STRING_OBJECT"));
         } catch (Exception e) {
@@ -136,14 +142,44 @@ public class CreateFragment2 extends Fragment {
         }
     }
 
-    protected void parseJsonObject(){
+    protected void parseJsonObject() {
         try {
-            mBook.bookTitle = jObj.getString("title");
-            mBook.bookAuthor = jObj.getString("authors");
-            mBook.bookYear = jObj.getString("publishedDate");
-            mBook.bookIsbn = jObj.getString("ISBN_13");
-        } catch (Exception e){
+            JSONArray jArray = jObj.getJSONArray("items");
+            JSONObject volumeInfo = jArray.getJSONObject(0).getJSONObject("volumeInfo");
+            JSONArray jsonIndustrialArray = jObj.getJSONArray("industryIdentifiers");
+            JSONArray authorArray = jObj.getJSONArray("authors");
+
+            StringBuilder authorBuild = new StringBuilder("");
+
+            //Appends all authors to a string
+            for(int a=0; a<authorArray.length(); a++){
+                if (a>0) {
+                    authorBuild.append(", ");
+                    authorBuild.append(authorArray.getString(a));
+                }
+            }
+
+            //Looks for ISBN in 13 digit format and passes to it
+            for(int k = 0; k < jsonIndustrialArray.length(); k++) {
+                JSONObject isbn = jsonIndustrialArray.getJSONObject(k);
+                if (isbn.getString("type").equals("ISBN_13")) {
+                    mBook.bookIsbn = isbn.getString("identifier");
+                }
+
+            mBook.bookTitle = volumeInfo.getString("title");
+            mBook.bookAuthor = authorBuild.toString();
+            mBook.bookYear = volumeInfo.getString("publishedDate");
+            }
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    protected void setTextFromJsonScan() {
+        titleField.setText(mBook.bookTitle);
+        authorField.setText(mBook.bookAuthor);
+        yearField.setText(mBook.bookYear);
+        isbnField.setText(mBook.bookIsbn);
     }
 }

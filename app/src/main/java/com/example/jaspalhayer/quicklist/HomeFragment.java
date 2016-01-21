@@ -3,7 +3,6 @@ package com.example.jaspalhayer.quicklist;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +43,7 @@ public class HomeFragment extends Fragment {
         barcodeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity().getApplicationContext(), ScanActivity.class);
+                Intent i = new Intent(getActivity().getApplicationContext(), SimpleScannerActivity.class);
                 startActivity(i);
             }
         });
