@@ -23,7 +23,8 @@ public class CreateListingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_listing_activity);
 
-        CreateFragment1 createFragment1 = new CreateFragment1();
+        CreateBookInfoFragment createFragment1 = new CreateBookInfoFragment();
+
         jsonObject = new JSONObject();
         b = new Bundle();
 

@@ -1,7 +1,5 @@
 package com.example.jaspalhayer.quicklist;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -13,13 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
 
-public class CreateFragment1 extends Fragment {
+public class CreateCourseInfoFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -58,7 +54,7 @@ public class CreateFragment1 extends Fragment {
 
     // TODO: Rename and change types and number of parameters
 
-    public CreateFragment1() {
+    public CreateCourseInfoFragment() {
         // Required empty public constructor
     }
 
@@ -127,7 +123,7 @@ public class CreateFragment1 extends Fragment {
                     // Capture all selected options
                     // Pass selection options to next fragment
 
-                    CreateFragment2 createFragment2 = new CreateFragment2();
+                    CreateConfirmFragment createFragment2 = new CreateConfirmFragment();
 
                     createBundle.putString("COURSE_TYPE", selectedCourseType);
                     createBundle.putString("COURSE_DEGREE", selectedCourse);
@@ -197,7 +193,7 @@ public class CreateFragment1 extends Fragment {
             degreeTypeSet = false;
         }
 
-        selectedCourseType = courseSpinner.getItemAtPosition(i).toString();
+        selectedCourseType = degreeTypeSpinner.getItemAtPosition(i).toString();
     }
 
     protected void setValidYearField(int i){

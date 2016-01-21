@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-public class CreateFragment3 extends Fragment {
+public class CreateConfirmFragment extends Fragment {
 
     protected static String bookTitle;
     protected static String bookAuthor;
@@ -42,7 +42,7 @@ public class CreateFragment3 extends Fragment {
 
     Bundle create3Bundle;
 
-    public CreateFragment3() {
+    public CreateConfirmFragment() {
         // Required empty public constructor
     }
 

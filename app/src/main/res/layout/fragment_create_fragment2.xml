@@ -5,13 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jaspalhayer.quicklist.CreateFragment2">
+    tools:context=".CreateBookInfoFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Step 2"
+        android:text="Step 1"
         android:layout_marginTop="30dp"
         android:gravity="center_horizontal"
         android:id="@+id/create_header_2"
@@ -183,7 +183,7 @@
             android:textColor="#FFF"
             android:textSize="19sp"
             android:fontFamily="sans-serif-medium"
-            android:text="Review and Confirm" />
+            android:text="Next" />
     </android.support.v7.widget.CardView>
 
 </RelativeLayout>

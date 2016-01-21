@@ -13,7 +13,7 @@ import android.widget.EditText;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class CreateFragment2 extends Fragment {
+public class CreateBookInfoFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -45,7 +45,7 @@ public class CreateFragment2 extends Fragment {
     protected static String bookIsbn;
 
 
-    public CreateFragment2() {
+    public CreateBookInfoFragment() {
         // Required empty public constructor
     }
 
@@ -60,6 +60,8 @@ public class CreateFragment2 extends Fragment {
                 getExistingJsonObject();
                 parseJsonObject();
             }
+        } else {
+            create2Bundle = new Bundle();
         }
     }
 
@@ -74,8 +76,8 @@ public class CreateFragment2 extends Fragment {
         mNext2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CreateFragment3 createFragment3 = new CreateFragment3();
-
+                //CreateConfirmFragment createFragment3 = new CreateConfirmFragment();
+                CreateCourseInfoFragment createFragment3 = new CreateCourseInfoFragment();
                 saveInputText();
                 setBundleValues();
 
@@ -146,16 +148,18 @@ public class CreateFragment2 extends Fragment {
         try {
             JSONArray jArray = jObj.getJSONArray("items");
             JSONObject volumeInfo = jArray.getJSONObject(0).getJSONObject("volumeInfo");
-            JSONArray jsonIndustrialArray = jObj.getJSONArray("industryIdentifiers");
-            JSONArray authorArray = jObj.getJSONArray("authors");
+
+            JSONArray jsonIndustrialArray = volumeInfo.getJSONArray("industryIdentifiers");
+
+            JSONArray authorArray = volumeInfo.getJSONArray("authors");
 
             StringBuilder authorBuild = new StringBuilder("");
 
             //Appends all authors to a string
             for(int a=0; a<authorArray.length(); a++){
-                if (a>0) {
-                    authorBuild.append(", ");
                     authorBuild.append(authorArray.getString(a));
+                if(authorArray.length()>1) {
+                    authorBuild.append(", ");
                 }
             }
 
