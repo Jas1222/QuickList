@@ -1,91 +1,122 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CreateCourseInfoFragment">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".CreateCourseInfoFragment">
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Step 2"
-            android:layout_marginTop="30dp"
-            android:gravity="center_horizontal"
             android:id="@+id/create_header_1"
-            android:textSize="40sp"
-            android:textColor="@color/colorAlt"
-            android:layout_centerHorizontal="true" />
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Enter your course details"
-            android:gravity="center_horizontal"
-            android:id="@+id/create_subheader_1"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/colorAlt"
-            android:layout_marginBottom="60dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/create_header_1"/>
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:id="@+id/create_degree_type_spinner"
-            android:layout_below="@id/create_subheader_1"/>
-
-        <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/create_year_spinner"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_below="@id/create_degree_type_spinner"/>
-
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/create_course_spinner"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:layout_marginTop="30dp"
-            android:layout_below="@id/create_year_spinner"/>
+            android:gravity="center_horizontal"
+            android:text="Step 2"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/colorAlt"
+            android:textSize="40sp" />
 
-        <android.support.v7.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        <TextView
+            android:id="@+id/create_subheader_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/create_header_1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="60dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:text="Enter your course details"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/colorAlt" />
+
+        <Spinner
+            android:id="@+id/create_degree_type_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/create_subheader_1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="60dp" />
+
+        <Spinner
+            android:id="@+id/create_year_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/create_degree_type_spinner"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="30dp" />
+
+        <Spinner
+            android:id="@+id/create_course_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/create_year_spinner"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="30dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/exclamation_mark"
+            android:id="@+id/create_degree_type_error"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:visibility="invisible"
+            android:layout_alignTop="@id/create_degree_type_spinner"/>
+
+        <ImageView
+            android:id="@+id/create_year_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/create_year_spinner"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/exclamation_mark"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/create_course_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/create_course_spinner"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/exclamation_mark"
+            android:visibility="invisible" />
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/create_next_1_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/create_course_spinner"
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
             android:layout_marginRight="20dp"
-            android:layout_below="@+id/create_course_spinner"
-            card_view:cardPreventCornerOverlap="false"
+            android:layout_marginTop="30dp"
             card_view:cardBackgroundColor="#E91E63"
             card_view:cardCornerRadius="2dp"
-            card_view:cardElevation="6dp">
+            card_view:cardElevation="6dp"
+            card_view:cardPreventCornerOverlap="false">
 
             <TextView
                 android:id="@+id/material_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="11dp"
-                android:paddingBottom="11dp"
                 android:layout_gravity="center_horizontal"
-                android:textColor="#FFF"
-                android:textSize="19sp"
                 android:fontFamily="sans-serif-medium"
-                android:text="Review and Confirm" />
+                android:paddingBottom="11dp"
+                android:paddingTop="11dp"
+                android:text="Review and Confirm"
+                android:textColor="#FFF"
+                android:textSize="19sp" />
         </android.support.v7.widget.CardView>
 
-</RelativeLayout>
+    </RelativeLayout>
 </ScrollView>

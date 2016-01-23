@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -43,6 +44,10 @@ public class CreateCourseInfoFragment extends Fragment {
 
     protected boolean underGradCourse;
     protected boolean postGradCourse;
+
+    protected ImageView degreeTypeError;
+    protected ImageView yearError;
+    protected ImageView courseError;
 
     protected ArrayAdapter<CharSequence> degreeTypeAdapter;
     protected ArrayAdapter<CharSequence> ugCourseAdapter;
@@ -119,6 +124,7 @@ public class CreateCourseInfoFragment extends Fragment {
         mNextButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                highlightInvalidFields();
                 if (degreeTypeSet && courseSet && yearSet) {
                     // Capture all selected options
                     // Pass selection options to next fragment
@@ -154,6 +160,10 @@ public class CreateCourseInfoFragment extends Fragment {
         courseSpinner = (Spinner)rootView.findViewById(R.id.create_course_spinner);
         yearSpinner = (Spinner)rootView.findViewById(R.id.create_year_spinner);
         mNextButton1 = (CardView)rootView.findViewById(R.id.create_next_1_btn);
+
+        courseError = (ImageView)rootView.findViewById(R.id.create_course_error);
+        degreeTypeError = (ImageView)rootView.findViewById(R.id.create_degree_type_error);
+        yearError = (ImageView)rootView.findViewById(R.id.create_year_error);
     }
 
     protected void createArrayAdapters(){
@@ -211,6 +221,26 @@ public class CreateCourseInfoFragment extends Fragment {
             selectedCourse = courseSpinner.getItemAtPosition(i).toString();
         } else {
             courseSet = false;
+        }
+    }
+
+    protected void highlightInvalidFields(){
+        if(!yearSet){
+            yearError.setVisibility(View.VISIBLE);
+        } else {
+            yearError.setVisibility(View.INVISIBLE);
+        }
+
+        if(!courseSet){
+            courseError.setVisibility(View.VISIBLE);
+        } else {
+            courseError.setVisibility(View.INVISIBLE);
+        }
+
+        if (!degreeTypeSet){
+            degreeTypeError.setVisibility(View.VISIBLE);
+        } else {
+            degreeTypeError.setVisibility(View.INVISIBLE);
         }
     }
 }
