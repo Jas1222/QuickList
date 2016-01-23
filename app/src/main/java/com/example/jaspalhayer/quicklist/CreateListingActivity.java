@@ -28,9 +28,9 @@ public class CreateListingActivity extends AppCompatActivity {
         jsonObject = new JSONObject();
         b = new Bundle();
 
-        cameFromScan=checkCameFromScanActivity();
+        cameFromScan = checkCameFromScanActivity();
 
-        if(cameFromScan) {
+        if (cameFromScan) {
             jsonObject = new JSONObject();
             getJsonObject();
             putJsonInBundle();
@@ -47,7 +47,13 @@ public class CreateListingActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        getSupportFragmentManager().popBackStack();
+        int backstackCount = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (backstackCount == 0) {
+            super.onBackPressed();
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
     }
 
     @Override
@@ -66,20 +72,20 @@ public class CreateListingActivity extends AppCompatActivity {
         }
     }
 
-    protected boolean checkCameFromScanActivity(){
+    protected boolean checkCameFromScanActivity() {
         if (getIntent().getStringExtra("CAME_FROM") != null) {
             cameFrom = getIntent().getStringExtra("CAME_FROM");
             cameFromScan = cameFrom.contains("scan");
         }
 
-        if(cameFromScan){
+        if (cameFromScan) {
             return true;
         } else {
             return false;
         }
     }
 
-    protected void putJsonInBundle(){
+    protected void putJsonInBundle() {
         b.putString("JSON_STRING_OBJECT", jsonObject.toString());
     }
 
