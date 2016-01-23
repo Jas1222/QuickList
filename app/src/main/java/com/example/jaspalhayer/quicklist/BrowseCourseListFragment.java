@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -29,6 +30,10 @@ public class BrowseCourseListFragment extends Fragment {
     protected CardView mLookup;
     protected String selectedCourse;
     protected String selectedYear;
+
+    protected ImageView degreeTypeError;
+    protected ImageView yearError;
+    protected ImageView courseError;
 
     protected ConnectionHandler handler = new ConnectionHandler();
 
@@ -50,9 +55,8 @@ public class BrowseCourseListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.browse_uni_course, container, false);
+        final View rootView = inflater.inflate(R.layout.browse_uni_course, container, false);
         setVariablesToUiElements(rootView);
-
         createArrayAdapters();
         setSpinnerToAdapter();
         setAdapter();
@@ -96,6 +100,7 @@ public class BrowseCourseListFragment extends Fragment {
         mLookup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                    highlightInvalidFields();
                 if (degreeTypeSet && courseSet && yearSet) {
                     handler.getCourseListings(getActivity().getApplicationContext(), selectedCourse, selectedYear, new ConnectionHandler.VolleyCallback() {
                         @Override
@@ -180,6 +185,28 @@ public class BrowseCourseListFragment extends Fragment {
         courseSpinner = (Spinner)rootView.findViewById(R.id.courseSpinner);
         yearSpinner = (Spinner)rootView.findViewById(R.id.yearSpinner);
         mLookup = (CardView) rootView.findViewById(R.id.mLookupButton);
+        courseError = (ImageView)rootView.findViewById(R.id.course_error);
+        degreeTypeError = (ImageView)rootView.findViewById(R.id.degree_type_error);
+        yearError = (ImageView)rootView.findViewById(R.id.year_error);
     }
 
+    protected void highlightInvalidFields(){
+        if(!yearSet){
+            yearError.setVisibility(View.VISIBLE);
+        } else {
+            yearError.setVisibility(View.INVISIBLE);
+        }
+
+        if(!courseSet){
+            courseError.setVisibility(View.VISIBLE);
+        } else {
+            courseError.setVisibility(View.INVISIBLE);
+        }
+
+        if (!degreeTypeSet){
+            degreeTypeError.setVisibility(View.VISIBLE);
+        } else {
+            degreeTypeError.setVisibility(View.INVISIBLE);
+        }
+    }
 }

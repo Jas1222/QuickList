@@ -67,7 +67,34 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/exclamation-mark"/>
+            android:src="@drawable/exclamation_mark"
+            android:id="@+id/degree_type_error"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:visibility="invisible"
+            android:layout_alignTop="@id/degreeTypeSpinner"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/exclamation_mark"
+            android:id="@+id/year_error"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:visibility="invisible"
+            android:layout_alignTop="@id/yearSpinner" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/exclamation_mark"
+            android:id="@+id/course_error"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:visibility="invisible"
+            android:layout_alignTop="@id/courseSpinner" />
+
+           <!-- android:layout_alignRight="@id/degreeTypeSpinner"/> -->
 
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
