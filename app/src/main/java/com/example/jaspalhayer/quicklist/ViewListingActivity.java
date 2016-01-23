@@ -40,7 +40,6 @@ public class ViewListingActivity extends AppCompatActivity {
         setVariablesToUiElements();
         getJsonObject();
 
-
         try {
             jsArray = jsonObject.getJSONArray("books");
         } catch (Exception e) {
@@ -98,9 +97,6 @@ public class ViewListingActivity extends AppCompatActivity {
         viewPriceText.setText("£"+mBook.bookPrice);
         viewIsbnText.setText(mBook.bookIsbn);
         viewMessageButtonText.setText("Message " + mBook.bookFirstName);
-        //mMessageButton.setText("Message " + mBook.bookFirstName);
-       // mMessageButton.setPadding(40, 10, 40, 10);
-
     }
 
     protected void getListerFirstName(Books mBook){
