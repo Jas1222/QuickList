@@ -21,7 +21,6 @@ public class BrowseUniCourseActivity extends AppCompatActivity {
                     .addToBackStack(null)
                     .commit();
         }
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }

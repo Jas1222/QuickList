@@ -3,6 +3,7 @@ package com.example.jaspalhayer.quicklist;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -11,7 +12,9 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 public class ViewListingActivity extends AppCompatActivity {
-    Button mMessageButton;
+    CardView mMessageButton;
+    TextView viewMessageButtonText;
+
     protected JSONArray jsArray = new JSONArray();
     protected Books mBook = new Books();
     protected JSONObject jsonObject;
@@ -32,7 +35,7 @@ public class ViewListingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_listing);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         titleListingNumber = getIntent().getStringExtra("keyTitle");
-        getSupportActionBar().setTitle("Listing #"+titleListingNumber);
+        getSupportActionBar().setTitle("Listing #" + titleListingNumber);
 
         setVariablesToUiElements();
         getJsonObject();
@@ -45,11 +48,13 @@ public class ViewListingActivity extends AppCompatActivity {
         }
 
         parseJsonToBook(mBook);
+        getListerFirstName(mBook);
         setValuesToVariables(mBook);
     }
 
     protected void setVariablesToUiElements(){
-        mMessageButton = (Button)findViewById(R.id.message_button);
+        mMessageButton = (CardView)findViewById(R.id.view_message_button);
+        viewMessageButtonText = (TextView)findViewById(R.id.view_card_text);
         viewTitleText = (TextView)findViewById(R.id.view_title_text);
         viewAuthorText = (TextView)findViewById(R.id.view_author_text);
         viewYearText = (TextView)findViewById(R.id.view_year_text);
@@ -86,14 +91,24 @@ public class ViewListingActivity extends AppCompatActivity {
     }
 
     protected void setValuesToVariables(Books mBook){
-        mMessageButton.setText(mBook.bookFullName);
         viewTitleText.setText(mBook.bookTitle);
         viewAuthorText.setText(mBook.bookAuthor);
         viewYearText.setText(mBook.bookYear);
         viewDescText.setText(mBook.bookDesc);
         viewPriceText.setText("£"+mBook.bookPrice);
         viewIsbnText.setText(mBook.bookIsbn);
-        mMessageButton.setText("Message "+mBook.bookFullName);
-        mMessageButton.setPadding(40, 10, 40, 10);
+        viewMessageButtonText.setText("Message " + mBook.bookFirstName);
+        //mMessageButton.setText("Message " + mBook.bookFirstName);
+       // mMessageButton.setPadding(40, 10, 40, 10);
+
+    }
+
+    protected void getListerFirstName(Books mBook){
+        String listerFullName = mBook.bookFullName;
+        if(listerFullName.contains(" ")){
+            mBook.bookFirstName = listerFullName.substring(0, listerFullName.indexOf(" "));
+        } else {
+            mBook.bookFirstName = listerFullName;
+        }
     }
 }

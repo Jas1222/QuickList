@@ -41,6 +41,8 @@ public class CreateConfirmFragment extends Fragment {
     ConnectionHandler handler = new ConnectionHandler();
 
     String userId;
+    String fullName;
+
     UserCredentialHandler userCred = new UserCredentialHandler();
 
     Bundle create3Bundle;
@@ -73,11 +75,12 @@ public class CreateConfirmFragment extends Fragment {
         SharedPreferences p;
         p=getActivity().getSharedPreferences("userNamePrefs", 0);
         userId = p.getString("NAV_EMAIL", null);
+        fullName = p.getString("NAV_NAME", null);
 
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                handler.createListingPost(getActivity().getApplicationContext(), bookTitle, bookAuthor, bookYear, bookIsbn, bookPrice, bookDesc, courseType, courseDegree, courseYear, statusCode, userId);
+                handler.createListingPost(getActivity().getApplicationContext(), bookTitle, bookAuthor, bookYear, bookIsbn, bookPrice, bookDesc, courseType, courseDegree, courseYear, statusCode, userId, fullName);
             }
         });
 
@@ -110,7 +113,6 @@ public class CreateConfirmFragment extends Fragment {
         courseYearLabel = (TextView)rootView.findViewById(R.id.create_degree_year_label);
 
         mSubmit = (CardView)rootView.findViewById(R.id.create_next_3_btn);
-
     }
 
     private void getBundleStrings(){

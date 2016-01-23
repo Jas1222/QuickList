@@ -9,17 +9,32 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/browse_headerText"
+            android:id="@+id/browse_title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal"
             android:layout_marginBottom="40dp"
+            android:text="Browse"
+            android:fontFamily="sans-serif-light"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/colorAlt"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/browse_headerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:layout_below="@id/browse_title_text"
+            android:layout_marginBottom="40dp"
             android:text="Tap on the dropdown menus to make your selection"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/colorAlt"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
 
         <Spinner
@@ -28,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="30dp"
             android:layout_marginRight="20dp" />
 
         <Spinner
@@ -37,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="40dp"
             android:layout_marginRight="20dp" />
 
         <Spinner

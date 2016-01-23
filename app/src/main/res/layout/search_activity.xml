@@ -9,10 +9,25 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/search_head_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical"
+            android:text="Search"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginBottom="40dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/colorAlt"
+            android:textSize="40sp" />
+
+        <TextView
             android:id="@+id/headerText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
+            android:textStyle="bold"
+            android:layout_below="@id/search_head_text"
             android:layout_centerHorizontal="true"
             android:gravity="center_vertical"
             android:text="For best results, search by ISBN"
