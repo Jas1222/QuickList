@@ -60,7 +60,6 @@ public class CreateConfirmFragment extends Fragment {
             create3Bundle = this.getArguments();
             getBundleStrings();
         }
-
     }
 
     @Override
