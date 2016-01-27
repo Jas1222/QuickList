@@ -49,18 +49,6 @@
             android:label="CHANGE TO COURSE"
             android:parentActivityName=".BrowseUniCourseActivity" />
         <activity
-            android:name=".SearchActivity"
-            android:label="@string/search"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.jaspalhayer.quicklist.MainActivity" />
-        </activity>
-        <activity
-            android:name=".SearchResultActivity"
-            android:label="@string/title_activity_search_result"
-            android:parentActivityName=".SearchActivity" />
-        <activity
             android:name=".ViewListingActivity"
             android:label="Listing"
             android:parentActivityName=".MainActivity" />

@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(userStatus.isUserLoggedIn) {
+                if(userStatus.checkIfUserIsLoggedIn(getApplicationContext())) {
                     Intent i = new Intent(getApplicationContext(), CreateListingActivity.class);
                     i.putExtra("COME_FROM", "main");
                     startActivity(i);

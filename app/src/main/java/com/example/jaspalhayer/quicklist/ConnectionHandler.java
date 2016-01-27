@@ -337,30 +337,6 @@ public class ConnectionHandler {
         requestQueue.add(update_request);
     }
 
-    public void getGoogleBookDetails(final Context context, final String isbn, final VolleyCallback callback) {
-        String getTestUrl = googleBooksUrl + isbn + googleBooksCountry;
-        getTestUrl = getTestUrl.replaceAll(" ", "%20");
-
-        JsonObjectRequest update_request = new JsonObjectRequest(getTestUrl,
-                null, new Response.Listener<JSONObject>() {
-
-            @Override
-            public void onResponse(JSONObject response) {
-                System.out.println(response);
-                callback.onSuccess(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
-
-            }
-        });
-
-        RequestQueue requestQueue = Volley.newRequestQueue(context);
-        requestQueue.add(update_request);
-    }
-
     protected void getGoogleBookRequest2(final Context context, final String isbn, final VolleyCallback callback) {
         String getTestUrl = googleBooksUrl + isbn + googleBooksCountry;
         StringRequest stringRequest = new StringRequest(Request.Method.GET, getTestUrl,
