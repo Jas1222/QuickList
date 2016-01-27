@@ -67,6 +67,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     i.putExtra("COME_FROM", "main");
                     startActivity(i);
                 } else {
+                    LoginFragment loginFragment = new LoginFragment();
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+
+                    FragmentTransaction fragmentTransaction = fragmentManager
+                            .beginTransaction();
+                    fragmentTransaction.replace(R.id.main_container, loginFragment).addToBackStack(null);
+                    fragmentTransaction.commit();
+
                     Snackbar snackbar = Snackbar.make(view, "You are not logged in, please login to create a listing", Snackbar.LENGTH_SHORT);
                     snackbar.show();
                 }
