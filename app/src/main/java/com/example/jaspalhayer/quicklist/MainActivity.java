@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -61,9 +62,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), CreateListingActivity.class);
-                i.putExtra("COME_FROM","main");
-                startActivity(i);
+                if(userStatus.isUserLoggedIn) {
+                    Intent i = new Intent(getApplicationContext(), CreateListingActivity.class);
+                    i.putExtra("COME_FROM", "main");
+                    startActivity(i);
+                } else {
+                    Snackbar snackbar = Snackbar.make(view, "You are not logged in, please login to create a listing", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                }
             }
         });
 
