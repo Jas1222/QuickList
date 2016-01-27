@@ -24,13 +24,6 @@ public class SearchResultActivity extends AppCompatActivity implements AdapterVi
 
     Books mBook = new Books();
 
-    protected String dateListed[]={
-            "10/10/10",
-            "11/11/11",
-            "12/12/12",
-            "13/13/13"
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +64,7 @@ public class SearchResultActivity extends AppCompatActivity implements AdapterVi
     }
 
     protected void drawListRows(Books mBook, int i){
-        ListingRowItem item = new ListingRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), mBook.jsonBookPrice.get(i), dateListed[i], mBook.jsonBookListId.get(i));
+        ListingRowItem item = new ListingRowItem(mBook.jsonBookTitle.get(i), mBook.jsonBookAuthor.get(i), mBook.jsonBookPrice.get(i), mBook.jsonBookYear.get(i), mBook.jsonBookListId.get(i));
         rowItems.add(item);
     }
 
