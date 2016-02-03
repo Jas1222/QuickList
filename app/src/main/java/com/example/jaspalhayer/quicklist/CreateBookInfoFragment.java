@@ -26,6 +26,7 @@ public class CreateBookInfoFragment extends Fragment {
     Bundle create2Bundle;
 
     JSONObject jObj;
+    JSONArray jsArray;
 
     EditText titleField;
     EditText authorField;
@@ -53,12 +54,20 @@ public class CreateBookInfoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBook = new Books();
+        // TODO if totalitems=0, confirm with user
 
         if (getArguments() != null) {
             create2Bundle = this.getArguments();
-            if (doesScanJsonObjectExist()) {
+            if (doesJsonObjectExist()) {
                 getExistingJsonObject();
-                parseJsonObject();
+
+                if (create2Bundle.getString("CAME_FROM_EDIT") != null) {
+                    convertJsonObjectToArray();
+                    parseEditJsonToBook();
+                    create2Bundle.putString("LIST_ID", mBook.bookListId);
+                } else {
+                    parseScanJsonObject();
+                }
             }
         } else {
             create2Bundle = new Bundle();
@@ -76,7 +85,6 @@ public class CreateBookInfoFragment extends Fragment {
         mNext2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //CreateConfirmFragment createFragment3 = new CreateConfirmFragment();
                 CreateCourseInfoFragment createFragment3 = new CreateCourseInfoFragment();
                 saveInputText();
                 setBundleValues();
@@ -91,8 +99,8 @@ public class CreateBookInfoFragment extends Fragment {
             }
         });
 
-        if (doesScanJsonObjectExist()) {
-            setTextFromJsonScan();
+        if (doesJsonObjectExist()) {
+            setTextFromJson();
         }
 
         return rootView;
@@ -127,7 +135,7 @@ public class CreateBookInfoFragment extends Fragment {
         bookDesc = descField.getText().toString();
     }
 
-    protected boolean doesScanJsonObjectExist() {
+    protected boolean doesJsonObjectExist() {
         if (create2Bundle.getString("JSON_STRING_OBJECT") != null) {
             getExistingJsonObject();
             return true;
@@ -135,6 +143,7 @@ public class CreateBookInfoFragment extends Fragment {
             return false;
         }
     }
+
 
     protected void getExistingJsonObject() {
         try {
@@ -144,7 +153,36 @@ public class CreateBookInfoFragment extends Fragment {
         }
     }
 
-    protected void parseJsonObject() {
+    protected void convertJsonObjectToArray() {
+        try {
+            jsArray = jObj.getJSONArray("books");
+        } catch (Exception e) {
+            System.out.println("Parsing the JSON object to array fucked up");
+        }
+    }
+
+    protected void parseEditJsonToBook() {
+        try {
+            for (int i = 0; i < jsArray.length(); i++) {
+                JSONObject jobj = jsArray.getJSONObject(i);
+
+                mBook.bookTitle = jobj.getString("book_title");
+                mBook.bookAuthor = jobj.getString("book_author");
+                mBook.bookPrice = jobj.getString("book_price");
+                mBook.bookIsbn = jobj.getString("book_isbn");
+                mBook.bookYear = jobj.getString("book_year");
+                mBook.bookDesc = jobj.getString("book_desc");
+                mBook.bookPrice = jobj.getString("book_price");
+            }
+        } catch (Exception e) {
+            System.out.println("Parsing JSON object failed in CreateBookInfoFragment");
+        }
+
+        mBook.bookListId = create2Bundle.getString("LIST_ID");
+    }
+
+
+    protected void parseScanJsonObject() {
         try {
             JSONArray jArray = jObj.getJSONArray("items");
             JSONObject volumeInfo = jArray.getJSONObject(0).getJSONObject("volumeInfo");
@@ -156,23 +194,23 @@ public class CreateBookInfoFragment extends Fragment {
             StringBuilder authorBuild = new StringBuilder("");
 
             //Appends all authors to a string
-            for(int a=0; a<authorArray.length(); a++){
-                    authorBuild.append(authorArray.getString(a));
-                if(authorArray.length()>1) {
+            for (int a = 0; a < authorArray.length(); a++) {
+                authorBuild.append(authorArray.getString(a));
+                if (authorArray.length() > 1) {
                     authorBuild.append(", ");
                 }
             }
 
             //Looks for ISBN in 13 digit format and passes to it
-            for(int k = 0; k < jsonIndustrialArray.length(); k++) {
+            for (int k = 0; k < jsonIndustrialArray.length(); k++) {
                 JSONObject isbn = jsonIndustrialArray.getJSONObject(k);
                 if (isbn.getString("type").equals("ISBN_13")) {
                     mBook.bookIsbn = isbn.getString("identifier");
                 }
 
-            mBook.bookTitle = volumeInfo.getString("title");
-            mBook.bookAuthor = authorBuild.toString();
-            mBook.bookYear = volumeInfo.getString("publishedDate");
+                mBook.bookTitle = volumeInfo.getString("title");
+                mBook.bookAuthor = authorBuild.toString();
+                mBook.bookYear = volumeInfo.getString("publishedDate");
             }
 
         } catch (Exception e) {
@@ -180,10 +218,12 @@ public class CreateBookInfoFragment extends Fragment {
         }
     }
 
-    protected void setTextFromJsonScan() {
+    protected void setTextFromJson() {
         titleField.setText(mBook.bookTitle);
         authorField.setText(mBook.bookAuthor);
         yearField.setText(mBook.bookYear);
         isbnField.setText(mBook.bookIsbn);
+        priceField.setText(mBook.bookPrice);
+        descField.setText(mBook.bookDesc);
     }
 }

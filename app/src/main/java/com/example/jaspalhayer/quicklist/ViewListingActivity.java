@@ -27,7 +27,6 @@ public class ViewListingActivity extends AppCompatActivity {
     TextView viewDescText;
     TextView viewPriceText;
     TextView viewIsbnText;
-    TextView viewFullName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -67,7 +67,6 @@ public class CreateCourseInfoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            // TODO if totalitems=0, confirm with user
             createBundle = getArguments();
         } else {
             createBundle = new Bundle();

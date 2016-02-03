@@ -42,6 +42,9 @@ public class CreateConfirmFragment extends Fragment {
 
     String userId;
     String fullName;
+    String listId;
+
+    boolean cameFromEdit = false;
 
     UserCredentialHandler userCred = new UserCredentialHandler();
 
@@ -72,49 +75,53 @@ public class CreateConfirmFragment extends Fragment {
         setLabelText();
 
         SharedPreferences p;
-        p=getActivity().getSharedPreferences("userNamePrefs", 0);
+        p = getActivity().getSharedPreferences("userNamePrefs", 0);
         userId = p.getString("NAV_EMAIL", null);
         fullName = p.getString("NAV_NAME", null);
 
         mSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                handler.createListingPost(getActivity().getApplicationContext(), bookTitle, bookAuthor, bookYear, bookIsbn, bookPrice, bookDesc, courseType, courseDegree, courseYear, statusCode, userId, fullName);
+                if (cameFromEdit) {
+                    handler.updateListingDetails(getActivity().getApplicationContext(), bookTitle, bookAuthor, bookYear, bookIsbn, bookPrice, bookDesc, courseType, courseDegree, courseYear, listId);
+                } else {
+                    handler.createListingPost(getActivity().getApplicationContext(), bookTitle, bookAuthor, bookYear, bookIsbn, bookPrice, bookDesc, courseType, courseDegree, courseYear, statusCode, userId, fullName);
+                }
             }
         });
 
         return rootView;
     }
 
-    private void setLabelText(){
-        bookTitleLabel.setText("Title: "+bookTitle);
-        bookAuthorLabel.setText("Author: "+bookAuthor);
-        bookYearLabel.setText("Price: "+bookYear);
-        bookIsbnLabel.setText("ISBN: "+bookIsbn);
-        bookDescLabel.setText("Description "+bookDesc);
-        bookPriceLabel.setText("Price: "+bookPrice);
+    private void setLabelText() {
+        bookTitleLabel.setText("Title: " + bookTitle);
+        bookAuthorLabel.setText("Author: " + bookAuthor);
+        bookYearLabel.setText("Year: " + bookYear);
+        bookIsbnLabel.setText("ISBN: " + bookIsbn);
+        bookDescLabel.setText("Description: " + bookDesc);
+        bookPriceLabel.setText("Price: £" + bookPrice);
 
-        courseDegreeLabel.setText("Course: "+courseDegree);
-        courseTypeLabel.setText("Type: " +courseType);
-        courseYearLabel.setText("Year: "+courseYear);
+        courseDegreeLabel.setText("Course: " + courseDegree);
+        courseTypeLabel.setText("Type: " + courseType);
+        courseYearLabel.setText("Year: " + courseYear);
     }
 
-    private void setVariablesToUi(View rootView){
-        bookTitleLabel = (TextView)rootView.findViewById(R.id.create_book_title_label);
-        bookAuthorLabel = (TextView)rootView.findViewById(R.id.create_book_author_label);
-        bookYearLabel = (TextView)rootView.findViewById(R.id.create_book_year_label);
-        bookIsbnLabel = (TextView)rootView.findViewById(R.id.create_book_isbn_label);
-        bookDescLabel = (TextView)rootView.findViewById(R.id.create_book_description_label);
-        bookPriceLabel = (TextView)rootView.findViewById(R.id.create_book_price_label);
+    private void setVariablesToUi(View rootView) {
+        bookTitleLabel = (TextView) rootView.findViewById(R.id.create_book_title_label);
+        bookAuthorLabel = (TextView) rootView.findViewById(R.id.create_book_author_label);
+        bookYearLabel = (TextView) rootView.findViewById(R.id.create_book_year_label);
+        bookIsbnLabel = (TextView) rootView.findViewById(R.id.create_book_isbn_label);
+        bookDescLabel = (TextView) rootView.findViewById(R.id.create_book_description_label);
+        bookPriceLabel = (TextView) rootView.findViewById(R.id.create_book_price_label);
 
-        courseDegreeLabel = (TextView)rootView.findViewById(R.id.create_degree_course_label);
-        courseTypeLabel = (TextView)rootView.findViewById(R.id.create_degree_type_label);
-        courseYearLabel = (TextView)rootView.findViewById(R.id.create_degree_year_label);
+        courseDegreeLabel = (TextView) rootView.findViewById(R.id.create_degree_course_label);
+        courseTypeLabel = (TextView) rootView.findViewById(R.id.create_degree_type_label);
+        courseYearLabel = (TextView) rootView.findViewById(R.id.create_degree_year_label);
 
-        mSubmit = (CardView)rootView.findViewById(R.id.create_next_3_btn);
+        mSubmit = (CardView) rootView.findViewById(R.id.create_next_3_btn);
     }
 
-    private void getBundleStrings(){
+    private void getBundleStrings() {
         courseType = create3Bundle.getString("COURSE_TYPE");
         courseDegree = create3Bundle.getString("COURSE_DEGREE");
         courseYear = create3Bundle.getString("COURSE_YEAR");
@@ -125,5 +132,10 @@ public class CreateConfirmFragment extends Fragment {
         bookPrice = create3Bundle.getString("KEY_PRICE");
         bookDesc = create3Bundle.getString("KEY_DESC");
         bookTitle = create3Bundle.getString("KEY_TITLE");
+
+        if (create3Bundle.getString("CAME_FROM_EDIT") != null) {
+            cameFromEdit = true;
+            listId = create3Bundle.getString("LIST_ID");
+        }
     }
 }

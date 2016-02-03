@@ -16,6 +16,7 @@ public class CreateListingActivity extends AppCompatActivity {
     Bundle b;
     boolean cameFromScan = false;
     String cameFrom;
+    boolean cameFromEdit = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,9 +30,18 @@ public class CreateListingActivity extends AppCompatActivity {
         b = new Bundle();
 
         cameFromScan = checkCameFromScanActivity();
+        cameFromEdit = checkCameFromEdit();
 
+        // TODO refactor into a case statement, rethink design of 'CAME_FROM'
         if (cameFromScan) {
             jsonObject = new JSONObject();
+            getJsonObject();
+            putJsonInBundle();
+            createFragment1.setArguments(b);
+        }
+
+        if (cameFromEdit) {
+            setTitle("Edit a Listing");
             getJsonObject();
             putJsonInBundle();
             createFragment1.setArguments(b);
@@ -85,8 +95,26 @@ public class CreateListingActivity extends AppCompatActivity {
         }
     }
 
-    protected void putJsonInBundle() {
-        b.putString("JSON_STRING_OBJECT", jsonObject.toString());
+    protected boolean checkCameFromEdit() {
+        if (getIntent().getStringExtra("CAME_FROM") != null) {
+            cameFrom = getIntent().getStringExtra("CAME_FROM");
+            cameFromEdit = cameFrom.contains("EDIT");
+        }
+
+        if (cameFromEdit) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
+    protected void putJsonInBundle() {
+        b.putString("JSON_STRING_OBJECT", jsonObject.toString());
+        if (cameFromEdit) {
+            b.putString("CAME_FROM_EDIT", "EDIT");
+
+            String listid = getIntent().getStringExtra("LIST_ID");
+            b.putString("LIST_ID", listid);
+        }
+    }
 }

@@ -91,6 +91,17 @@ public class ResultActivity extends AppCompatActivity implements AdapterView.OnI
         final String member_list_id = rowItems.get(info.position).bookListId;
         switch (item.getItemId()) {
             case R.id.listing_edit:
+                handler.getCourseListingsDetails(getApplicationContext(), member_list_id, new ConnectionHandler.VolleyCallback() {
+                    @Override
+                    public void onSuccess(JSONObject result) {
+                        jsOb = result;
+                        Intent i = new Intent(getApplicationContext(), CreateListingActivity.class);
+                        i.putExtra("LIST_ID", member_list_id);
+                        i.putExtra("jsonObject", jsOb.toString());
+                        i.putExtra("CAME_FROM", "EDIT");
+                        startActivity(i);
+                    }
+                });
                 return true;
             case R.id.listing_delete:
                 handler.deleteListing(getApplicationContext(), member_list_id);

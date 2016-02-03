@@ -28,6 +28,9 @@ public class ConnectionHandler {
     String getUserListingsUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/get_user_listing.php";
     String postDeleteUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/delete_listing.php";
     String postUpdateListingStatus = "http://qt003605.webs.sse.reading.ac.uk/android_connect/update_list_status.php";
+    String updateListingDetailsUrl = "http://qt003605.webs.sse.reading.ac.uk/android_connect/update_list_details.php";
+
+
     String googleBooksUrl = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
     String googleBooksCountry = "&country=UK";
 
@@ -73,6 +76,49 @@ public class ConnectionHandler {
                 params.put("list_status", status_code);
                 params.put("user_id", userId);
                 params.put("full_name", fullName);
+
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    public void updateListingDetails(final Context context, final String title, final String author, final String year, final String isbn, final String price, final String desc, final String courseType, final String courseDegree, final String courseYear, final String listid) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, updateListingDetailsUrl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObjectResponse = new JSONObject(response);
+                            String msg = jsonObjectResponse.getString("message");
+                            Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println(error);
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("book_title", title);
+                params.put("book_author", author);
+                params.put("book_year", year);
+                params.put("book_desc", desc);
+                params.put("book_price", price);
+                params.put("book_isbn", isbn);
+                params.put("uni_course_type", courseType);
+                params.put("uni_year", courseYear);
+                params.put("uni_course", courseDegree);
+                params.put("list_id", listid);
 
                 return params;
             }
