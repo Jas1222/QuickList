@@ -56,6 +56,19 @@
             android:name=".HomeFragment"
             android:label="@string/title_activity_home_fragement"></activity>
 
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationName"
+            android:value="@string/app_name" />
+
         <activity android:name=".SimpleScannerActivity"
             android:label="Scan Activity"
             android:parentActivityName=".MainActivity"/>
