@@ -4,7 +4,7 @@
 
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -16,8 +16,8 @@
         <!-- Main/Home Activity -->
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
             android:configChanges="orientation|screenSize"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,17 +28,18 @@
 
         <!-- All Product Activity (child of main activity) -->
 
+
         <!-- Create a Listing Activity (child of main activity -->
         <activity
             android:name=".CreateListingActivity"
-            android:label="Create a Listing"
             android:configChanges="orientation|screenSize"
+            android:label="Create a Listing"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".BrowseUniCourseActivity"
-            android:label="Browse by Course"
             android:configChanges="orientation|screenSize"
+            android:label="Browse by Course"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -49,29 +50,40 @@
             android:label="CHANGE TO COURSE"
             android:parentActivityName=".BrowseUniCourseActivity" />
         <activity
+            android:name=".SearchResultActivity"
+            android:label="Search"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".ViewListingActivity"
             android:label="Listing"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".HomeFragment"
-            android:label="@string/title_activity_home_fragement"></activity>
-
+            android:label="@string/title_activity_home_fragement" />
         <activity
             android:name="com.facebook.FacebookActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationName"
             android:value="@string/app_name" />
 
-        <activity android:name=".SimpleScannerActivity"
+        <activity
+            android:name=".SimpleScannerActivity"
             android:label="Scan Activity"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".MessagingActivity"
+            android:label="@string/title_activity_messaging"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.jaspalhayer.quicklist.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -408,5 +408,6 @@
     <string name="title_activity_view_listing">ViewListingActivity</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_home_fragement">HomeFragement</string>
+    <string name="title_activity_messaging">MessagingActivity</string>
 
 </resources>

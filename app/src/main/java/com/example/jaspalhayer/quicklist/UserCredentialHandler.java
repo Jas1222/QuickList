@@ -13,6 +13,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.facebook.login.LoginManager;
+import com.sendbird.android.SendBird;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -113,6 +114,8 @@ public class UserCredentialHandler {
                                 isUserLoggedIn = true;
 
                                 storeUserEmailAndName(context);
+                                sendbirdLogin(context);
+
                                 Toast.makeText(context, loginMessage, Toast.LENGTH_LONG).show();
                                 callback.onSuccess();
                             }
@@ -138,6 +141,13 @@ public class UserCredentialHandler {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
+    }
+
+    protected void sendbirdLogin(Context context){
+        SharedPreferences prefs = context.getSharedPreferences(USER_PREFS, 0);
+        String email = prefs.getString(KEY_NAV_EMAIL, "");
+        String name = prefs.getString(KEY_NAV_NAME, "");
+        SendBird.login(email,name);
     }
 
     protected boolean loginError(String error) {
@@ -226,6 +236,8 @@ public class UserCredentialHandler {
 
         navHeaderEmail.setText(prefs.getString(KEY_NAV_EMAIL, this.userFullname));
         navHeaderFullName.setText(prefs.getString(KEY_NAV_NAME, this.userEmail));
+
+        sendbirdLogin(context);
     }
 
     protected void setNavHeaderOnLogout(NavigationView navigationView) {

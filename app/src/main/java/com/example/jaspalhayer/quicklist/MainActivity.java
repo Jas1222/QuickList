@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.facebook.FacebookSdk;
+import com.sendbird.android.SendBird;
 
 import org.json.JSONObject;
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     MenuItem activeListing;
     Bundle bundle;
     SharedPreferences prefs;
+    String APP_ID = "FDBEF958-BCF1-4A23-A20F-C4625D2E9C7A";
 
     NavigationView navigationView;
     UserCredentialHandler userStatus;
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         request = new ConnectionHandler();
         bundle = new Bundle();
         FacebookSdk.sdkInitialize(getApplicationContext());
-
+        SendBird.init(APP_ID);
 
         prefs = getSharedPreferences(USER_PREFS, 0);
 
