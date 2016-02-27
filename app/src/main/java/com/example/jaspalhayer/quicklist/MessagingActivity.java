@@ -28,9 +28,14 @@ public class MessagingActivity extends Activity {
         userCredentialHandler = new UserCredentialHandler();
         Button bMsgJas = (Button)findViewById(R.id.bJas);
         Button bMsgTest = (Button)findViewById(R.id.bTest);
+        Button bSendMsg = (Button)findViewById(R.id.button_send_message);
+
+        String channelUrl = "72f92.testchannel";
+        final String userH = "h@h.com";
+        final String userT = "test@test.com";
 
         messageReceivedText = (TextView)findViewById(R.id.message_text);
-        SendBird.connect();
+
 
         bMsgJas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,18 +43,21 @@ public class MessagingActivity extends Activity {
                 // SendBird.joinMessaging();
                 //  SendBird.join("72f92.testchannel");
 
-                SendBird.startMessaging("jhayer36@gmail.com");
-
-                SendBird.send("IF YOU SEE THIS IT WORKED");
+                SendBird.startMessaging(userH);
             }
         });
 
         bMsgTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SendBird.startMessaging("test@test.com");
+                SendBird.startMessaging(userT);
+            }
+        });
 
-                SendBird.send("IF YOU SEE THIS IT WORKED");
+        bSendMsg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SendBird.send("MESSAGE SENT");
             }
         });
 
@@ -72,6 +80,7 @@ public class MessagingActivity extends Activity {
             @Override
             public void onMessageReceived(Message message) {
                 messageReceivedText.setText(message.getMessage());
+                System.out.println(message.getMessage());
             }
 
             @Override
@@ -116,7 +125,8 @@ public class MessagingActivity extends Activity {
 
             @Override
             public void onMessagingStarted(MessagingChannel messagingChannel) {
-
+                SendBird.join(messagingChannel.getUrl());
+                SendBird.connect();
             }
 
             @Override
