@@ -52,7 +52,6 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
 
     }
@@ -109,6 +108,21 @@ public class LoginFragment extends Fragment {
                             public void onCompleted(
                                     JSONObject object,
                                     GraphResponse response) {
+
+                                try {
+                                    String userName = object.getString("name");
+                                    String userEmail = object.getString("email");
+                                    System.out.println("User email: " + userEmail + " \n User name: " + userName);
+                                    loginHandler.saveUserEmailAndName(getActivity().getApplicationContext(), userName, userEmail);
+                                    loginHandler.storeUserEmailAndName(getActivity().getApplicationContext());
+
+                                } catch (Exception e) {
+                                    System.out.println("Parsing and saving name email from fb fucked up");
+                                }
+
+
+                                //TODO parse and save user details
+                                mCallback.onLoginSuccess();
                                 // Application code
                                 Log.v("LoginActivity", response.toString());
                                 // Possibly run callback onsuccess?

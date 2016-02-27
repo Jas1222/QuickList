@@ -17,6 +17,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.facebook.FacebookSdk;
+
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, LoginFragment.OnLoginCallback {
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         userStatus = new UserCredentialHandler();
         request = new ConnectionHandler();
         bundle = new Bundle();
+        FacebookSdk.sdkInitialize(getApplicationContext());
+
 
         prefs = getSharedPreferences(USER_PREFS, 0);
 

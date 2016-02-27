@@ -12,6 +12,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.login.LoginManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,12 +31,14 @@ public class UserCredentialHandler {
     protected static final String KEY_NAV_NAME = "NAV_NAME";
     protected static final String KEY_NAV_EMAIL = "NAV_EMAIL";
     protected static final String KEY_USER_STATUS = "USER_STATUS";
+    protected static final String KEY_USER_FB_STATUS = "FB_LOGIN_STATUS";
     protected static final String USER_PREFS = "userNamePrefs";
 
     protected static final String userLoggedIn = "true";
     protected static final String userNotLoggedIn = "false";
 
     public boolean isUserLoggedIn = false;
+    public boolean isFacebookUserLoggedIn = false;
     protected String loginResponse;
     protected String loginMessage;
 
@@ -102,7 +105,9 @@ public class UserCredentialHandler {
                                 loginMessage = jsonObjectResponse.getString("error_msg");
                                 Toast.makeText(context, loginMessage, Toast.LENGTH_LONG).show();
                             } else {
+                                //TODO refactor
                                 loginMessage = jsonObjectResponse.getString("login_msg");
+
                                 userEmail = jsonObjectResponse.getString("email");
                                 userFullname = jsonObjectResponse.getString("name");
                                 isUserLoggedIn = true;
@@ -171,11 +176,27 @@ public class UserCredentialHandler {
         editor.putString(KEY_USER_STATUS, "true").apply();
     }
 
-    protected boolean checkIfUserIsLoggedIn(Context context) {
-        String getStatus;
+    protected void saveUserEmailAndName(Context context, String name, String email){
+        userFullname = name;
+        userEmail = email;
+        isUserLoggedIn = true;
+        isFacebookUserLoggedIn = true;
         SharedPreferences prefs = context.getSharedPreferences(USER_PREFS, 0);
-        getStatus = prefs.getString(KEY_USER_STATUS, "");
-        if (getStatus.equals("true")) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(KEY_USER_FB_STATUS, "true");
+    }
+
+    protected boolean checkIfUserIsLoggedIn(Context context) {
+        String getNormalStatus;
+        String getFbStatus;
+
+        SharedPreferences prefs = context.getSharedPreferences(USER_PREFS, 0);
+        getFbStatus = prefs.getString(KEY_USER_FB_STATUS, "");
+
+        getNormalStatus = prefs.getString(KEY_USER_STATUS, "");
+        if (getNormalStatus.equals("true")) {
+            return true;
+        } else if(getFbStatus.equals("true")) {
             return true;
         } else {
             return false;
@@ -190,6 +211,9 @@ public class UserCredentialHandler {
         editor.putString(KEY_USER_STATUS, userNotLoggedIn).apply();
         editor.putString(KEY_NAV_NAME, "").apply();
         editor.putString(KEY_NAV_EMAIL, "").apply();
+        editor.putString(KEY_USER_FB_STATUS, "").apply();
+
+        LoginManager.getInstance().logOut();
 
         Toast.makeText(context, "You have logged out!", Toast.LENGTH_LONG).show();
     }
@@ -211,8 +235,6 @@ public class UserCredentialHandler {
         navHeaderFullName.setText("You are not logged in");
         navHeaderEmail.setText("Please login below");
     }
-
-    //TODO method to check if user is logged in
 
     public interface VolleyCallBack {
         void onSuccess();
