@@ -65,9 +65,6 @@ public class ChatCustomAdapter extends BaseAdapter {
             holder.username = (TextView)convertView.findViewById(R.id.chat_user_id);
             holder.timestamp = (TextView)convertView.findViewById(R.id.chat_timestamp);
 
-
-//            holder.timestamp.setText((int)row_pos.timestamp);
-
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder)convertView.getTag();
@@ -82,14 +79,8 @@ public class ChatCustomAdapter extends BaseAdapter {
     }
 
     public void updateChatList(List<ChatRowItem> chatItems){
-        System.out.println("LIST THAT IS PASSED"+chatItems);
-        System.out.println("BEFORE CLEAR: " + chatRowItemList);
         chatRowItemList.clear();
         chatRowItemList.addAll(chatItems);
-        System.out.println("AFTER CLEAR AND ADD: "+chatRowItemList);
-
         this.notifyDataSetChanged();
     }
-
-
 }

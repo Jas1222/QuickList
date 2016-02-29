@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+
 import com.sendbird.android.MessageListQuery;
 import com.sendbird.android.SendBird;
 import com.sendbird.android.SendBirdEventHandler;
@@ -19,10 +20,11 @@ import com.sendbird.android.model.MessagingChannel;
 import com.sendbird.android.model.ReadStatus;
 import com.sendbird.android.model.SystemMessage;
 import com.sendbird.android.model.TypeStatus;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class MessagingActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class MessagingActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     UserCredentialHandler userCredentialHandler;
     ListView chatListView;
 
@@ -34,10 +36,10 @@ public class MessagingActivity extends AppCompatActivity implements AdapterView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messaging);
         userCredentialHandler = new UserCredentialHandler();
-        Button bMsgJas = (Button)findViewById(R.id.bJas);
-        Button bMsgTest = (Button)findViewById(R.id.bTest);
-        Button bSendMsg = (Button)findViewById(R.id.button_send_message);
-        final EditText inputText = (EditText)findViewById(R.id.chat_enter_message);
+        Button bMsgJas = (Button) findViewById(R.id.bJas);
+        Button bMsgTest = (Button) findViewById(R.id.bTest);
+        Button bSendMsg = (Button) findViewById(R.id.button_send_message);
+        final EditText inputText = (EditText) findViewById(R.id.chat_enter_message);
 
         final String userH = "h@h.com";
         final String userT = "test@test.com";
@@ -45,7 +47,7 @@ public class MessagingActivity extends AppCompatActivity implements AdapterView.
         chatRowItems = new ArrayList<>();
         final ChatCustomAdapter adapter = new ChatCustomAdapter(this, chatRowItems);
 
-        chatListView = (ListView)findViewById(R.id.chat_listview);
+        chatListView = (ListView) findViewById(R.id.chat_listview);
         chatListView.setAdapter(adapter);
         chatListView.setOnItemClickListener(this);
 
@@ -92,6 +94,7 @@ public class MessagingActivity extends AppCompatActivity implements AdapterView.
             public void onMessageReceived(Message message) {
                 drawListRows(message);
                 adapter.updateChatList(chatRowItems);
+                scrollMyListViewToBottom(adapter);
             }
 
             @Override
@@ -140,10 +143,12 @@ public class MessagingActivity extends AppCompatActivity implements AdapterView.
                 SendBird.queryMessageList(messagingChannel.getUrl()).load(Long.MAX_VALUE, 30, 10, new MessageListQuery.MessageListQueryResult() {
                     @Override
                     public void onResult(List<MessageModel> messageModels) {
-                         messagesList = (List<Message>)(List<?>) messageModels;
-                         for(int i = 0; i < messageModels.size(); i++){
-                             drawListRows(messagesList.get(i));
-                         }
+                        messagesList = (List<Message>) (List<?>) messageModels;
+                        for (int i = 0; i < messageModels.size(); i++) {
+                            drawListRows(messagesList.get(i));
+                        }
+                        adapter.updateChatList(chatRowItems);
+                        scrollMyListViewToBottom(adapter);
                         SendBird.join(messagingChannel.getUrl());
                         SendBird.connect();
                     }
@@ -190,14 +195,23 @@ public class MessagingActivity extends AppCompatActivity implements AdapterView.
 
     }
 
-    public void drawListRows(Message msg){
+    public void drawListRows(Message msg) {
         ChatRowItem item = new ChatRowItem(msg.getSenderName(), msg.getMessage(), msg.getTimestamp());
         chatRowItems.add(item);
     }
 
-  //  public void updateChatList(List<ChatRowItem> chatItems){
-  //      messagesList.clear();
-  //      messagesList.addAll(newMsgList);
+    private void scrollMyListViewToBottom(final ChatCustomAdapter adapter){
+        chatListView.post(new Runnable(){
+            @Override
+            public void run(){
+                chatListView.setSelection(adapter.getCount() - 1);
+            }
+        });
     }
+
+    //  public void updateChatList(List<ChatRowItem> chatItems){
+    //      messagesList.clear();
+    //      messagesList.addAll(newMsgList);
+}
 
 
