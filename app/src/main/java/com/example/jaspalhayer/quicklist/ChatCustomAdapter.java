@@ -8,8 +8,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.sendbird.android.model.Message;
+
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,8 +22,13 @@ public class ChatCustomAdapter extends BaseAdapter {
     List<ChatRowItem> chatRowItemList;
     Context context;
 
+//    ChatCustomAdapter(Context context, List<ChatRowItem> chatRowItemList){
+//        this.chatRowItemList = chatRowItemList;
+//        this.context = context;
+//    }
+
     ChatCustomAdapter(Context context, List<ChatRowItem> chatRowItemList){
-        this.chatRowItemList = chatRowItemList;
+        this.chatRowItemList = new ArrayList<>(chatRowItemList);
         this.context = context;
     }
 
@@ -57,10 +65,7 @@ public class ChatCustomAdapter extends BaseAdapter {
             holder.username = (TextView)convertView.findViewById(R.id.chat_user_id);
             holder.timestamp = (TextView)convertView.findViewById(R.id.chat_timestamp);
 
-            ChatRowItem row_pos = chatRowItemList.get(position);
 
-            holder.message.setText(row_pos.message);
-            holder.username.setText(row_pos.userId);
 //            holder.timestamp.setText((int)row_pos.timestamp);
 
             convertView.setTag(holder);
@@ -68,7 +73,23 @@ public class ChatCustomAdapter extends BaseAdapter {
             holder = (ViewHolder)convertView.getTag();
         }
 
+        ChatRowItem row_pos = chatRowItemList.get(position);
+
+        holder.message.setText(row_pos.message);
+        holder.username.setText(row_pos.userId);
+
         return convertView;
     }
+
+    public void updateChatList(List<ChatRowItem> chatItems){
+        System.out.println("LIST THAT IS PASSED"+chatItems);
+        System.out.println("BEFORE CLEAR: " + chatRowItemList);
+        chatRowItemList.clear();
+        chatRowItemList.addAll(chatItems);
+        System.out.println("AFTER CLEAR AND ADD: "+chatRowItemList);
+
+        this.notifyDataSetChanged();
+    }
+
 
 }

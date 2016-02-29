@@ -1,19 +1,12 @@
 package com.example.jaspalhayer.quicklist;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import com.sendbird.android.MessageListQuery;
 import com.sendbird.android.SendBird;
 import com.sendbird.android.SendBirdEventHandler;
@@ -26,16 +19,15 @@ import com.sendbird.android.model.MessagingChannel;
 import com.sendbird.android.model.ReadStatus;
 import com.sendbird.android.model.SystemMessage;
 import com.sendbird.android.model.TypeStatus;
-
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class MessagingActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
     UserCredentialHandler userCredentialHandler;
     ListView chatListView;
+
     List<ChatRowItem> chatRowItems;
+    List<Message> messagesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +44,7 @@ public class MessagingActivity extends AppCompatActivity implements AdapterView.
 
         chatRowItems = new ArrayList<>();
         final ChatCustomAdapter adapter = new ChatCustomAdapter(this, chatRowItems);
+
         chatListView = (ListView)findViewById(R.id.chat_listview);
         chatListView.setAdapter(adapter);
         chatListView.setOnItemClickListener(this);
@@ -60,9 +53,6 @@ public class MessagingActivity extends AppCompatActivity implements AdapterView.
         bMsgJas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // SendBird.joinMessaging();
-                //  SendBird.join("72f92.testchannel");
-
                 SendBird.startMessaging(userH);
             }
         });
@@ -77,9 +67,8 @@ public class MessagingActivity extends AppCompatActivity implements AdapterView.
         bSendMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String message = inputText.getText().toString();
-                SendBird.send(message);
-                adapter.notifyDataSetChanged();
+                String newMsg = inputText.getText().toString();
+                SendBird.send(newMsg);
             }
         });
 
@@ -101,7 +90,8 @@ public class MessagingActivity extends AppCompatActivity implements AdapterView.
 
             @Override
             public void onMessageReceived(Message message) {
-                adapter.notifyDataSetChanged();
+                drawListRows(message);
+                adapter.updateChatList(chatRowItems);
             }
 
             @Override
@@ -150,11 +140,10 @@ public class MessagingActivity extends AppCompatActivity implements AdapterView.
                 SendBird.queryMessageList(messagingChannel.getUrl()).load(Long.MAX_VALUE, 30, 10, new MessageListQuery.MessageListQueryResult() {
                     @Override
                     public void onResult(List<MessageModel> messageModels) {
-                         List<Message> messages = (List<Message>)(List<?>) messageModels;
+                         messagesList = (List<Message>)(List<?>) messageModels;
                          for(int i = 0; i < messageModels.size(); i++){
-                             drawListRows(messages.get(i));
+                             drawListRows(messagesList.get(i));
                          }
-                        adapter.notifyDataSetChanged();
                         SendBird.join(messagingChannel.getUrl());
                         SendBird.connect();
                     }
@@ -164,13 +153,10 @@ public class MessagingActivity extends AppCompatActivity implements AdapterView.
 
                     }
                 });
-               // SendBird.join(messagingChannel.getUrl());
-               // SendBird.connect();
             }
 
             @Override
             public void onMessagingUpdated(MessagingChannel messagingChannel) {
-
             }
 
             @Override
@@ -209,23 +195,9 @@ public class MessagingActivity extends AppCompatActivity implements AdapterView.
         chatRowItems.add(item);
     }
 
-    public void getPreviousMessages(final MessagingChannel messagingChannel, final ChatCustomAdapter adapter){
-        SendBird.queryMessageList(messagingChannel.getUrl()).load(Long.MAX_VALUE, 30, 10, new MessageListQuery.MessageListQueryResult() {
-            @Override
-            public void onResult(List<MessageModel> messageModels) {
-                List<Message> messages = (List<Message>)(List<?>) messageModels;
-                for(int i = 0; i < messageModels.size(); i++){
-                    drawListRows(messages.get(i));
-                }
-                adapter.notifyDataSetChanged();
-                SendBird.join(messagingChannel.getUrl());
-                SendBird.connect();
-            }
-
-            @Override
-            public void onError(Exception e) {
-
-            }
-        });
+  //  public void updateChatList(List<ChatRowItem> chatItems){
+  //      messagesList.clear();
+  //      messagesList.addAll(newMsgList);
     }
-}
+
+
