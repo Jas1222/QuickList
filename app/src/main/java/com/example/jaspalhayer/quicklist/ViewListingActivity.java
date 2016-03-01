@@ -55,6 +55,7 @@ public class ViewListingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), MessagingActivity.class);
+                i.putExtra("USER_TO_MESSAGE_ID", mBook.userId.toString());
                 startActivity(i);
             }
         });
@@ -91,7 +92,8 @@ public class ViewListingActivity extends AppCompatActivity {
                 mBook.bookYear = jobj.getString("book_year");
                 mBook.bookDesc = jobj.getString("book_desc");
                 mBook.bookFullName = jobj.getString("full_name");
-                mBook.bookListId = jobj.getString("list_id");
+               // mBook.bookListId = jobj.getString("list_id");
+                mBook.userId = jobj.getString("user_id");
             }
         } catch (Exception e) {
             System.out.println("Parsing JSON object to Book object fucked up");

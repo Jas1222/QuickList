@@ -30,14 +30,18 @@ public class MessagingActivity extends AppCompatActivity implements AdapterView.
 
     List<ChatRowItem> chatRowItems;
     List<Message> messagesList;
+    String APP_ID = "FDBEF958-BCF1-4A23-A20F-C4625D2E9C7A";
+    String recipientId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messaging);
         userCredentialHandler = new UserCredentialHandler();
-        Button bMsgJas = (Button) findViewById(R.id.bJas);
-        Button bMsgTest = (Button) findViewById(R.id.bTest);
+        SendBird.init(APP_ID);
+        recipientId = getIntent().getStringExtra("USER_TO_MESSAGE_ID");
+        SendBird.startMessaging(recipientId);
+
         Button bSendMsg = (Button) findViewById(R.id.button_send_message);
         final EditText inputText = (EditText) findViewById(R.id.chat_enter_message);
 
@@ -51,26 +55,12 @@ public class MessagingActivity extends AppCompatActivity implements AdapterView.
         chatListView.setAdapter(adapter);
         chatListView.setOnItemClickListener(this);
 
-
-        bMsgJas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SendBird.startMessaging(userH);
-            }
-        });
-
-        bMsgTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SendBird.startMessaging(userT);
-            }
-        });
-
         bSendMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String newMsg = inputText.getText().toString();
                 SendBird.send(newMsg);
+                inputText.setText(null);
             }
         });
 
@@ -208,10 +198,6 @@ public class MessagingActivity extends AppCompatActivity implements AdapterView.
             }
         });
     }
-
-    //  public void updateChatList(List<ChatRowItem> chatItems){
-    //      messagesList.clear();
-    //      messagesList.addAll(newMsgList);
 }
 
 

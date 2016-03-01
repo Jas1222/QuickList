@@ -19,6 +19,15 @@ import android.view.MenuItem;
 
 import com.facebook.FacebookSdk;
 import com.sendbird.android.SendBird;
+import com.sendbird.android.SendBirdEventHandler;
+import com.sendbird.android.model.BroadcastMessage;
+import com.sendbird.android.model.Channel;
+import com.sendbird.android.model.FileLink;
+import com.sendbird.android.model.Message;
+import com.sendbird.android.model.MessagingChannel;
+import com.sendbird.android.model.ReadStatus;
+import com.sendbird.android.model.SystemMessage;
+import com.sendbird.android.model.TypeStatus;
 
 import org.json.JSONObject;
 
@@ -99,6 +108,99 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             userStatus.setNavHeaderOnLogout(navigationView);
             updateNavDrawer("logout", register, login, logout, expiredListing, completeListing, activeListing);
         }
+
+        SendBird.setEventHandler(new SendBirdEventHandler() {
+            @Override
+            public void onConnect(Channel channel) {
+
+            }
+
+            @Override
+            public void onError(int i) {
+
+            }
+
+            @Override
+            public void onChannelLeft(Channel channel) {
+
+            }
+
+            @Override
+            public void onMessageReceived(Message message) {
+
+            }
+
+            @Override
+            public void onSystemMessageReceived(SystemMessage systemMessage) {
+
+            }
+
+            @Override
+            public void onBroadcastMessageReceived(BroadcastMessage broadcastMessage) {
+
+            }
+
+            @Override
+            public void onFileReceived(FileLink fileLink) {
+
+            }
+
+            @Override
+            public void onReadReceived(ReadStatus readStatus) {
+
+            }
+
+            @Override
+            public void onTypeStartReceived(TypeStatus typeStatus) {
+
+            }
+
+            @Override
+            public void onTypeEndReceived(TypeStatus typeStatus) {
+
+            }
+
+            @Override
+            public void onAllDataReceived(SendBird.SendBirdDataType sendBirdDataType, int i) {
+
+            }
+
+            @Override
+            public void onMessageDelivery(boolean b, String s, String s1, String s2) {
+
+            }
+
+            @Override
+            public void onMessagingStarted(MessagingChannel messagingChannel) {
+                SendBird.join(messagingChannel.getUrl());
+                SendBird.connect();
+            }
+
+            @Override
+            public void onMessagingUpdated(MessagingChannel messagingChannel) {
+
+            }
+
+            @Override
+            public void onMessagingEnded(MessagingChannel messagingChannel) {
+
+            }
+
+            @Override
+            public void onAllMessagingEnded() {
+
+            }
+
+            @Override
+            public void onMessagingHidden(MessagingChannel messagingChannel) {
+
+            }
+
+            @Override
+            public void onAllMessagingHidden() {
+
+            }
+        });
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager
@@ -235,6 +337,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     startActivity(i);
                 }
             });
+        } else if(id == R.id.nav_my_chats) {
+            Intent i = new Intent(getApplicationContext(), MyChatsActivity.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -268,4 +373,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         completeListing = nv.getMenu().getItem(4);
         expiredListing = nv.getMenu().getItem(5);
     }
+
+
 }

@@ -27,6 +27,7 @@ public class Books {
     String bookIsbn;
     String bookListId;
     String bookFirstName;
+    String userId;
 
     public Books(){
 

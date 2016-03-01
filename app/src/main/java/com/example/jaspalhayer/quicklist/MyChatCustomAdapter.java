@@ -14,8 +14,8 @@ import java.util.List;
 /**
  * Created by jaspalhayer on 29/02/2016.
  */
-public class ChatCustomAdapter extends BaseAdapter {
-    List<ChatRowItem> chatRowItemList;
+public class MyChatCustomAdapter extends BaseAdapter {
+    List<MyChatsRowItem> chatRowItemList;
     Context context;
 
 //    ChatCustomAdapter(Context context, List<ChatRowItem> chatRowItemList){
@@ -23,7 +23,7 @@ public class ChatCustomAdapter extends BaseAdapter {
 //        this.context = context;
 //    }
 
-    ChatCustomAdapter(Context context, List<ChatRowItem> chatRowItemList){
+    MyChatCustomAdapter(Context context, List<MyChatsRowItem> chatRowItemList){
         this.chatRowItemList = new ArrayList<>(chatRowItemList);
         this.context = context;
     }
@@ -44,9 +44,8 @@ public class ChatCustomAdapter extends BaseAdapter {
     }
 
     private class ViewHolder {
-        TextView username;
-        TextView message;
-        TextView timestamp;
+        TextView userId;
+        TextView bookTitle;
     }
 
     @Override
@@ -57,25 +56,23 @@ public class ChatCustomAdapter extends BaseAdapter {
         if(convertView == null ) {
             convertView = mInflater.inflate(R.layout.chat_msg_item, null);
             holder = new ViewHolder();
-            holder.message = (TextView)convertView.findViewById(R.id.chat_message_text);
-            holder.username = (TextView)convertView.findViewById(R.id.chat_user_id);
-            holder.timestamp = (TextView)convertView.findViewById(R.id.chat_timestamp);
+            holder.bookTitle = (TextView)convertView.findViewById(R.id.chat_message_text);
+            holder.userId = (TextView)convertView.findViewById(R.id.chat_user_id);
 
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder)convertView.getTag();
         }
 
-        ChatRowItem row_pos = chatRowItemList.get(position);
+        MyChatsRowItem row_pos = chatRowItemList.get(position);
 
-        holder.message.setText(row_pos.message);
-        holder.username.setText(row_pos.userId);
-        holder.timestamp.setText(String.valueOf(row_pos.timestamp));
+        holder.bookTitle.setText(row_pos.bookTitle);
+        holder.userId.setText(row_pos.userId);
 
         return convertView;
     }
 
-    public void updateChatList(List<ChatRowItem> chatItems){
+    public void updateChatList(List<MyChatsRowItem> chatItems){
         chatRowItemList.clear();
         chatRowItemList.addAll(chatItems);
         this.notifyDataSetChanged();

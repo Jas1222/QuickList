@@ -15,23 +15,10 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="com.example.jaspalhayer.quicklist.MessagingActivity">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:id="@+id/bJas"
-            android:layout_height="wrap_content"
-            android:text="Message Jas"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:id="@+id/bTest"
-            android:layout_alignParentRight="true"
-            android:layout_height="wrap_content"
-            android:text="Message Test"/>
 
         <ListView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/bJas"
             android:id="@+id/chat_listview"
             android:layout_marginBottom="70dp">
         </ListView>
