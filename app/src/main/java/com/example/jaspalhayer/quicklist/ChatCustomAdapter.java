@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,15 +19,17 @@ import java.util.List;
 public class ChatCustomAdapter extends BaseAdapter {
     List<ChatRowItem> chatRowItemList;
     Context context;
+    String userFullName;
 
 //    ChatCustomAdapter(Context context, List<ChatRowItem> chatRowItemList){
 //        this.chatRowItemList = chatRowItemList;
 //        this.context = context;
 //    }
 
-    ChatCustomAdapter(Context context, List<ChatRowItem> chatRowItemList){
+    ChatCustomAdapter(Context context, List<ChatRowItem> chatRowItemList, String userFullName){
         this.chatRowItemList = new ArrayList<>(chatRowItemList);
         this.context = context;
+        this.userFullName = userFullName;
     }
 
     @Override
@@ -65,12 +69,21 @@ public class ChatCustomAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder)convertView.getTag();
         }
+        TextView msgSenderName = (TextView) convertView.findViewById(R.id.chat_user_id);
 
         ChatRowItem row_pos = chatRowItemList.get(position);
 
         holder.message.setText(row_pos.message);
         holder.username.setText(row_pos.userId);
         holder.timestamp.setText(String.valueOf(row_pos.timestamp));
+
+        String senderName = row_pos.userId.toString();
+
+        if(senderName.contains(userFullName)){
+            msgSenderName.setTextColor(context.getResources().getColorStateList(R.color.colorPrimary));
+        } else {
+            msgSenderName.setTextColor(context.getResources().getColorStateList(R.color.colorDarkPink));
+        }
 
         return convertView;
     }

@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.sendbird.android.MessageListQuery;
 import com.sendbird.android.SendBird;
@@ -27,11 +28,14 @@ import java.util.List;
 public class MessagingActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     UserCredentialHandler userCredentialHandler;
     ListView chatListView;
+    TextView msgSenderId;
 
     List<ChatRowItem> chatRowItems;
     List<Message> messagesList;
     String APP_ID = "FDBEF958-BCF1-4A23-A20F-C4625D2E9C7A";
     String recipientId;
+    String recipientName;
+    String userFullName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,17 +43,19 @@ public class MessagingActivity extends AppCompatActivity implements AdapterView.
         setContentView(R.layout.activity_messaging);
         userCredentialHandler = new UserCredentialHandler();
         SendBird.init(APP_ID);
+        userFullName = userCredentialHandler.getUserFullName(getApplicationContext());
+        recipientName = getIntent().getStringExtra("SENDER_NAME");
         recipientId = getIntent().getStringExtra("USER_TO_MESSAGE_ID");
+        setTitle("Chat with "+recipientName);
+
         SendBird.startMessaging(recipientId);
 
         Button bSendMsg = (Button) findViewById(R.id.button_send_message);
         final EditText inputText = (EditText) findViewById(R.id.chat_enter_message);
 
-        final String userH = "h@h.com";
-        final String userT = "test@test.com";
-
         chatRowItems = new ArrayList<>();
-        final ChatCustomAdapter adapter = new ChatCustomAdapter(this, chatRowItems);
+        final ChatCustomAdapter adapter = new ChatCustomAdapter(this, chatRowItems, userFullName);
+     //   msgSenderId = (TextView)findViewById(R.id.chat_user_id);
 
         chatListView = (ListView) findViewById(R.id.chat_listview);
         chatListView.setAdapter(adapter);
@@ -187,6 +193,7 @@ public class MessagingActivity extends AppCompatActivity implements AdapterView.
 
     public void drawListRows(Message msg) {
         ChatRowItem item = new ChatRowItem(msg.getSenderName(), msg.getMessage(), msg.getTimestamp());
+
         chatRowItems.add(item);
     }
 

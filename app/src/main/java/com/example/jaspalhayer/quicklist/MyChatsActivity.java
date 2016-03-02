@@ -29,7 +29,7 @@ public class MyChatsActivity extends AppCompatActivity implements AdapterView.On
         //getActionBar().setDisplayHomeAsUpEnabled(true);
         chatsRowItemList = new ArrayList<>();
         final MyChatCustomAdapter adapter = new MyChatCustomAdapter(this, chatsRowItemList);
-
+        setTitle("My Chats");
         myListView = (ListView) findViewById(R.id.listView);
         myListView.setAdapter(adapter);
         myListView.setOnItemClickListener(this);
@@ -51,7 +51,6 @@ public class MyChatsActivity extends AppCompatActivity implements AdapterView.On
                         //Only works with size 1 atm, need to rethink for multiple chats
                     }
                     adapter.updateChatList(chatsRowItemList);
-                    System.out.println(listOfUserNames);
                 }
 
                 @Override
@@ -66,8 +65,10 @@ public class MyChatsActivity extends AppCompatActivity implements AdapterView.On
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
         final String userToMessageId = chatsRowItemList.get(position).userId;
+        String recipientName = chatsRowItemList.get(position).userFullName;
         Intent i = new Intent(getApplicationContext(), MessagingActivity.class );
         i.putExtra("USER_TO_MESSAGE_ID", userToMessageId);
+        i.putExtra("SENDER_NAME", recipientName);
         startActivity(i);
     }
 

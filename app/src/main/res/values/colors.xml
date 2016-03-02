@@ -7,4 +7,7 @@
     <color name="colorAlt2">#C2185B</color>
     <color name="white">#FFFF</color>
     <color name="grey">#E0E0E0</color>
+    <color name="black">#000</color>
+    <color name="materialGrey">#424242</color>
+    <color name="colorDarkPink">#880E4F</color>
 </resources>

@@ -175,7 +175,7 @@ public class UserCredentialHandler {
     protected String getUserFullName(Context context){
         SharedPreferences prefs = context.getSharedPreferences(USER_PREFS, 0);
         userFullname = prefs.getString(KEY_NAV_NAME, "");
-        return userEmail;
+        return userFullname;
     }
 
     protected void storeUserEmailAndName(Context context) {

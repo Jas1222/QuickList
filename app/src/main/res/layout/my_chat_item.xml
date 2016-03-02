@@ -35,7 +35,8 @@
         android:id="@+id/chat_message_text"
         android:layout_below="@+id/chat_user_id"
         android:maxWidth="250dp"
-        android:textSize="14sp"
+        android:textSize="18sp"
+        android:layout_marginBottom="10dp"
         android:textColor="#000"
         android:text="txt"/>
 </RelativeLayout>

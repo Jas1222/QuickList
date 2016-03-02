@@ -56,6 +56,7 @@ public class ViewListingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), MessagingActivity.class);
                 i.putExtra("USER_TO_MESSAGE_ID", mBook.userId.toString());
+                i.putExtra("SENDER_NAME", mBook.bookFirstName.toString());
                 startActivity(i);
             }
         });
