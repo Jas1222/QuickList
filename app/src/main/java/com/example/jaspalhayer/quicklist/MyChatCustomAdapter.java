@@ -67,7 +67,7 @@ public class MyChatCustomAdapter extends BaseAdapter {
         MyChatsRowItem row_pos = chatRowItemList.get(position);
 
         holder.bookTitle.setText(row_pos.bookTitle);
-        holder.userId.setText(row_pos.userId);
+        holder.userId.setText(row_pos.userFullName);
 
         return convertView;
     }

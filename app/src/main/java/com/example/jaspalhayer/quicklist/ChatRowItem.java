@@ -6,9 +6,9 @@ package com.example.jaspalhayer.quicklist;
 public class ChatRowItem {
     protected String userId;
     protected String message;
-    protected long timestamp;
+    protected String timestamp;
 
-    public ChatRowItem(String userId, String message, long timestamp){
+    public ChatRowItem(String userId, String message, String timestamp){
         this.userId = userId;
         this.message = message;
         this.timestamp = timestamp;

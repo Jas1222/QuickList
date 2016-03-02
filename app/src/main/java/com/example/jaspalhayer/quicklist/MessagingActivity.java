@@ -22,7 +22,10 @@ import com.sendbird.android.model.ReadStatus;
 import com.sendbird.android.model.SystemMessage;
 import com.sendbird.android.model.TypeStatus;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MessagingActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -192,18 +195,26 @@ public class MessagingActivity extends AppCompatActivity implements AdapterView.
     }
 
     public void drawListRows(Message msg) {
-        ChatRowItem item = new ChatRowItem(msg.getSenderName(), msg.getMessage(), msg.getTimestamp());
-
+        String time = millisecondsToTime(msg);
+        ChatRowItem item = new ChatRowItem(msg.getSenderName(), msg.getMessage(), time);
         chatRowItems.add(item);
     }
 
     private void scrollMyListViewToBottom(final ChatCustomAdapter adapter){
-        chatListView.post(new Runnable(){
+        chatListView.post(new Runnable() {
             @Override
-            public void run(){
+            public void run() {
                 chatListView.setSelection(adapter.getCount() - 1);
             }
         });
+    }
+
+    public String millisecondsToTime(Message msg){
+        Date date = new Date(msg.getTimestamp());
+        DateFormat formatter = new SimpleDateFormat("HH:mm");
+        String dateFormatted = formatter.format(date);
+
+        return dateFormatted;
     }
 }
 
