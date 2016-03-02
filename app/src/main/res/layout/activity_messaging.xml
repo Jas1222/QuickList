@@ -34,6 +34,7 @@
 
         <EditText
             android:layout_width="match_parent"
+            android:hint="Type your message here"
             android:layout_height="wrap_content"
             android:id="@+id/chat_enter_message"
             android:layout_alignParentBottom="true"
