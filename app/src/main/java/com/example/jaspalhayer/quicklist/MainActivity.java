@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     MenuItem completeListing;
     MenuItem expiredListing;
     MenuItem activeListing;
+    MenuItem myChats;
+
     Bundle bundle;
     SharedPreferences prefs;
     String APP_ID = "FDBEF958-BCF1-4A23-A20F-C4625D2E9C7A";
@@ -103,10 +105,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (userStatus.checkIfUserIsLoggedIn(getApplicationContext())) {
             userStatus.setNavHeaderOnLogin(getApplicationContext(), navigationView);
-            updateNavDrawer("login", register, login, logout, expiredListing, completeListing, activeListing);
+            updateNavDrawer("login", register, login, logout, expiredListing, completeListing, activeListing, myChats);
         } else {
             userStatus.setNavHeaderOnLogout(navigationView);
-            updateNavDrawer("logout", register, login, logout, expiredListing, completeListing, activeListing);
+            updateNavDrawer("logout", register, login, logout, expiredListing, completeListing, activeListing, myChats);
         }
 
         SendBird.setEventHandler(new SendBirdEventHandler() {
@@ -214,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         HomeFragment homeFragment = new HomeFragment();
         userStatus.setNavHeaderOnLogin(getApplicationContext(), navigationView);
 
-        updateNavDrawer("login", register, login, logout, expiredListing, completeListing, activeListing);
+        updateNavDrawer("login", register, login, logout, expiredListing, completeListing, activeListing, myChats);
 
         register.setVisible(false);
         login.setVisible(false);
@@ -292,7 +294,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_logout) {
             userStatus.logoutUser(getApplicationContext());
             userStatus.setNavHeaderOnLogout(navigationView);
-            updateNavDrawer("logout", register, login, logout, expiredListing, completeListing, activeListing);
+            updateNavDrawer("logout", register, login, logout, expiredListing, completeListing, activeListing, myChats);
 
         } else if (id == R.id.nav_how) {
             // navigate to how it works page
@@ -347,7 +349,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void updateNavDrawer(String action, MenuItem register, MenuItem login, MenuItem logout, MenuItem expiredListing, MenuItem completeListing, MenuItem activeListing) {
+    private void updateNavDrawer(String action, MenuItem register, MenuItem login, MenuItem logout, MenuItem expiredListing, MenuItem completeListing, MenuItem activeListing, MenuItem myChats) {
         if (action == "login") {
             register.setVisible(false);
             login.setVisible(false);
@@ -355,6 +357,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             completeListing.setVisible(true);
             activeListing.setVisible(true);
             expiredListing.setVisible(true);
+            myChats.setVisible(true);
         } else {
             register.setVisible(true);
             login.setVisible(true);
@@ -362,6 +365,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             completeListing.setVisible(false);
             activeListing.setVisible(false);
             expiredListing.setVisible(false);
+            myChats.setVisible(false);
         }
     }
 
@@ -372,6 +376,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         activeListing = nv.getMenu().getItem(3);
         completeListing = nv.getMenu().getItem(4);
         expiredListing = nv.getMenu().getItem(5);
+        myChats = nv.getMenu().getItem(6);
     }
 
 
