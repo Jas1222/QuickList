@@ -99,6 +99,8 @@
             android:layout_below="@id/login_login_button"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
             android:id="@+id/facebook_login_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

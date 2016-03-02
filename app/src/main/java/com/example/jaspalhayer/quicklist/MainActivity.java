@@ -218,6 +218,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         updateNavDrawer("login", register, login, logout, expiredListing, completeListing, activeListing, myChats);
 
+        //Todo neccessary?
         register.setVisible(false);
         login.setVisible(false);
         logout.setVisible(true);

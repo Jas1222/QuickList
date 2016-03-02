@@ -2,10 +2,12 @@ package com.example.jaspalhayer.quicklist;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.StringRequest;
 import com.sendbird.android.MessagingChannelListQuery;
@@ -31,7 +33,6 @@ public class MyChatsActivity extends AppCompatActivity implements AdapterView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse_result);
-        //getActionBar().setDisplayHomeAsUpEnabled(true);
         chatsRowItemList = new ArrayList<>();
         final MyChatCustomAdapter adapter = new MyChatCustomAdapter(this, chatsRowItemList);
         setTitle("My Chats");
@@ -43,12 +44,21 @@ public class MyChatsActivity extends AppCompatActivity implements AdapterView.On
         myListView.setAdapter(adapter);
         myListView.setOnItemClickListener(this);
 
+        Toast loadingChatsToast = Toast.makeText(getApplicationContext(), "Loading Chats", Toast.LENGTH_SHORT);
+       final  Toast noChatsFoundToast = Toast.makeText(getApplicationContext(), "No Chats Found", Toast.LENGTH_LONG);
+        loadingChatsToast.show();
+
         // queryChannelList or queryMessagingChannelList
         MessagingChannelListQuery mChannelList = SendBird.queryMessagingChannelList();
+
+
         if (mChannelList.hasNext()) {
             mChannelList.next(new MessagingChannelListQuery.MessagingChannelListQueryResult() {
                 @Override
                 public void onResult(List<MessagingChannel> channels) {
+                    if(channels.size() == 0){
+                        noChatsFoundToast.show();
+                    }
                     List<MessagingChannel.Member> listOfMembersPerChannel;
                     List<String> listOfUserNames = new ArrayList<>();
                     String name;
@@ -82,6 +92,8 @@ public class MyChatsActivity extends AppCompatActivity implements AdapterView.On
 
                 }
             });
+        } else {
+
         }
     }
 

@@ -27,6 +27,7 @@
             android:title="My Expired Listings" />
         <item
             android:id="@+id/nav_my_chats"
+            android:icon="@drawable/nav_message_icon"
             android:title="My Chats"/>
     </group>
 
